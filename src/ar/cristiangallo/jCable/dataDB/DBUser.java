@@ -1,11 +1,11 @@
-package dataDB;
+package ar.cristiangallo.jCable.dataDB;
 
-import conexionDB.ConexionDB;
-import entidades.User;
+import ar.cristiangallo.jCable.conexionDB.ConexionDB;
+import ar.cristiangallo.jCable.entidades.User;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  * Created by cgallo on 06/06/20.

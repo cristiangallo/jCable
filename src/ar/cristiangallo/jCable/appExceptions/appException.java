@@ -1,4 +1,4 @@
-package appExceptions;
+package ar.cristiangallo.jCable.appExceptions;
 
 /**
  * Created by cgallo on 04/09/15.

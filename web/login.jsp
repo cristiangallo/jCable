@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<%@page import="ar.cristiangallo.jCable.appExceptions.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
 <html lang="en-US" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -341,7 +343,10 @@
               <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
                 <h4 class="font-alt">Ingresar</h4>
                 <hr class="divider-w mb-10">
-                <form class="form" name="login">
+                <form class="form" name="login" method="post" action="login">
+                  <% if (request.getAttribute("error")!=null){
+                    appException error = (appException)request.getAttribute("error");
+                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
                   <div class="form-group">
                     <input class="form-control" id="email" type="text" name="email" placeholder="Email"/>
                   </div>
@@ -349,7 +354,7 @@
                     <input class="form-control" id="password" type="password" name="password" placeholder="Contraseña"/>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-round btn-b">Ingresar</button>
+                    <input type="submit" class="btn btn-round btn-b" value="Ingresar">
                   </div>
                   <div class="form-group"><a href="">¿Olvidaste tu contraseña?</a></div>
                 </form>

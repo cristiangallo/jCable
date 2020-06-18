@@ -1,11 +1,12 @@
-package entidades;
+package ar.cristiangallo.jCable.entidades;
+
+import ar.cristiangallo.jCable.appExceptions.appException;
 
 import java.util.Date;
 
 /**
  * Created by cgallo on 05/06/20.
  */
-
 
 public class User {
     private int id;
@@ -110,5 +111,9 @@ public class User {
         return id;
     }
 
+    public void login() throws appException {
+        if (!this.getIsActive()) {
+            throw new appException("Usuario inactivo.");
+        }
+    }
 }
-

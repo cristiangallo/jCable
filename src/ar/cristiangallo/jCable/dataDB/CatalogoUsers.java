@@ -1,7 +1,7 @@
-package dataDB;
+package ar.cristiangallo.jCable.dataDB;
 
-import appExceptions.appException;
-import entidades.User;
+import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.entidades.User;
 
 /**
  * Created by cgallo on 06/06/20.
@@ -29,7 +29,7 @@ public class CatalogoUsers {
 
     public User login(String email, String password) throws appException {
         User user = this.getUser(email, password);
-        if (user.getIsActive()) throw new appException("Usuario inactivo.");
+        user.login();
         return user;
     }
 
