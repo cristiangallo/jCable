@@ -83,7 +83,6 @@ public class DBUser {
     public static void save(User user) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String stmtSQL;
         Integer user_id = user.getId();
 
         try {
@@ -100,7 +99,6 @@ public class DBUser {
                         "insert into user(email, password, first_name, last_name, is_staff, is_active, " +
                                 "is_superuser, last_login, date_joined) values (?,?,?,?,?,?,?,?,?)",
                         PreparedStatement.RETURN_GENERATED_KEYS);
-
             }
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getPassword());
@@ -111,7 +109,6 @@ public class DBUser {
             stmt.setBoolean(7, user.getIsSuperuser());
             stmt.setDate(8, user.getLastLogin());
             stmt.setDate(9, user.getDateJoined());
-
             stmt.execute();
             rs = stmt.getGeneratedKeys();
         } catch (SQLException e) {

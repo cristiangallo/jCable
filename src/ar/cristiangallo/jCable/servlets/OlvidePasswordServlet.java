@@ -40,7 +40,7 @@ public class OlvidePasswordServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // request.getRequestDispatcher("olvide-mi-password").forward(request, response);
+        request.getRequestDispatcher("olvide-mi-password.jsp").forward(request, response);
 
     }
 }

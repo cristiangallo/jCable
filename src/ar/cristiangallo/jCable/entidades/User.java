@@ -124,5 +124,7 @@ public class User {
         RandomString randomString = new RandomString();
         this.setPassword(randomString.randomAlfaString(8));
         DBUser.save(this);
+
+        // ToDo acà habría que enviar el email con el nuevo password
     }
 }

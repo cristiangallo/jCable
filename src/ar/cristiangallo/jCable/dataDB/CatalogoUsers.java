@@ -40,6 +40,7 @@ public class CatalogoUsers {
     public void olvideMiPassword(String email) throws appException {
         System.out.println("catalogo");
         User user = DBUser.getUser(email);
+        if (user == null) throw new appException("No te has registrado con este email.");
         user.olvideMiPassword();
     }
 }
