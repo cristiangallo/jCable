@@ -52,10 +52,15 @@
                     <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
                         <h4 class="font-alt">Recuperar contraseña</h4>
                         <hr class="divider-w mb-10">
-                        <p>Por favor ingresa el email con el que te has registrado y te enviaremos un correo con
-                            instrucciones para que puedas cambiar tu contraseña.
-                        </p>
                         <form class="form" name="login" method="post" action="olvide-mi-password">
+                            <% if (request.getAttribute("mensaje")!=null){
+                                String mensaje = (String) request.getAttribute("mensaje");
+                                out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
+                            else {
+                                out.println("<div class='well well-lg'>Por favor ingresa el email con el que te has " +
+                                        "registrado y te enviaremos un correo con instrucciones para que puedas " +
+                                        "cambiar tu contraseña.</div>");
+                            } %>
                             <% if (request.getAttribute("error")!=null){
                                 appException error = (appException)request.getAttribute("error");
                                 out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>

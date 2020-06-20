@@ -2,10 +2,10 @@ package ar.cristiangallo.jCable.entidades;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.DBUser;
+import utiles.Mailer;
 import utiles.RandomString;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by cgallo on 05/06/20.
@@ -121,10 +121,9 @@ public class User {
     }
 
     public void olvideMiPassword() {
-        RandomString randomString = new RandomString();
-        this.setPassword(randomString.randomAlfaString(8));
+        setPassword(RandomString.randomAlfaString(8));
         DBUser.save(this);
+        Mailer.send(email,"Recuperar password en jCable","tu nueva password es: " + password);
 
-        // ToDo acà habría que enviar el email con el nuevo password
     }
 }

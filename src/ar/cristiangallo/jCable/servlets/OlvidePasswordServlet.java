@@ -29,11 +29,10 @@ public class OlvidePasswordServlet extends HttpServlet {
 
         try {
             ctrlUsers.olvideMiPassword(email);
-            request.getSession().setAttribute("mensaje", "Te enviamos un correo con instrucciones para que " +
-                    "recuperes tu contraseña");
+            request.setAttribute("mensaje", "Te enviamos un correo con instrucciones para que recuperes tu " +
+                    "contraseña");
 
         } catch (appException e) {
-            System.out.println(e);
             request.setAttribute("error", e);
         }
         catch (Exception e) {
