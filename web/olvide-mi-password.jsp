@@ -58,9 +58,8 @@
                                 out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
                             else {
                                 out.println("<div class='well well-lg'>Por favor ingresa el email con el que te has " +
-                                        "registrado y te enviaremos un correo con instrucciones para que puedas " +
-                                        "cambiar tu contraseña.</div>");
-                            } %>
+                                        "registrado y te enviaremos contraseña provisorio a tu cuenta de correo " +
+                                        "electrónico.</div>");} %>
                             <% if (request.getAttribute("error")!=null){
                                 appException error = (appException)request.getAttribute("error");
                                 out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>

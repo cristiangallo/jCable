@@ -123,7 +123,7 @@ public class User {
     public void olvideMiPassword() {
         setPassword(RandomString.randomAlfaString(8));
         DBUser.save(this);
-        Mailer.send(email,"Recuperar password en jCable","tu nueva password es: " + password);
+        Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
 
     }
 }
