@@ -1,8 +1,11 @@
 package ar.cristiangallo.jCable.entidades;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.dataDB.DBUser;
+import utiles.RandomString;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by cgallo on 05/06/20.
@@ -115,5 +118,11 @@ public class User {
         if (!this.getIsActive()) {
             throw new appException("Usuario inactivo.");
         }
+    }
+
+    public void olvideMiPassword() {
+        RandomString randomString = new RandomString();
+        this.setPassword(randomString.randomAlfaString(8));
+        DBUser.save(this);
     }
 }

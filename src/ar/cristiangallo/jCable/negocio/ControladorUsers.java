@@ -4,6 +4,9 @@ import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.CatalogoUsers;
 import ar.cristiangallo.jCable.entidades.User;
 
+import java.util.Random;
+import java.util.UUID;
+
 /**
  * Created by cgallo on 06/06/2020.
  */
@@ -24,19 +27,21 @@ public class ControladorUsers {
      * Launch the application.
      */
     public static void main(String[] args) {
+        int largo = 8;
+        Random random = new Random();
+        String alfanumerico = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        try {
-            ControladorUsers ctrlUsers = new ControladorUsers();
-            User user = ctrlUsers.getUser("crgallo@frro.utn.edu.ar", "123");
-            user.login();
-            System.out.println(user.getEmail());
+        StringBuilder sb = new StringBuilder( largo );
+        for( int i = 0; i < largo; i++ )
+            sb.append( alfanumerico.charAt( random.nextInt(alfanumerico.length()) ) );
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        System.out.println(sb.toString());
 
     }
 
 
+    public void olvideMiPassword(String email) throws appException {
+        System.out.println("controlador");
+        catUsers.olvideMiPassword(email);
+    }
 }

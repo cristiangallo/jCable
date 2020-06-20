@@ -37,4 +37,9 @@ public class CatalogoUsers {
         DBUser.save(user);
     }
 
+    public void olvideMiPassword(String email) throws appException {
+        System.out.println("catalogo");
+        User user = DBUser.getUser(email);
+        user.olvideMiPassword();
+    }
 }

@@ -58,7 +58,7 @@
                   <div class="form-group">
                     <input type="submit" class="btn btn-round btn-b" value="Ingresar">
                   </div>
-                  <div class="form-group"><a href="">¿Olvidaste tu contraseña?</a></div>
+                  <div class="form-group"><a href="/olvide-mi-password">¿Olvidaste tu contraseña?</a></div>
                 </form>
               </div>
               <div class="col-sm-5">
