@@ -21,7 +21,7 @@
                         "data-toggle='dropdown'>Hola "+ user.getFirstName() + "!</a><ul class='dropdown-menu'>");
                     if (user.getIsSuperuser()){out.println("<li><a href='documentation.html#contact'>Administrar usuarios</a></li>");};
                     out.println("<li><a href='documentation.html#reservation'>Mi cuenta</a></li>");
-                    out.println("<li><a href='documentation.html#changelog'>Cerrar sesi&oacute;n</a></li></ul></li>");
+                    out.println("<li><a href='/logout'>Cerrar sesi&oacute;n</a></li></ul></li>");
                 }
                 %>
             </ul>

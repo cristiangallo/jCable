@@ -43,10 +43,7 @@
     <div class="main">
         <section class="module">
             <div class="container">
-                <div class="row">
-
-                    <% if (user!=null){out.println(user.getEmail());}%>
-                </div>
+                <div class="row"></div>
             </div>
         </section>
         <hr class="divider-d">

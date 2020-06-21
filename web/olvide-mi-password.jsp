@@ -44,7 +44,7 @@
     <div class="page-loader">
         <div class="loader">Loading...</div>
     </div>
-    <%@include  file="header.html" %>
+    <jsp:include page="header.jsp" />
     <div class="main">
         <section class="module">
             <div class="container">
