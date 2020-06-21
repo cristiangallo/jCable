@@ -5,6 +5,8 @@ import ar.cristiangallo.jCable.dataDB.DBUser;
 import utiles.Mailer;
 import utiles.RandomString;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -20,12 +22,12 @@ public class User {
     private boolean is_staff = false;
     private boolean is_active = false;
     private boolean is_superuser = false;
-    private Date last_login = null;
-    private Date date_joined = new java.util.Date();
+    private Timestamp last_login = null;
+    private Timestamp date_joined = new Timestamp(System.currentTimeMillis());
 
     // constructor para usuario guardado
     public User(int id, String email, String password, String first_name, String last_name, boolean is_staff,
-                boolean is_active, boolean is_superuser, Date last_login, Date date_joined) {
+                boolean is_active, boolean is_superuser, Timestamp last_login, Timestamp date_joined) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -106,13 +108,13 @@ public class User {
         this.is_superuser = is_superuser;
     }
 
-    public java.sql.Date getLastLogin() {
-        return (java.sql.Date) last_login;
+    public Timestamp getLastLogin() {
+        return last_login;
     }
 
     // public void setLastLogin(java.sql.Date last_login) { this.last_login = last_login; }
 
-    public Date getDateJoined() { return date_joined; }
+    public Timestamp getDateJoined() { return date_joined; }
 
     // public void setDateJoined(java.sql.Date date_joined) { this.date_joined = date_joined; }
 

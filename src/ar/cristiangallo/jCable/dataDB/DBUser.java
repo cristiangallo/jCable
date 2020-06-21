@@ -31,7 +31,7 @@ public class DBUser {
                         rs.getString("password"), rs.getString("first_name"),
                         rs.getString("last_name"), rs.getBoolean("is_staff"),
                         rs.getBoolean("is_active"), rs.getBoolean("is_superuser"),
-                        rs.getDate("last_login"), rs.getDate("date_joined"));
+                        rs.getTimestamp("last_login"), rs.getTimestamp("date_joined"));
 
             }
         } catch (SQLException e) {
@@ -64,7 +64,7 @@ public class DBUser {
                         rs.getString("password"), rs.getString("first_name"),
                         rs.getString("last_name"), rs.getBoolean("is_staff"),
                         rs.getBoolean("is_active"), rs.getBoolean("is_superuser"),
-                        rs.getDate("last_login"), rs.getDate("date_joined"));
+                        rs.getTimestamp("last_login"), rs.getTimestamp("date_joined"));
 
             }
         } catch (SQLException e) {
@@ -87,15 +87,15 @@ public class DBUser {
         Integer user_id = user.getId();
 
         try {
-            if (user_id != null) {
-                System.out.println("update");
+            if (user_id > 0) {
+                System.out.println("update user");
                 stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                         "update user set email = ?, password = ?, first_name = ?, last_name = ?, is_staff = ?, " +
                                 "is_active = ?, is_superuser = ?, last_login = ?, date_joined = ? where id = ?",
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setInt(10, user_id);
             } else {
-                System.out.println("save");
+                System.out.println("save user");
                 stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                         "insert into user(email, password, first_name, last_name, is_staff, is_active, " +
                                 "is_superuser, last_login, date_joined) values (?,?,?,?,?,?,?,?,?)",
@@ -108,9 +108,9 @@ public class DBUser {
             stmt.setBoolean(5, user.getIsStaff());
             stmt.setBoolean(6, user.getIsActive());
             stmt.setBoolean(7, user.getIsSuperuser());
-            stmt.setDate(8, user.getLastLogin());
+            stmt.setTimestamp(8, user.getLastLogin());
 
-            stmt.setDate(9, new java.sql.Date(((Date) user.getDateJoined()).getTime()));
+            stmt.setTimestamp(9, user.getDateJoined());
             stmt.execute();
             rs = stmt.getGeneratedKeys();
         } catch (SQLException e) {

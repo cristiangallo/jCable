@@ -4,6 +4,7 @@ import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.CatalogoUsers;
 import ar.cristiangallo.jCable.entidades.User;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -30,15 +31,8 @@ public class ControladorUsers {
      */
     public static void main(String[] args)
     {
-        java.util.Date dt = new java.util.Date();
 
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String currentTime = sdf.format(dt);
-
-        // print out today's date
-        System.out.println(currentTime);
+        System.out.println();
     }
 
 
