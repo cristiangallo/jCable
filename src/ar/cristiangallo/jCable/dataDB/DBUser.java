@@ -6,6 +6,7 @@ import ar.cristiangallo.jCable.entidades.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  * Created by cgallo on 06/06/20.
@@ -108,7 +109,8 @@ public class DBUser {
             stmt.setBoolean(6, user.getIsActive());
             stmt.setBoolean(7, user.getIsSuperuser());
             stmt.setDate(8, user.getLastLogin());
-            stmt.setDate(9, user.getDateJoined());
+
+            stmt.setDate(9, new java.sql.Date(((Date) user.getDateJoined()).getTime()));
             stmt.execute();
             rs = stmt.getGeneratedKeys();
         } catch (SQLException e) {

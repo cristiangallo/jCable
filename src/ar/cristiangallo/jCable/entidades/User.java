@@ -112,7 +112,7 @@ public class User {
 
     // public void setLastLogin(java.sql.Date last_login) { this.last_login = last_login; }
 
-    public java.sql.Date getDateJoined() { return (java.sql.Date) date_joined; }
+    public Date getDateJoined() { return date_joined; }
 
     // public void setDateJoined(java.sql.Date date_joined) { this.date_joined = date_joined; }
 
