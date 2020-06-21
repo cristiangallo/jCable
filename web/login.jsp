@@ -75,20 +75,40 @@
                         appException errorR = (appException)request.getAttribute("errorR");
                         out.println("<div class='alert alert-danger' role='alert'>" + errorR.getMessage() + "</div>");}%>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="first_name" placeholder="Nombre"/>
+                        <% String first_name = (String) request.getAttribute("first_name");
+                            out.println("<input class='form-control' type='text' name='first_name' placeholder='Nombre'");
+                            if (first_name!=null){out.println(" value="+first_name);}
+                            out.println(" >");
+                         %>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="last_name" placeholder="Apellido"/>
+                        <% String last_name = (String) request.getAttribute("last_name");
+                            out.println("<input class='form-control' type='text' name='last_name' placeholder='Apellido'");
+                            if (last_name!=null){out.println(" value="+last_name);}
+                            out.println(" >");
+                         %>
                     </div>
                     <div class="form-group">
-                    <input class="form-control" type="text" name="email" placeholder="Email"/>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Contraseña"/>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" name="password2" placeholder="Repertir contraseña"/>
-                  </div>
+                        <% String emailR = (String) request.getAttribute("emailR");
+                            out.println("<input class='form-control' type='email' name='email' placeholder='Email'");
+                            if (emailR!=null){out.println(" value="+emailR);}
+                            out.println(" >");
+                         %>
+                    </div>
+                    <div class="form-group">
+                        <% String passwordR = (String) request.getAttribute("passwordR");
+                            out.println("<input class='form-control' type='password' name='password' placeholder='Contraseña'");
+                            if (passwordR!=null){out.println(" value="+passwordR);}
+                            out.println(" >");
+                         %>
+                    </div>
+                    <div class="form-group">
+                        <% String password2 = (String) request.getAttribute("password2");
+                            out.println("<input class='form-control' type='password' name='password2' placeholder='Repertir contraseña'");
+                            if (password2!=null){out.println(" value="+password2);}
+                            out.println(" >");
+                         %>
+                    </div>
 
                   <div class="form-group">
                     <button class="btn btn-block btn-round btn-b">Registrarme</button>
