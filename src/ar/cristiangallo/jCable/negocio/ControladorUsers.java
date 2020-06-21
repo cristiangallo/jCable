@@ -4,6 +4,8 @@ import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.CatalogoUsers;
 import ar.cristiangallo.jCable.entidades.User;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -26,22 +28,26 @@ public class ControladorUsers {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-        int largo = 8;
-        Random random = new Random();
-        String alfanumerico = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    public static void main(String[] args)
+    {
+        java.util.Date dt = new java.util.Date();
 
-        StringBuilder sb = new StringBuilder( largo );
-        for( int i = 0; i < largo; i++ )
-            sb.append( alfanumerico.charAt( random.nextInt(alfanumerico.length()) ) );
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        System.out.println(sb.toString());
+        String currentTime = sdf.format(dt);
 
+        // print out today's date
+        System.out.println(currentTime);
     }
 
 
     public void olvideMiPassword(String email) throws appException {
         System.out.println("controlador");
         catUsers.olvideMiPassword(email);
+    }
+
+    public void addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
+        catUsers.addUser(email, password, password2, first_name, last_name);
     }
 }

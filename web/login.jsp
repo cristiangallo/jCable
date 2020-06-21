@@ -68,7 +68,19 @@
                 <h4 class="font-alt">Registrarse</h4>
                 <hr class="divider-w mb-10">
                 <form class="form" name="registrarse" method="post" action="alta-usuario">
-                  <div class="form-group">
+                    <% if (request.getAttribute("mensajeR")!=null){
+                        String mensajeR = (String) request.getAttribute("mensajeR");
+                        out.println("<div class='alert alert-success' role='alert'>" + mensajeR + "</div>");}
+                    else if (request.getAttribute("errorR")!=null){
+                        appException errorR = (appException)request.getAttribute("errorR");
+                        out.println("<div class='alert alert-danger' role='alert'>" + errorR.getMessage() + "</div>");}%>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="first_name" placeholder="Nombre"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="last_name" placeholder="Apellido"/>
+                    </div>
+                    <div class="form-group">
                     <input class="form-control" type="text" name="email" placeholder="Email"/>
                   </div>
                   <div class="form-group">
@@ -77,27 +89,12 @@
                   <div class="form-group">
                     <input class="form-control" type="password" name="password2" placeholder="Repertir contraseña"/>
                   </div>
-                  <div class="form-group">
-                    <input class="form-control" type="text" name="first_name" placeholder="Contraseña"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="is_active">
-                      <input class="form-control" type="checkbox" id="is_active" name="is_active">Activo
-                    </label>
-                  </div>
-                  <div class="form-group">
-                    <label for="is_staff">
-                      <input class="form-control" type="checkbox" id="is_staff" name="is_staff">Productor
-                    </label>
-                  </div>
-                  <div class="form-group">
-                    <label for="is_superuser">
-                      <input class="form-control" type="checkbox" id="is_superuser" name="is_superuser">Superusuario</label>
-                  </div>
+
                   <div class="form-group">
                     <button class="btn btn-block btn-round btn-b">Registrarme</button>
                   </div>
                 </form>
+
               </div>
             </div>
           </div>

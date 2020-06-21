@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AltaUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // response.getWriter().append("Served at: ").append(request.getContextPath());
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -25,25 +25,30 @@ public class AltaUsuarioServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
 
         try {
-            user = ctrlUsers.getUser(email, password);
-            user.login();
-            request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            ctrlUsers.addUser(email, password, password2, first_name, last_name);
+            request.setAttribute("email", email);
+            request.setAttribute("first_name", first_name);
+            request.setAttribute("last_name", last_name);
+            request.setAttribute("password", password);
+            request.setAttribute("password2", password2);
+            request.setAttribute("mensajeR", "Activa tu cuenta en jCable a través del link que te enviamos por " +
+                    "correo electrónico");
 
         } catch (appException e) {
             System.out.println(e);
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
+            request.setAttribute("errorR", e);
+
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        request.getSession().setAttribute("user", "popo");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 
     }
 }

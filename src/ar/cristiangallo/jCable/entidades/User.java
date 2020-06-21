@@ -17,11 +17,11 @@ public class User {
     private String last_name;
     private String email;
     private String password;
-    private boolean is_staff;
-    private boolean is_active;
-    private boolean is_superuser;
-    private Date last_login;
-    private Date date_joined;
+    private boolean is_staff = false;
+    private boolean is_active = false;
+    private boolean is_superuser = false;
+    private Date last_login = null;
+    private Date date_joined = new java.util.Date();
 
     // constructor para usuario guardado
     public User(int id, String email, String password, String first_name, String last_name, boolean is_staff,
@@ -36,6 +36,18 @@ public class User {
         this.is_superuser = is_superuser;
         this.last_login = last_login;
         this.date_joined = date_joined;
+    }
+
+    public User(String email, String password, String first_name, String last_name) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+
+        DBUser.save(this);
+        Mailer.send(email,"Activar cuenta en jCable","Hola " + first_name + ", haz <a href='http://127.0." +
+                "0.1:8080/activar-usuario'>click aqui</a> para activar tu cuenta en jCable");
+
     }
 
     public String getPassword() {
@@ -98,17 +110,11 @@ public class User {
         return (java.sql.Date) last_login;
     }
 
-    public void setLastLogin(java.sql.Date last_login) {
-        this.last_login = last_login;
-    }
+    // public void setLastLogin(java.sql.Date last_login) { this.last_login = last_login; }
 
-    public java.sql.Date getDateJoined() {
-        return (java.sql.Date) date_joined;
-    }
+    public java.sql.Date getDateJoined() { return (java.sql.Date) date_joined; }
 
-    public void setDateJoined(java.sql.Date date_joined) {
-        this.date_joined = date_joined;
-    }
+    // public void setDateJoined(java.sql.Date date_joined) { this.date_joined = date_joined; }
 
     public int getId() {
         return id;
