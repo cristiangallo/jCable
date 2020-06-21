@@ -44,14 +44,14 @@ public class CatalogoUsers {
     }
 
     public User addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
+        if (email == "") throw new appException("Ingresa un email.");
         User user = DBUser.getUser(email);
-
         if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
                 "contraseña.");
         if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
-        if (password == null) throw new appException("Ingresa una contraseña.");
-        if (first_name == null) throw new appException("Ingresa tu nombre.");
-        if (last_name == null) throw new appException("Ingresa tu apellido.");
+        if (password == "") throw new appException("Ingresa una contraseña.");
+        if (first_name == "") throw new appException("Ingresa tu nombre.");
+        if (last_name == "") throw new appException("Ingresa tu apellido.");
         return new User(email, password, first_name, last_name);
     }
 }
