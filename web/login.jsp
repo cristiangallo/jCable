@@ -1,8 +1,9 @@
-<!DOCTYPE html>
 <%@page import="ar.cristiangallo.jCable.appExceptions.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="ar.cristiangallo.jCable.entidades.*" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
-<html lang="en-US" dir="ltr">
+<!DOCTYPE html>
+<html lang="es-AR" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,12 +38,14 @@
       <div class="page-loader">
         <div class="loader">Loading...</div>
       </div>
-      <%@include  file="header.html" %>
+
+      <jsp:include page="header.jsp" />
       <div class="main">
         <section class="module">
           <div class="container">
             <div class="row">
               <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
+
                 <h4 class="font-alt">Ingresar</h4>
                 <hr class="divider-w mb-10">
                 <form class="form" name="login" method="post" action="login">
@@ -64,15 +67,32 @@
               <div class="col-sm-5">
                 <h4 class="font-alt">Registrarse</h4>
                 <hr class="divider-w mb-10">
-                <form class="form" name="registrarse">
+                <form class="form" name="registrarse" method="post" action="alta-usuario">
                   <div class="form-group">
-                    <input class="form-control" id="email" type="text" name="email" placeholder="Email"/>
+                    <input class="form-control" type="text" name="email" placeholder="Email"/>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" id="password" type="password" name="password" placeholder="Contraseña"/>
+                    <input class="form-control" type="password" name="password" placeholder="Contraseña"/>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" id="password2" type="password" name="password2" placeholder="Repertir contraseña"/>
+                    <input class="form-control" type="password" name="password2" placeholder="Repertir contraseña"/>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="first_name" placeholder="Contraseña"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_active">
+                      <input class="form-control" type="checkbox" id="is_active" name="is_active">Activo
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_staff">
+                      <input class="form-control" type="checkbox" id="is_staff" name="is_staff">Productor
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_superuser">
+                      <input class="form-control" type="checkbox" id="is_superuser" name="is_superuser">Superusuario</label>
                   </div>
                   <div class="form-group">
                     <button class="btn btn-block btn-round btn-b">Registrarme</button>
