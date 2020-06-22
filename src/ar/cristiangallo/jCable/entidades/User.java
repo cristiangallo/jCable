@@ -2,12 +2,12 @@ package ar.cristiangallo.jCable.entidades;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.DBUser;
+import org.apache.commons.mail.EmailException;
 import utiles.Mailer;
 import utiles.RandomString;
+import utiles.SendHtmlEmail;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Created by cgallo on 05/06/20.
@@ -47,9 +47,14 @@ public class User {
         this.password = password;
 
         DBUser.save(this);
+        /*
         Mailer.send(email,"Activar cuenta en jCable","Hola " + first_name + ", haz <a href='http://127.0." +
                 "0.1:8080/activar-usuario'>click aqui</a> para activar tu cuenta en jCable");
+        */
 
+        SendHtmlEmail.send(email, "Activar cuenta en jCable", "<html>Hola " + first_name + " , haz " +
+                    "<a href='http://127.0.0.1:8080/activar-usuario/" + email + "'>click aqui</a> para activar tu perfil en " +
+                    "jCable.</html>");
     }
 
     public String getPassword() {
