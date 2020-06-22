@@ -126,6 +126,8 @@ public class User {
         if (!this.getIsActive()) {
             throw new appException("Usuario inactivo.");
         }
+        last_login = new Timestamp(System.currentTimeMillis());
+        DBUser.save(this);
     }
 
     public void olvideMiPassword() {

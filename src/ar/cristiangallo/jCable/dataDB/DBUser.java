@@ -109,7 +109,6 @@ public class DBUser {
             stmt.setBoolean(6, user.getIsActive());
             stmt.setBoolean(7, user.getIsSuperuser());
             stmt.setTimestamp(8, user.getLastLogin());
-
             stmt.setTimestamp(9, user.getDateJoined());
             stmt.execute();
             rs = stmt.getGeneratedKeys();
