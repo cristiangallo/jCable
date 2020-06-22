@@ -140,5 +140,8 @@ public class User {
         DBUser.save(this);
         Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
 
+        SendHtmlEmail.send(email, "Nuevo password para jCable", "<html>Hola " + first_name + "!, " +
+                "tu password provisorio es: "+ password + ".</html>");
+
     }
 }
