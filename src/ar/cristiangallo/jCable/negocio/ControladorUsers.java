@@ -23,6 +23,11 @@ public class ControladorUsers {
         return user;
     }
 
+    public User getUser(String email) throws appException {
+        User user = catUsers.getUser(email);
+        return user;
+    }
+
     public void login(User user) throws appException {
         user.login();
     }
@@ -43,5 +48,9 @@ public class ControladorUsers {
 
     public void addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
         catUsers.addUser(email, password, password2, first_name, last_name);
+    }
+
+    public void activarUser(User user) throws appException {
+        catUsers.activarUser(user);
     }
 }

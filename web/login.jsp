@@ -43,15 +43,27 @@
       <div class="main">
         <section class="module">
           <div class="container">
+              <div class="row">
+                  <div class="col-sm-8 col-sm-offset-1">
+                      <% if (request.getAttribute("mensaje")!=null){
+                          String mensaje = (String) request.getAttribute("mensaje");
+                          out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
+
+                        else if (request.getAttribute("errorL")!=null){
+                          appException errorL = (appException)request.getAttribute("errorL");
+                          out.println("<div class='alert alert-danger' role='alert'>" + errorL.getMessage() + "</div>");}
+                      %>
+                 </div>
+              </div>
             <div class="row">
               <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 
                 <h4 class="font-alt">Ingresar</h4>
                 <hr class="divider-w mb-10">
                 <form class="form" name="login" method="post" action="login">
-                  <% if (request.getAttribute("error")!=null){
-                    appException error = (appException)request.getAttribute("error");
-                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
+                  <% if (request.getAttribute("errorL")!=null){
+                    appException errorL = (appException)request.getAttribute("errorL");
+                    out.println("<div class='alert alert-danger' role='alert'>" + errorL.getMessage() + "</div>");}%>
                   <div class="form-group">
                     <input class="form-control" id="email" type="text" name="email" placeholder="Email"/>
                   </div>

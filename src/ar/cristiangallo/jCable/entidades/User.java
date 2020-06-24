@@ -53,8 +53,8 @@ public class User {
         */
 
         SendHtmlEmail.send(email, "Activar cuenta en jCable", "<html>Hola " + first_name + " , haz " +
-                    "<a href='http://127.0.0.1:8080/activar-usuario/" + email + "'>click aqui</a> para activar tu perfil en " +
-                    "jCable.</html>");
+                "<a href='http://127.0.0.1:8080/activar-usuario?email=" + email + "'>click aqui</a> para activar " +
+                "tu perfil en jCable.</html>");
     }
 
     public String getPassword() {
@@ -138,10 +138,20 @@ public class User {
     public void olvideMiPassword() {
         setPassword(RandomString.randomAlfaString(8));
         DBUser.save(this);
-        Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
+        // Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
 
         SendHtmlEmail.send(email, "Nuevo password para jCable", "<html>Hola " + first_name + "!, " +
                 "tu password provisorio es: "+ password + ".</html>");
 
+    }
+
+    public void activarUser() throws appException {
+        if (!is_active){
+            setIsActive(true);
+            DBUser.save(this);
+
+        } else {
+            throw new appException("Este usuario ya estaba activado.");
+        }
     }
 }

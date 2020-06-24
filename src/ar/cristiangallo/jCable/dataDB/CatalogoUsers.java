@@ -38,7 +38,7 @@ public class CatalogoUsers {
     }
 
     public void olvideMiPassword(String email) throws appException {
-        User user = DBUser.getUser(email);
+        User user = getUser(email);
         if (user == null) throw new appException("No te has registrado con este email.");
         user.olvideMiPassword();
     }
@@ -53,5 +53,13 @@ public class CatalogoUsers {
         if (first_name == "") throw new appException("Ingresa tu nombre.");
         if (last_name == "") throw new appException("Ingresa tu apellido.");
         return new User(email, password, first_name, last_name);
+    }
+
+    public User getUser(String email) {
+        return DBUser.getUser(email);
+    }
+
+    public void activarUser(User user) throws appException {
+        user.activarUser();
     }
 }
