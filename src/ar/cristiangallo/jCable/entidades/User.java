@@ -40,7 +40,12 @@ public class User {
         this.date_joined = date_joined;
     }
 
-    public User(String email, String password, String first_name, String last_name) {
+    public User(String email, String password, String password2, String first_name, String last_name) throws appException {
+        if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
+        if (password == "") throw new appException("Ingresa una contraseña.");
+        if (first_name == "") throw new appException("Ingresa tu nombre.");
+        if (last_name == "") throw new appException("Ingresa tu apellido.");
+
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

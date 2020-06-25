@@ -48,11 +48,7 @@ public class CatalogoUsers {
         User user = DBUser.getUser(email);
         if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
                 "contraseña.");
-        if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
-        if (password == "") throw new appException("Ingresa una contraseña.");
-        if (first_name == "") throw new appException("Ingresa tu nombre.");
-        if (last_name == "") throw new appException("Ingresa tu apellido.");
-        return new User(email, password, first_name, last_name);
+        return new User(email, password, password2, first_name, last_name);
     }
 
     public User getUser(String email) {
