@@ -17,8 +17,8 @@ public class IndexServlet extends HttpServlet {
 
         if (user == null) {
             response.sendRedirect("login.jsp");
-        } else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
         }
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

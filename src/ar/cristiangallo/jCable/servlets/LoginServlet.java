@@ -23,9 +23,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ControladorUsers ctrlUsers = new ControladorUsers();
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
+        String email = request.getParameter("emailL");
+        String password = request.getParameter("passwordL");
+        request.setAttribute("emailL", email);
+        request.setAttribute("passwordL", password);
         try {
             User user = ctrlUsers.getUser(email, password);
             user.login();

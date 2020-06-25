@@ -64,12 +64,20 @@
                   <% if (request.getAttribute("errorL")!=null){
                     appException errorL = (appException)request.getAttribute("errorL");
                     out.println("<div class='alert alert-danger' role='alert'>" + errorL.getMessage() + "</div>");}%>
-                  <div class="form-group">
-                    <input class="form-control" id="email" type="text" name="email" placeholder="Email"/>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" id="password" type="password" name="password" placeholder="Contraseña"/>
-                  </div>
+                    <div class="form-group">
+                        <% String emailL = (String) request.getAttribute("emailL");
+                            out.println("<input class='form-control' type='email' name='emailL' placeholder='Email'");
+                            if (emailL!=null){out.println(" value="+emailL);}
+                            out.println(" >");
+                        %>
+                    </div>
+                    <div class="form-group">
+                        <% String passwordL = (String) request.getAttribute("passwordL");
+                            out.println("<input class='form-control' type='password' name='passwordL' placeholder='Contraseña'");
+                            if (passwordL!=null){out.println(" value="+passwordL);}
+                            out.println(" >");
+                        %>
+                    </div>
                   <div class="form-group">
                     <input type="submit" class="btn btn-round btn-b" value="Ingresar">
                   </div>
