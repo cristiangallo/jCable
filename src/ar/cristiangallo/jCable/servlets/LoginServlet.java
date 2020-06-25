@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.getSession().setAttribute("user", "popo");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }

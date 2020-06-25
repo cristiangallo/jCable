@@ -53,4 +53,8 @@ public class ControladorUsers {
     public void activarUser(User user) throws appException {
         catUsers.activarUser(user);
     }
+
+    public void saveUser(User user) throws appException {
+        catUsers.save(user);
+    }
 }

@@ -19,8 +19,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <% if (user!=null){out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
                         "data-toggle='dropdown'>Hola "+ user.getFirstName() + "!</a><ul class='dropdown-menu'>");
-                    if (user.getIsSuperuser()){out.println("<li><a href='/listar-usuarios'>Administrar usuarios</a></li>");};
-                    out.println("<li><a href='/mi-cuenta'>Mi cuenta</a></li>");
+                    if (user.getIsSuperuser()){out.println("<li><a href='/administrar-usuarios'>Administrar usuarios</a></li>");};
+                    out.println("<li><a href='/mi-perfil'>Mi perfil</a></li>");
+                    out.println("<li><a href='/cambiar-password'>Cambiar contraseña</a></li>");
                     out.println("<li><a href='/logout'>Cerrar sesi&oacute;n</a></li></ul></li>");
                 }
                 %>

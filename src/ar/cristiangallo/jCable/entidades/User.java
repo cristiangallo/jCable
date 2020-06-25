@@ -61,7 +61,8 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws appException {
+        if (password == "") throw new appException("El campo contraseña es obligatorio.");
         this.password = password;
     }
 
@@ -69,7 +70,8 @@ public class User {
         return first_name;
     }
 
-    public void setFirstName(String first_name) {
+    public void setFirstName(String first_name) throws appException {
+        if (first_name == "") throw new appException("El campo nombre es obligatorio.");
         this.first_name = first_name;
     }
 
@@ -77,7 +79,8 @@ public class User {
         return last_name;
     }
 
-    public void setLastName(String last_name) {
+    public void setLastName(String last_name) throws appException {
+        if (last_name == "") throw new appException("El campo apellido es obligatorio.");
         this.last_name = last_name;
     }
 
@@ -85,7 +88,8 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws appException {
+        if (email == "") throw new appException("El campo email es obligatorio.");
         this.email = email;
     }
 
@@ -135,7 +139,7 @@ public class User {
         DBUser.save(this);
     }
 
-    public void olvideMiPassword() {
+    public void olvideMiPassword() throws appException {
         setPassword(RandomString.randomAlfaString(8));
         DBUser.save(this);
         // Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
@@ -151,7 +155,7 @@ public class User {
             DBUser.save(this);
 
         } else {
-            throw new appException("Este usuario ya estaba activado.");
+            throw new appException("Este usuario ya fue activado.");
         }
     }
 }

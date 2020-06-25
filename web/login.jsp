@@ -49,9 +49,9 @@
                           String mensaje = (String) request.getAttribute("mensaje");
                           out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
 
-                        else if (request.getAttribute("errorL")!=null){
-                          appException errorL = (appException)request.getAttribute("errorL");
-                          out.println("<div class='alert alert-danger' role='alert'>" + errorL.getMessage() + "</div>");}
+                        else if (request.getAttribute("error")!=null){
+                          appException error = (appException)request.getAttribute("error");
+                          out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}
                       %>
                  </div>
               </div>
@@ -132,21 +132,8 @@
           </div>
         </section>
         <hr class="divider-d">
-        <footer class="footer bg-dark">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-6">
-                <p class="copyright font-alt">&copy; 2020&nbsp;<a href="https://github.com/cristiangallo/jCable.git">jCable</a>,
-                  All Rights Reserved</p>
-              </div>
-              <div class="col-sm-6">
-                <div class="footer-social-links">
-                  <a href="#"><i class="fa fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+      <%@include  file="footer.html" %>
+
       </div>
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>

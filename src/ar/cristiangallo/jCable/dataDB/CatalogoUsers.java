@@ -62,4 +62,5 @@ public class CatalogoUsers {
     public void activarUser(User user) throws appException {
         user.activarUser();
     }
+
 }
