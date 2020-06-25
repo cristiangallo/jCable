@@ -44,10 +44,6 @@ public class CatalogoUsers {
     }
 
     public User addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
-        if (email == "") throw new appException("Ingresa un email.");
-        User user = DBUser.getUser(email);
-        if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
-                "contraseña.");
         return new User(email, password, password2, first_name, last_name);
     }
 

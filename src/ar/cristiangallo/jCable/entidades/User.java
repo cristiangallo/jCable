@@ -41,6 +41,10 @@ public class User {
     }
 
     public User(String email, String password, String password2, String first_name, String last_name) throws appException {
+        if (email == "") throw new appException("Ingresa un email.");
+        User user = DBUser.getUser(email);
+        if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
+                "contraseña.");
         if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
         if (password == "") throw new appException("Ingresa una contraseña.");
         if (first_name == "") throw new appException("Ingresa tu nombre.");
