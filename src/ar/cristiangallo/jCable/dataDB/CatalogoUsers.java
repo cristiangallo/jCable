@@ -63,4 +63,7 @@ public class CatalogoUsers {
         user.activarUser();
     }
 
+    public void changePasswordUser(User user, String password, String new_password, String new_password2) throws appException {
+        user.changePassword(password, new_password, new_password2);
+    }
 }

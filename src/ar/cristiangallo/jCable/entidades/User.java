@@ -158,4 +158,14 @@ public class User {
             throw new appException("Este usuario ya fue activado.");
         }
     }
+
+    public void changePassword(String password, String new_password, String new_password2) throws appException {
+        if (!password.equals(this.password)) throw new appException("La contraseña actual es incorrecta.");
+        if (new_password.equals(this.password)) throw new appException("La nueva contraseña es igual a tu contraseña actual.");
+        if (!new_password.equals(new_password2)) throw new appException("Las contraseñas no coinciden.");
+        if (new_password == "") throw new appException("Debes ingresar una nueva contraseña.");
+        setPassword(new_password);
+        DBUser.save(this);
+
+    }
 }

@@ -57,4 +57,8 @@ public class ControladorUsers {
     public void saveUser(User user) throws appException {
         catUsers.save(user);
     }
+
+    public void changePasswordUser(User user, String password, String new_password, String new_password2) throws appException {
+        catUsers.changePasswordUser(user, password, new_password, new_password2);
+    }
 }
