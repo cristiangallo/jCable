@@ -34,15 +34,17 @@ public class MiPerfilServet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
+        request.removeAttribute("first_name");
+        request.removeAttribute("last_name");
 
         try {
             System.out.println(first_name);
             System.out.println(last_name);
+            request.setAttribute("first_name", first_name);
+            request.setAttribute("last_name", last_name);
             user.setFirstName(first_name);
             user.setLastName(last_name);
             ctrlUsers.saveUser(user);
-            request.setAttribute("first_name", user.getFirstName());
-            request.setAttribute("last_name", user.getLastName());
             request.setAttribute("mensaje", "Los cambios se guardaron exitosamente.");
 
         } catch (appException e) {

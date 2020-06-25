@@ -30,7 +30,6 @@ public class LoginServlet extends HttpServlet {
             User user = ctrlUsers.getUser(email, password);
             user.login();
             request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
 
         } catch (appException e) {
             System.out.println(e);
@@ -42,7 +41,7 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-
+        // request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.sendRedirect("index.jsp");
     }
 }
