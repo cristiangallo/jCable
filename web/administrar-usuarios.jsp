@@ -57,12 +57,12 @@
                             <div class="col-sm-8 col-sm-offset-2 et-icons">
                                 <h4 class="font-alt mb-0">Administrar usuarios</h4>
                                 <hr class="divider-w mt-10 mb-20">
-
                                 <% if (request.getAttribute("error")!=null){
                                     appException error = (appException)request.getAttribute("error");
                                     out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() +
                                             "</div>");
-                                } else if (request.getAttribute("allUsers")!=null){
+                                } %>
+                                <% if (request.getAttribute("allUsers")!=null){
                                     ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
                                     for (User user : allUsers) {
                                         out.println("<a href='/administrar-usuarios?user_id=" + user.getId() +
@@ -84,8 +84,42 @@
                                         }
                                         out.println("aria-hidden='true'></span> " + user.getFullName() + "</span></a>");
                                     }
-                                };
-                                %>
+                                } %>
+                                <% if (request.getAttribute("administrarUser")!=null) {
+                                    User administrarUser = (User) request.getAttribute("administrarUser");
+                                    out.println("<form class='form' name='registrarse' method='post' action='alta-usuario'>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input class='form-control' type='text' name='first_name' value='" +
+                                            administrarUser.getFirstName() + "' placeholder='Nombre' >");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input class='form-control' type='text' name='last_name' " +
+                                            "value='" + administrarUser.getLastName() + "' placeholder='Apellido' >");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input class='form-control' type='email' readonly name='email' " +
+                                            "value='" + administrarUser.getEmail() + "' placeholder='Email' >");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input type='checkbox' name='isSuperuser' id='isSuperuser' ");
+                                    if (administrarUser.getIsSuperuser()){ out.println("checked");};
+                                    out.println("><label style='padding-left: 10px;' for='isSuperuser'>Superusuario</label>");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input type='checkbox' name='isStaff' id='isStaff'" );
+                                    if (administrarUser.getIsStaff()){ out.println("checked");};
+                                    out.println("><label style='padding-left: 10px;' for='isStaff'>Productor</label>");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<input type='checkbox' name='isActive' id='isActive' ");
+                                    if (administrarUser.getIsActive()){ out.println("checked");};
+                                    out.println("><label for='isActive' style='padding-left: 10px;'>Activo</label>");
+                                    out.println("</div>");
+                                    out.println("<div class='form-group'>");
+                                    out.println("<button class='btn btn-block btn-round btn-b'>Registrarme</button>");
+                                    out.println("</div>");
+                                    out.println("</form>");
+                                } %>
                             </div>
                         </div>
                     </div>

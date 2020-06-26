@@ -62,4 +62,8 @@ public class ControladorUsers {
     public ArrayList<User> allUsers() {
         return catUsers.all();
     }
+
+    public User getUserById(int user_id) throws appException {
+        return catUsers.getUserById(user_id);
+    }
 }

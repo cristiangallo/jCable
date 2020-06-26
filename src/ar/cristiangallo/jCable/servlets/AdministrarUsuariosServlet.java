@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 @WebServlet(name="Administrar-usuarios", urlPatterns = {"/administrar-usuarios"})
 public class AdministrarUsuariosServlet extends HttpServlet {
@@ -27,7 +27,14 @@ public class AdministrarUsuariosServlet extends HttpServlet {
 
             }
             ControladorUsers ctrlUsers = new ControladorUsers();
-            request.setAttribute("allUsers", ctrlUsers.allUsers());
+
+            String user_id = request.getParameter("user_id");
+            if (user_id == null) {
+                request.setAttribute("allUsers", ctrlUsers.allUsers());
+            } else {
+                request.setAttribute("administrarUser", ctrlUsers.getUserById(Integer.parseInt(user_id)));
+            }
+
         } catch (appException e) {
             System.out.println(e);
             request.setAttribute("error", e);

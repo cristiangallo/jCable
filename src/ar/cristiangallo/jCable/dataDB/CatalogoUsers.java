@@ -64,4 +64,8 @@ public class CatalogoUsers {
     public ArrayList<User> all() {
         return DBUser.all();
     }
+
+    public User getUserById(int user_id) throws appException {
+        return DBUser.getById(user_id);
+    }
 }
