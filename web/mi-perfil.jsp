@@ -51,7 +51,7 @@
         <section class="module">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
+                    <div class="col-sm-8 col-sm-offset-2">
                         <h4 class="font-alt">Mi perfil</h4>
                         <hr class="divider-w mb-10">
                         <form class="form" name="registrarse" method="post" action="mi-perfil">

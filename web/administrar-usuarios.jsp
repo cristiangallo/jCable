@@ -36,6 +36,7 @@
     <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="static/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/lib/et-line-font/et-line-font.css" rel="stylesheet">
     <!-- Main stylesheet and color file-->
     <link href="static/css/style.css" rel="stylesheet">
     <link id="color-scheme" href="static/css/colors/default.css" rel="stylesheet">
@@ -50,7 +51,31 @@
     <div class="main">
         <section class="module">
             <div class="container">
-                <div class="row"></div>
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2 et-icons">
+                                <h4 class="font-alt mb-0">Administrar usuarios</h4>
+                                <hr class="divider-w mt-10 mb-20">
+
+                                <% if (request.getAttribute("error")!=null){
+                                    appException error = (appException)request.getAttribute("error");
+                                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() +
+                                            "</div>");}
+                                %>
+                                <a href="#">
+                                    <span class="box1 alert-danger"><span class="icon-gears" aria-hidden="true"></span> icon-gears</span>
+                                </a>
+                                <a href="#">
+                                    <span class="box1 alert-success"><span class="icon-strategy" aria-hidden="true"></span> icon-strategy</span>
+                                </a>
+                                <a href="#">
+                                    <span class="box1 alert-success"><span class="icon-profile-male" aria-hidden="true"></span> icon-profile-male</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <hr class="divider-d">
