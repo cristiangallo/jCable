@@ -32,7 +32,6 @@ public class DBUser {
                         rs.getString("last_name"), rs.getBoolean("is_staff"),
                         rs.getBoolean("is_active"), rs.getBoolean("is_superuser"),
                         rs.getTimestamp("last_login"), rs.getTimestamp("date_joined"));
-                System.out.println(user.getEmail());
                 all.add(user);
             }
         } catch (SQLException e) {
