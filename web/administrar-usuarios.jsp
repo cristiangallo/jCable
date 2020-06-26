@@ -65,7 +65,7 @@
                                 } else if (request.getAttribute("allUsers")!=null){
                                     ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
                                     for (User user : allUsers) {
-                                        out.println("<a href='/administrar-usuarios&user_id=" + user.getId() +
+                                        out.println("<a href='/administrar-usuarios?user_id=" + user.getId() +
                                                 "'><span class='box1 ");
                                         if (user.getIsActive()) {
                                             out.println("alert-success ");
