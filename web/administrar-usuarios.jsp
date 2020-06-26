@@ -9,6 +9,7 @@
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
 <head>
@@ -46,7 +47,6 @@
     <div class="page-loader">
         <div class="loader">Loading...</div>
     </div>
-    <% User user = (User) session.getAttribute("user"); %>
     <jsp:include page="header.jsp" />
     <div class="main">
         <section class="module">
@@ -61,17 +61,31 @@
                                 <% if (request.getAttribute("error")!=null){
                                     appException error = (appException)request.getAttribute("error");
                                     out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() +
-                                            "</div>");}
+                                            "</div>");
+                                } else if (request.getAttribute("allUsers")!=null){
+                                    ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
+                                    for (User user : allUsers) {
+                                        out.println("<a href='/administrar-usuarios&user_id=" + user.getId() +
+                                                "'><span class='box1 ");
+                                        if (user.getIsActive()) {
+                                            out.println("alert-success ");
+                                        } else {
+                                            out.println("alert-danger ");
+                                        }
+                                        out.println("'><span class=");
+                                        if (user.getIsSuperuser()) {
+                                            out.println("'icon-gears'");
+                                        } else {
+                                            if (user.getIsStaff()) {
+                                                out.println("'icon-strategy'");
+                                            } else {
+                                                out.println("'icon-profile-male'");
+                                            }
+                                        }
+                                        out.println("aria-hidden='true'></span> " + user.getFullName() + "</span></a>");
+                                    }
+                                };
                                 %>
-                                <a href="#">
-                                    <span class="box1 alert-danger"><span class="icon-gears" aria-hidden="true"></span> icon-gears</span>
-                                </a>
-                                <a href="#">
-                                    <span class="box1 alert-success"><span class="icon-strategy" aria-hidden="true"></span> icon-strategy</span>
-                                </a>
-                                <a href="#">
-                                    <span class="box1 alert-success"><span class="icon-profile-male" aria-hidden="true"></span> icon-profile-male</span>
-                                </a>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,8 @@ package ar.cristiangallo.jCable.dataDB;
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.entidades.User;
 
+import java.util.ArrayList;
+
 /**
  * Created by cgallo on 06/06/20.
  */
@@ -57,5 +59,9 @@ public class CatalogoUsers {
 
     public void changePasswordUser(User user, String password, String new_password, String new_password2) throws appException {
         user.changePassword(password, new_password, new_password2);
+    }
+
+    public ArrayList<User> all() {
+        return DBUser.all();
     }
 }

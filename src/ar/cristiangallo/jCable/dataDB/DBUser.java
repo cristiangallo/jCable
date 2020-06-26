@@ -6,6 +6,7 @@ import ar.cristiangallo.jCable.entidades.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,6 +14,40 @@ import java.util.Date;
  */
 
 public class DBUser {
+
+    public static ArrayList<User> all() {
+        ArrayList<User> all = new ArrayList<User>();
+        User user = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                    "select id, email, password, first_name, last_name, is_staff, is_active, " +
+                            "is_superuser, last_login, date_joined from user"
+            );
+            rs = stmt.executeQuery();
+            while (rs != null && rs.next()) {
+                user = new User(rs.getInt("id"), rs.getString("email"),
+                        rs.getString("password"), rs.getString("first_name"),
+                        rs.getString("last_name"), rs.getBoolean("is_staff"),
+                        rs.getBoolean("is_active"), rs.getBoolean("is_superuser"),
+                        rs.getTimestamp("last_login"), rs.getTimestamp("date_joined"));
+                System.out.println(user.getEmail());
+                all.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.cancel();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ConexionDB.getInstancia().releaseConexion();
+        }
+        return all;
+    }
 
     public static User getUser(String email, String password) {
         User user = null;

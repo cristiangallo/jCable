@@ -5,10 +5,7 @@ import ar.cristiangallo.jCable.dataDB.CatalogoUsers;
 import ar.cristiangallo.jCable.entidades.User;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by cgallo on 06/06/2020.
@@ -60,5 +57,9 @@ public class ControladorUsers {
 
     public void changePasswordUser(User user, String password, String new_password, String new_password2) throws appException {
         catUsers.changePasswordUser(user, password, new_password, new_password2);
+    }
+
+    public ArrayList<User> allUsers() {
+        return catUsers.all();
     }
 }

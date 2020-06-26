@@ -88,6 +88,10 @@ public class User {
         return last_name;
     }
 
+    public String getFullName() {
+        return first_name + " " + last_name;
+    }
+
     public void setLastName(String last_name) throws appException {
         if (last_name == "") throw new appException("El campo apellido es obligatorio.");
         this.last_name = last_name;
