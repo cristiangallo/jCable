@@ -87,7 +87,7 @@
                                 } %>
                                 <% if (request.getAttribute("administrarUser")!=null) {
                                     User administrarUser = (User) request.getAttribute("administrarUser");
-                                    out.println("<form class='form' name='registrarse' method='post' action='alta-usuario'>");
+                                    out.println("<form class='form' name='registrarse' method='post' action=''>");
                                     out.println("<div class='form-group'>");
                                     out.println("<input class='form-control' type='text' name='first_name' value='" +
                                             administrarUser.getFirstName() + "' placeholder='Nombre' >");
@@ -97,7 +97,7 @@
                                             "value='" + administrarUser.getLastName() + "' placeholder='Apellido' >");
                                     out.println("</div>");
                                     out.println("<div class='form-group'>");
-                                    out.println("<input class='form-control' type='email' readonly name='email' " +
+                                    out.println("<input class='form-control' type='email' disabled name='email' " +
                                             "value='" + administrarUser.getEmail() + "' placeholder='Email' >");
                                     out.println("</div>");
                                     out.println("<div class='form-group'>");
@@ -114,9 +114,10 @@
                                     out.println("<span class='box2'><input type='checkbox' name='isActive' id='isActive' ");
                                     if (administrarUser.getIsActive()){ out.println("checked");};
                                     out.println("><label for='isActive' style='padding-left: 10px;'>Activo</label>");
-                                    out.println("</span></div>");
+                                    out.println("</span></div><br><br>");
                                     out.println("<div class='form-group'>");
-                                    out.println("<button class='btn btn-block btn-round btn-b'>Registrarme</button>");
+                                    out.println("<button class='btn btn-border-d btn-round' type='button'>Descartar</button>");
+                                    out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
                                     out.println("</div>");
                                     out.println("</form>");
                                 } %>
