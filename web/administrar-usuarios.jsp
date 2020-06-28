@@ -57,11 +57,12 @@
                             <div class="col-sm-8 col-sm-offset-2 et-icons">
                                 <h4 class="font-alt mb-0">Administrar usuarios</h4>
                                 <hr class="divider-w mt-10 mb-20">
-                                <% if (request.getAttribute("error")!=null){
+                                <% if (request.getAttribute("mensaje")!=null){
+                                    String mensaje = (String) request.getAttribute("mensaje");
+                                    out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
+                                else if (request.getAttribute("error")!=null){
                                     appException error = (appException)request.getAttribute("error");
-                                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() +
-                                            "</div>");
-                                } %>
+                                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
                                 <% if (request.getAttribute("allUsers")!=null){
                                     ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
                                     for (User user : allUsers) {
@@ -102,21 +103,22 @@
                                     out.println("</div>");
                                     out.println("<div class='form-group'>");
                                     out.println("<span class='box2'><input type='checkbox' name='isSuperuser' id='isSuperuser' ");
-                                    if (administrarUser.getIsSuperuser()){ out.println("checked");};
+                                    if (administrarUser.getIsSuperuser()){ out.println("checked=\"checked\"");};
                                     out.println("><label style='padding-left: 10px;' for='isSuperuser'>Admin</label>");
                                     out.println("</span></div>");
                                     out.println("<div class='form-group'>");
                                     out.println("<span class='box2'><input type='checkbox' name='isStaff' id='isStaff'" );
-                                    if (administrarUser.getIsStaff()){ out.println("checked");};
+                                    if (administrarUser.getIsStaff()){ out.println("checked=\"checked\"");};
                                     out.println("><label style='padding-left: 10px;' for='isStaff'>Productor</label>");
                                     out.println("</span></div>");
                                     out.println("<div class='form-group'>");
                                     out.println("<span class='box2'><input type='checkbox' name='isActive' id='isActive' ");
-                                    if (administrarUser.getIsActive()){ out.println("checked");};
+                                    if (administrarUser.getIsActive()){ out.println("checked=\"checked\"");};
                                     out.println("><label for='isActive' style='padding-left: 10px;'>Activo</label>");
                                     out.println("</span></div><br><br>");
                                     out.println("<div class='form-group'>");
-                                    out.println("<button class='btn btn-border-d btn-round' type='button'>Descartar</button>");
+                                    out.println("<button class='btn btn-border-d btn-round' type='button' " +
+                                            "onclick=\"document.location.href = '/administrar-usuarios';\">volver</button>");
                                     out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
                                     out.println("</div>");
                                     out.println("</form>");

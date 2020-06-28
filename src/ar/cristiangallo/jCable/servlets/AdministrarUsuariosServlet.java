@@ -32,7 +32,8 @@ public class AdministrarUsuariosServlet extends HttpServlet {
             if (user_id == null) {
                 request.setAttribute("allUsers", ctrlUsers.allUsers());
             } else {
-                request.setAttribute("administrarUser", ctrlUsers.getUserById(Integer.parseInt(user_id)));
+                User administrarUser = ctrlUsers.getUserById(Integer.parseInt(user_id));
+                request.setAttribute("administrarUser", administrarUser);
             }
 
         } catch (appException e) {
@@ -47,4 +48,46 @@ public class AdministrarUsuariosServlet extends HttpServlet {
         request.getRequestDispatcher("administrar-usuarios.jsp").forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        try {
+            if (user == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            } else if (!user.getIsSuperuser()) {
+                throw new appException("No tienen acceso a la administración de perfiles.");
+
+            }
+
+            String user_id = request.getParameter("user_id");
+            if (user_id == null) {
+                throw new appException("No hay usuario que administrar.");
+            }
+            ControladorUsers ctrlUsers = new ControladorUsers();
+            User administrarUser = ctrlUsers.getUserById(Integer.parseInt(user_id));
+            administrarUser.setFirstName(request.getParameter("first_name"));
+            administrarUser.setLastName(request.getParameter("last_name"));
+            boolean isSuperuser = request.getParameterValues("isSuperuser") != null;
+            boolean isStaff = request.getParameterValues("isStaff") != null;
+            boolean isActive = request.getParameterValues("isActive") != null;
+            administrarUser.setIsSuperuser(isSuperuser);
+            administrarUser.setIsStaff(isStaff);
+            administrarUser.setIsActive(isActive);
+            ctrlUsers.saveUser(administrarUser);
+            request.setAttribute("mensaje", "Los cambios se guardaron satisfactoriamente.");
+            request.setAttribute("administrarUser", administrarUser);
+
+        } catch (appException e) {
+            System.out.println(e);
+            request.setAttribute("error", e);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        request.getRequestDispatcher("administrar-usuarios.jsp").forward(request, response);
+    }
 }
