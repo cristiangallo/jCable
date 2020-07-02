@@ -2,8 +2,8 @@ package ar.cristiangallo.jCable.entidades;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.DBUser;
-import org.apache.commons.mail.EmailException;
-import utiles.Mailer;
+// import org.apache.commons.mail.EmailException;
+// import utiles.Mailer;
 import utiles.RandomString;
 import utiles.SendHtmlEmail;
 
@@ -42,7 +42,7 @@ public class User {
 
     public User(String email, String password, String password2, String first_name, String last_name) throws appException {
         if (email == "") throw new appException("Ingresa un email.");
-        User user = DBUser.getUser(email);
+        User user = DBUser.getInstancia().getUser(email);
         if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
                 "contraseña.");
         if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
@@ -54,8 +54,7 @@ public class User {
         this.last_name = last_name;
         this.email = email;
         this.password = password;
-
-        DBUser.save(this);
+        DBUser.getInstancia().save(this);
         /*
         Mailer.send(email,"Activar cuenta en jCable","Hola " + first_name + ", haz <a href='http://127.0." +
                 "0.1:8080/activar-usuario'>click aqui</a> para activar tu cuenta en jCable");
@@ -149,12 +148,12 @@ public class User {
             throw new appException("Usuario inactivo.");
         }
         last_login = new Timestamp(System.currentTimeMillis());
-        DBUser.save(this);
+        DBUser.getInstancia().save(this);
     }
 
     public void olvideMiPassword() throws appException {
         setPassword(RandomString.randomAlfaString(8));
-        DBUser.save(this);
+        DBUser.getInstancia().save(this);
         // Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
 
         SendHtmlEmail.send(email, "Nuevo password para jCable", "<html>Hola " + first_name + "!, " +
@@ -165,7 +164,7 @@ public class User {
     public void activarUser() throws appException {
         if (!is_active){
             setIsActive(true);
-            DBUser.save(this);
+            DBUser.getInstancia().save(this);
 
         } else {
             throw new appException("Este usuario ya fue activado.");
@@ -178,7 +177,11 @@ public class User {
         if (!new_password.equals(new_password2)) throw new appException("Las contraseñas no coinciden.");
         if (new_password == "") throw new appException("Debes ingresar una nueva contraseña.");
         setPassword(new_password);
-        DBUser.save(this);
+        DBUser.getInstancia().save(this);
 
+    }
+
+    public void save() {
+        DBUser.getInstancia().save(this);
     }
 }

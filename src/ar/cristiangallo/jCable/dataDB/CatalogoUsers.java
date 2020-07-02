@@ -24,7 +24,7 @@ public class CatalogoUsers {
     private CatalogoUsers() {}
 
     public User getUser(String email, String password) throws appException  {
-        User user = DBUser.getUser(email, password);
+        User user = DBUser.getInstancia().getUser(email, password);
         if (user == null) throw new appException("Nombre de usuario o contraseña inválida.");
         return user;
     }
@@ -36,7 +36,7 @@ public class CatalogoUsers {
     }
 
     public void save(User user) {
-        DBUser.save(user);
+        user.save();
     }
 
     public void olvideMiPassword(String email) throws appException {
@@ -50,7 +50,7 @@ public class CatalogoUsers {
     }
 
     public User getUser(String email) {
-        return DBUser.getUser(email);
+        return DBUser.getInstancia().getUser(email);
     }
 
     public void activarUser(User user) throws appException {
@@ -61,11 +61,8 @@ public class CatalogoUsers {
         user.changePassword(password, new_password, new_password2);
     }
 
-    public ArrayList<User> all() {
-        return DBUser.all();
-    }
+    public ArrayList<User> all() { return DBUser.getInstancia().all(); }
 
-    public User getUserById(int user_id) throws appException {
-        return DBUser.getById(user_id);
-    }
+    public User getUserById(int user_id) { return DBUser.getInstancia().get(user_id); }
+
 }

@@ -1,7 +1,6 @@
 package ar.cristiangallo.jCable.dataDB;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
-
 import java.util.ArrayList;
 
 /**
