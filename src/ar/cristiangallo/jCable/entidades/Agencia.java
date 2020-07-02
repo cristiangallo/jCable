@@ -41,4 +41,8 @@ public class Agencia {
     public void setIsActive(boolean is_active) {
         this.is_active = is_active;
     }
+
+    public int getDiasPurga() {
+        return dias_purga;
+    }
 }
