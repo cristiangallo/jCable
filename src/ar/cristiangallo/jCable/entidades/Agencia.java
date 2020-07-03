@@ -1,5 +1,8 @@
 package ar.cristiangallo.jCable.entidades;
 
+import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.dataDB.DBAgencia;
+
 public class Agencia {
     private int id;
     private String descripcion;
@@ -12,6 +15,18 @@ public class Agencia {
         this.descripcion = description;
         this.home_path = home_path;
         this.is_active = is_active;
+    }
+
+    public Agencia(int id, String descripcion, String home_path, int dias_purga, boolean is_active) throws appException {
+        if (descripcion == "") throw new appException("Ingresa una descripción.");
+        if (home_path == "") throw new appException("Ingresa la ubicación de los archivos de los cables.");
+        this.id = id;
+        this.descripcion = descripcion;
+        this.home_path = home_path;
+        this.dias_purga = dias_purga;
+        this.is_active = is_active;
+
+        DBAgencia.getInstancia().save(this);
     }
 
     public int getId() {
@@ -44,5 +59,18 @@ public class Agencia {
 
     public int getDiasPurga() {
         return dias_purga;
+    }
+
+    public void save() {
+        DBAgencia.getInstancia().save(this);
+    }
+
+    public void setDiasPurga(int dias_purga) {
+        this.dias_purga = dias_purga;
+    }
+
+    public void delete() {
+        /* ToDo revisar que no tenga cables la agencia para poder eliminarla */
+        DBAgencia.getInstancia().delete(this);
     }
 }

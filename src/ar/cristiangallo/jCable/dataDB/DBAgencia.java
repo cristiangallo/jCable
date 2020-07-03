@@ -28,13 +28,63 @@ public class DBAgencia extends DBTable<Agencia> {
     }
 
     @Override
-    public Agencia get(int id) throws appException {
-        return null;
+    public Agencia get(int agencia_id) throws appException {
+        Agencia agencia = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                    "select id, descripcion, home_path, dias_purga, is_active from agencias where id = ?"
+            );
+            stmt.setInt(1, agencia_id  );
+            rs = stmt.executeQuery();
+            if (rs != null && rs.next()) {
+                agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),
+                        rs.getInt("dias_purga"), rs.getBoolean("is_active"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.cancel();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ConexionDB.getInstancia().releaseConexion();
+        }
+        return agencia;
     }
 
     @Override
     public ArrayList<Agencia> all() throws appException {
-        return null;
+        ArrayList<Agencia> all = new ArrayList<Agencia>();
+        Agencia agencia = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                    "select id, descripcion, home_path, dias_purga, is_active from agencias;"
+            );
+            rs = stmt.executeQuery();
+            while (rs != null && rs.next()) {
+                agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),
+                        rs.getInt("dias_purga"), rs.getBoolean("is_active"));
+                all.add(agencia);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.cancel();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ConexionDB.getInstancia().releaseConexion();
+        }
+        return all;
     }
 
     @Override
@@ -47,7 +97,7 @@ public class DBAgencia extends DBTable<Agencia> {
             if (user_id > 0) {
                 System.out.println("update agencia");
                 stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                        "update agencias set descripcion = ?, home_path = ?, dias_purga = ?, is_active = ?, " +
+                        "update agencias set descripcion = ?, home_path = ?, dias_purga = ?, is_active = ? " +
                                 "where id = ?", PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setInt(5, user_id);
             } else {
