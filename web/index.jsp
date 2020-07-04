@@ -1,7 +1,7 @@
-<%@page import="ar.cristiangallo.jCable.appExceptions.*" %>
+
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
+
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
@@ -118,18 +118,19 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="widget">
-                            <h5 class="widget-title font-alt">Agencias de noticias</h5>
-                            <ul class="icon-list">
-                                <% if (request.getAttribute("agenciasActivas")!=null){
-                                    ArrayList<Agencia> agenciasActivas = (ArrayList<Agencia>) request.getAttribute("agenciasActivas");
-                                    for (Agencia agencia : agenciasActivas) {
-                                        out.println("<li><a href='/agencias?agencia_id=" + agencia.getId() +"'> " +
-                                                agencia.getDescription() + "</a></li>");
-                                    }
-                                }%>
-                            </ul>
-                        </div>
+                        <%  if (request.getAttribute("agenciasActivas")!=null){
+                                ArrayList<Agencia> agenciasActivas = (ArrayList<Agencia>) request.getAttribute("agenciasActivas");
+                                out.println("<div class='widget'>");
+                                out.println("<h5 class='widget-title font-alt'>Agencias de noticias</h5>");
+                                out.println("<ul class='icon-list'>");
+                                for (Agencia agencia : agenciasActivas) {
+                                    out.println("<li><a href='/agencias?agencia_id=" + agencia.getId() +"'> " +
+                                            agencia.getDescription() + "</a></li>");
+                                }
+                                out.println("</ul>");
+                                out.println("</div>");
+                            }
+                        %>
                         <div class="widget">
                             <h5 class="widget-title font-alt">Popular Posts</h5>
                             <ul class="widget-posts">
