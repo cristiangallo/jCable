@@ -51,8 +51,12 @@ public class AdministrarAgenciasServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer dias_purga = null;
         User user = (User) request.getSession().getAttribute("user");
-
+        try {
+            dias_purga = Integer.parseInt(request.getParameter("dias_purga"));
+        } catch(NumberFormatException ex){
+        }
         try {
             if (user == null) {
                 response.sendRedirect("login.jsp");
@@ -70,7 +74,7 @@ public class AdministrarAgenciasServlet extends HttpServlet {
             Agencia administrarAgencia = ctrlAgencias.getAgenciaById(Integer.parseInt(agencia_id));
             administrarAgencia.setDescription(request.getParameter("descripcion"));
             administrarAgencia.setHomePath(request.getParameter("home_path"));
-            administrarAgencia.setDiasPurga(Integer.parseInt(request.getParameter("dias_purga")));
+            administrarAgencia.setDiasPurga(dias_purga);
             boolean isActive = request.getParameterValues("isActive") != null;
             administrarAgencia.setIsActive(isActive);
             ctrlAgencias.saveAgencia(administrarAgencia);

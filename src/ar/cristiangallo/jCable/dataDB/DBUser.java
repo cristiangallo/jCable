@@ -68,7 +68,7 @@ public class DBUser extends DBTable<User> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "select id, email, password, first_name, last_name, is_staff, is_active, " +
-                            "is_superuser, last_login, date_joined from user where id = ?"
+                            "is_superuser, last_login, date_joined from users where id = ?"
             );
             stmt.setInt(1, user_id);
             rs = stmt.executeQuery();

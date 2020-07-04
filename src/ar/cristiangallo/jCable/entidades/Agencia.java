@@ -7,7 +7,7 @@ public class Agencia {
     private int id;
     private String descripcion;
     private String home_path;
-    private int dias_purga = 7;
+    private Integer dias_purga = 7;
     private boolean is_active;
 
     public Agencia(int id, String description, String home_path, boolean is_active) {
@@ -17,7 +17,7 @@ public class Agencia {
         this.is_active = is_active;
     }
 
-    public Agencia(int id, String descripcion, String home_path, int dias_purga, boolean is_active) throws appException {
+    public Agencia(int id, String descripcion, String home_path, Integer dias_purga, boolean is_active) throws appException {
         if (descripcion == "") throw new appException("Ingresa una descripción.");
         if (home_path == "") throw new appException("Ingresa la ubicación de los archivos de los cables.");
         this.id = id;
@@ -57,7 +57,7 @@ public class Agencia {
         this.is_active = is_active;
     }
 
-    public int getDiasPurga() {
+    public Integer getDiasPurga() {
         return dias_purga;
     }
 
@@ -65,7 +65,7 @@ public class Agencia {
         DBAgencia.getInstancia().save(this);
     }
 
-    public void setDiasPurga(int dias_purga) {
+    public void setDiasPurga(Integer dias_purga) {
         this.dias_purga = dias_purga;
     }
 
