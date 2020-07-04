@@ -29,4 +29,9 @@ public class ControladorAgencias {
     public void delAgencia(int agencia_id) throws appException {
         catAgencias.delAgencia(agencia_id);
     }
+
+    public Agencia addAgencia(String descripcion, String home_path, Integer dias_purga, boolean isActive) throws appException {
+
+        return catAgencias.addAgencia(descripcion, home_path, dias_purga, isActive);
+    }
 }

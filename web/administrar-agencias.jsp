@@ -52,77 +52,81 @@
         <section class="module">
             <div class="container">
                 <div class="row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2 et-icons">
-                                <h4 class="font-alt mb-0">Administrar agencias de noticias</h4>
-                                <hr class="divider-w mt-10 mb-20">
-                                <% if (request.getAttribute("mensaje")!=null){
-                                    String mensaje = (String) request.getAttribute("mensaje");
-                                    out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
-                                else if (request.getAttribute("error")!=null){
-                                    appException error = (appException)request.getAttribute("error");
-                                    out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
-                                <% if (request.getAttribute("allAgencias")!=null){
-                                    ArrayList<Agencia> allAgencias = (ArrayList<Agencia>) request.getAttribute("allAgencias");
-                                    for (Agencia agencia : allAgencias) {
-                                        out.println("<a href='/administrar-agencias?agencia_id=" + agencia.getId() +
-                                                "'><span class='box1 ");
-                                        if (agencia.getIsActive()) {
-                                            out.println("alert-success ");
-                                        } else {
-                                            out.println("alert-danger ");
-                                        }
-                                        out.println("'><span class=");
-                                        if (agencia.getIsActive()) {
-                                            out.println("'icon-gears'");
-                                        } else {
-                                            if (agencia.getIsActive()) {
-                                                out.println("'icon-strategy'");
-                                            } else {
-                                                out.println("'icon-profile-male'");
-                                            }
-                                        }
-                                        out.println("aria-hidden='true'></span> " + agencia.getDescription() + "</span></a>");
+                    <div class="col-sm-8 col-sm-offset-2 et-icons">
+                        <h4 class="font-alt mb-0">Administrar agencias de noticias</h4>
+                        <hr class="divider-w mt-10 mb-20">
+                        <% if (request.getAttribute("mensaje")!=null){
+                            String mensaje = (String) request.getAttribute("mensaje");
+                            out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
+                        else if (request.getAttribute("error")!=null){
+                            appException error = (appException)request.getAttribute("error");
+                            out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
+                        <% if (request.getAttribute("allAgencias")!=null){
+                            ArrayList<Agencia> allAgencias = (ArrayList<Agencia>) request.getAttribute("allAgencias");
+                            for (Agencia agencia : allAgencias) {
+                                out.println("<a href='/administrar-agencias?agencia_id=" + agencia.getId() +
+                                        "'><span class='box1 ");
+                                if (agencia.getIsActive()) {
+                                    out.println("alert-success ");
+                                } else {
+                                    out.println("alert-danger ");
+                                }
+                                out.println("'><span class=");
+                                if (agencia.getIsActive()) {
+                                    out.println("'icon-gears'");
+                                } else {
+                                    if (agencia.getIsActive()) {
+                                        out.println("'icon-strategy'");
+                                    } else {
+                                        out.println("'icon-profile-male'");
                                     }
-                                } else if (request.getAttribute("administrarAgencia")!=null) {
-                                    Agencia administrarAgencia = (Agencia) request.getAttribute("administrarAgencia");
-                                    out.println("<form class='form' name='form' method='post' action=''>");
-                                    out.println("<div class='form-group'>");
-                                    out.println("<label for='descripcion'>Descripción</label>");
-                                    out.println("<input class='form-control' type='text' name='descripcion' value='" +
-                                            administrarAgencia.getDescription() + "' placeholder='Descripción' " +
-                                            "id='descripcion' >");
-                                    out.println("</div>");
-                                    out.println("<div class='form-group'>");
-                                    out.println("<label for='home_path'>Home</label>");
-                                    out.println("<input class='form-control' type='text' name='home_path' " +
-                                            "value='" + administrarAgencia.getHomePath() + "' placeholder='Ubicación " +
-                                            "de donde levantar los cables de la agencia' id='home_path'>");
-                                    out.println("</div>");
-                                    out.println("<div class='form-group'>");
-                                    out.println("<label for='dias_purga'>Purga (en días)</label>");
-                                    out.println("<input class='form-control' type='text' name='dias_purga' " +
-                                            "id='dias_purga' value='" + administrarAgencia.getDiasPurga() +
-                                            "' placeholder='Días para purgarse' >");
-                                    out.println("</div>");
-                                    out.println("<div class='form-group'>");
-                                    out.println("<span class='box2'><input type='checkbox' name='isActive' id='isActive' ");
-                                    if (administrarAgencia.getIsActive()){ out.println("checked=\"checked\"");};
-                                    out.println("><label for='isActive' style='padding-left: 10px;'>Activa</label>");
-                                    out.println("</span></div><br><br>");
-                                    out.println("<div class='form-group'>");
-                                    out.println("<button class='btn btn-border-d btn-round' type='button' " +
-                                            "onclick=\"document.location.href = '/administrar-agencias';\">volver</button>");
-                                    out.println("<a class='btn btn-border-d btn-round' role='button' " +
-                                            "onclick=\"return confirm('are you sure?');\" href='/administrar-agencias/eliminar?" +
-                                            "agencia_id=" + administrarAgencia.getId() + "'>Eliminar</a>");
-                                    out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
-                                    out.println("</div>");
-                                    out.println("</form>");
-                                } %>
-                            </div>
-                        </div>
+                                }
+                                out.println("aria-hidden='true'></span> " + agencia.getDescription() + "</span></a>");
+                            }
+                        } else if (request.getAttribute("administrarAgencia")!=null) {
+                            Agencia administrarAgencia = (Agencia) request.getAttribute("administrarAgencia");
+                            out.println("<form class='form' name='form' method='post' action=''>");
+                            out.println("<div class='form-group'>");
+                            out.println("<label for='descripcion'>Descripción</label>");
+                            out.println("<input class='form-control' type='text' name='descripcion' value='" +
+                                    administrarAgencia.getDescription() + "' placeholder='Descripción' " +
+                                    "id='descripcion' >");
+                            out.println("</div>");
+                            out.println("<div class='form-group'>");
+                            out.println("<label for='home_path'>Home</label>");
+                            out.println("<input class='form-control' type='text' name='home_path' " +
+                                    "value='" + administrarAgencia.getHomePath() + "' placeholder='Ubicación " +
+                                    "de donde levantar los cables de la agencia' id='home_path'>");
+                            out.println("</div>");
+                            out.println("<div class='form-group'>");
+                            out.println("<label for='dias_purga'>Purga (en días)</label>");
+                            out.println("<input class='form-control' type='text' name='dias_purga' " +
+                                    "id='dias_purga' value='" + administrarAgencia.getDiasPurga() +
+                                    "' placeholder='Días para purgarse' >");
+                            out.println("</div>");
+                            out.println("<div class='form-group'>");
+                            out.println("<span class='box2'><input type='checkbox' name='isActive' id='isActive' ");
+                            if (administrarAgencia.getIsActive()){ out.println("checked=\"checked\"");};
+                            out.println("><label for='isActive' style='padding-left: 10px;'>Activa</label>");
+                            out.println("</span></div><br><br>");
+                            out.println("<div class='form-group'>");
+                            out.println("<button class='btn btn-border-d btn-round' type='button' " +
+                                    "onclick=\"document.location.href = '/administrar-agencias';\">volver</button>");
+                            out.println("<a class='btn btn-border-d btn-round' role='button' " +
+                                    "onclick=\"return confirm('are you sure?');\" href='/eliminar-agencia?" +
+                                    "agencia_id=" + administrarAgencia.getId() + "'>Eliminar</a>");
+                            out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
+                            out.println("</div>");
+                            out.println("</form>");
+                        } out.println("</div></div>");
+                        if (request.getAttribute("allAgencias")!=null){
+                            out.println("<div class='row'><div class='col-sm-8 col-sm-offset-2 et-icons'>" +
+                                "<br><a class='btn btn-border-d btn-round' " +
+                                "role='button' href='/'>volver</a>&nbsp;<a class='btn btn-round btn-b' " +
+                                "role='button' href='/agregar-agencia'>Agregar</a></div>" +
+                                "</div>");
+                        }
+                        %>
                     </div>
                 </div>
             </div>

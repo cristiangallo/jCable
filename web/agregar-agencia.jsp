@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: cgallo
-  Date: 25/6/20
-  Time: 08:45
+  Date: 4/7/20
+  Time: 01:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="ar.cristiangallo.jCable.appExceptions.*" %>
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
-<% User user = (User) session.getAttribute("user"); %>
+<%@ page import="java.net.Inet4Address" %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
 <head>
@@ -51,43 +51,55 @@
         <section class="module">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
-                        <h4 class="font-alt">Cambiar contraseña</h4>
-                        <hr class="divider-w mb-10">
-                        <form class="form" name="registrarse" method="post" action="cambiar-password">
-                            <% if (request.getAttribute("mensaje")!=null){
-                                String mensaje = (String) request.getAttribute("mensaje");
-                                out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
-                            else if (request.getAttribute("error")!=null){
-                                appException error = (appException)request.getAttribute("error");
-                                out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
-
+                    <div class="col-sm-8 col-sm-offset-2 et-icons">
+                        <h4 class="font-alt mb-0">Agregar agencia de noticias</h4>
+                        <hr class="divider-w mt-10 mb-20">
+                        <% if (request.getAttribute("mensaje")!=null){
+                            String mensaje = (String) request.getAttribute("mensaje");
+                            out.println("<div class='alert alert-success' role='alert'>" + mensaje + "</div>");}
+                        else if (request.getAttribute("error")!=null){
+                            appException error = (appException)request.getAttribute("error");
+                            out.println("<div class='alert alert-danger' role='alert'>" + error.getMessage() + "</div>");}%>
+                        <form class='form' name='form' method='post' action=''>
                             <div class="form-group">
-                                <% String password = (String) request.getAttribute("password");
-                                    out.println("<input class='form-control' type='password' name='password' " +
-                                            "placeholder='Contraseña actual'");
-                                    if (password!=null){out.println(" value="+password);}
+                                <% String descripcion = (String) request.getAttribute("descripcion");
+                                    out.println("<label for='descripcion'>Descripción</label>");
+                                    out.println("<input class='form-control' type='text' id='descripcion' " +
+                                            "name='descripcion' placeholder='Descripción'");
+                                    if (descripcion!=null){out.println(" value="+descripcion);}
                                     out.println(" >");
                                 %>
                             </div>
                             <div class="form-group">
-                                <% String new_password = (String) request.getAttribute("new_password");
-                                    out.println("<input class='form-control' type='password' name='new_password' " +
-                                            "placeholder='Nueva contraseña'");
-                                    if (password!=null){out.println(" value="+new_password);}
+                                <% String home_path = (String) request.getAttribute("home_path");
+                                    out.println("<label for='home_path'>Home</label>");
+                                    out.println("<input class='form-control' type='text' id='home_path' " +
+                                            "name='home_path' placeholder='Ubicación de donde levantar los cables de " +
+                                            "la agencia'");
+                                    if (home_path!=null){out.println(" value="+home_path);}
                                     out.println(" >");
                                 %>
                             </div>
                             <div class="form-group">
-                                <% String new_password2 = (String) request.getAttribute("new_password2");
-                                    out.println("<input class='form-control' type='password' name='new_password2' " +
-                                            "placeholder='Repetir nueva contraseña'");
-                                    if (new_password!=null){out.println(" value="+new_password2);}
+                                <% Integer dias_purga = (Integer) request.getAttribute("dias_purga");
+                                    out.println("<label for='dias_purga'>Purga (en días)</label>");
+                                    out.println("<input class='form-control' type='text' id='dias_purga' " +
+                                            "name='dias_purga' placeholder='Días para purgarse'");
+                                    if (dias_purga!=null){out.println(" value="+dias_purga);}
                                     out.println(" >");
                                 %>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-block btn-round btn-b" type="submit">Cambiar contraseña</button>
+                                <% boolean isActive = request.getAttribute("isActive") != null;
+                                    out.println("<span class='box2'><input type='checkbox' name='isActive' id='isActive' ");
+                                    if (isActive){out.println(" checked");}
+                                    out.println("><label for='isActive' style='padding-left: 10px;'>Activa</label>");
+                                    out.println("</span>");
+                                %>
+                            </div><br><br>
+                            <div class='form-group'>
+                                <a class='btn btn-border-d btn-round' role='button' href='/administrar-agencias'>volver</a>
+                                <button class='btn btn-round btn-b' type='submit'>Agregar</button>
                             </div>
                         </form>
                     </div>

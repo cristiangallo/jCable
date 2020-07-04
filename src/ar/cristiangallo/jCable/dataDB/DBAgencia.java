@@ -40,7 +40,7 @@ public class DBAgencia extends DBTable<Agencia> {
             rs = stmt.executeQuery();
             if (rs != null && rs.next()) {
                 Integer dias_purga = (Integer) rs.getObject("dias_purga");
-                System.out.println("dias_purga:" + dias_purga);
+                System.out.println("dias_purga:" + rs.getObject("dias_purga") + dias_purga);
 
                 // ToDo ver como recuperar un null integer
                 agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),
@@ -116,6 +116,11 @@ public class DBAgencia extends DBTable<Agencia> {
             stmt.setBoolean(4, agencia.getIsActive());
             stmt.execute();
             rs = stmt.getGeneratedKeys();
+            if (user_id == 0) {
+                if(rs != null && rs.next()){
+                    agencia.setId(rs.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

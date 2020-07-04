@@ -831,6 +831,11 @@ a,
 }
 
 /* Forms common style */
+.botonera {
+  text-align: right;
+  padding-top: 10px;
+}
+
 .form-control {
   font-family: "Roboto Condensed", sans-serif;
   #text-transform: uppercase;

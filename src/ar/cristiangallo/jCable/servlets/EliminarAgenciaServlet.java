@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Eliminar-agencia", urlPatterns = {"/administrar-agencias/eliminar"})
+@WebServlet(name="Eliminar-agencia", urlPatterns = {"/eliminar-agencia"})
 public class EliminarAgenciaServlet extends HttpServlet {
 
     @Override
@@ -29,7 +29,7 @@ public class EliminarAgenciaServlet extends HttpServlet {
             }
             ControladorAgencias ctrlAgencias = new ControladorAgencias();
             ctrlAgencias.delAgencia(Integer.parseInt(request.getParameter("agencia_id")));
-            response.sendRedirect("/administrar-agencias");
+            response.sendRedirect("administrar-agencias");
             return;
 
         } catch (appException e) {
@@ -41,7 +41,7 @@ public class EliminarAgenciaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.getRequestDispatcher("/administrar-agencias.jsp").forward(request, response);
+        request.getRequestDispatcher("administrar-agencias.jsp").forward(request, response);
 
     }
 

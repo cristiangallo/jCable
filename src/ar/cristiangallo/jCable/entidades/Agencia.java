@@ -17,18 +17,27 @@ public class Agencia {
         this.is_active = is_active;
     }
 
+    // constructor para la agencia guardada en la db
     public Agencia(int id, String descripcion, String home_path, Integer dias_purga, boolean is_active) throws appException {
-        if (descripcion == "") throw new appException("Ingresa una descripción.");
-        if (home_path == "") throw new appException("Ingresa la ubicación de los archivos de los cables.");
         this.id = id;
         this.descripcion = descripcion;
         this.home_path = home_path;
         this.dias_purga = dias_purga;
         this.is_active = is_active;
-
-        DBAgencia.getInstancia().save(this);
     }
 
+    public Agencia(String descripcion, String home_path, Integer dias_purga, boolean is_active) throws appException {
+        if (descripcion == "") throw new appException("Ingresa una descripción.");
+        if (home_path == "") throw new appException("Ingresa la ubicación de los archivos de los cables.");
+        this.descripcion = descripcion;
+        this.home_path = home_path;
+        this.dias_purga = dias_purga;
+        this.is_active = is_active;
+        DBAgencia.getInstancia().save(this);
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getId() {
         return this.id;
     }
@@ -73,4 +82,6 @@ public class Agencia {
         /* ToDo revisar que no tenga cables la agencia para poder eliminarla */
         DBAgencia.getInstancia().delete(this);
     }
+
+
 }

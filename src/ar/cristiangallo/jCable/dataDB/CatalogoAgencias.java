@@ -38,4 +38,8 @@ public class CatalogoAgencias {
         Agencia agencia = getAgenciaById(agencia_id);
         agencia.delete();
     }
+
+    public Agencia addAgencia(String descripcion, String home_path, Integer dias_purga, boolean isActive) throws appException {
+        return new Agencia(descripcion, home_path, dias_purga, isActive);
+    }
 }
