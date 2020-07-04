@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
 
         if (user != null) {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("/");
             return;
         }
         request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -48,6 +48,6 @@ public class LoginServlet extends HttpServlet {
         }
 
         // request.getRequestDispatcher("index.jsp").forward(request, response);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/");
     }
 }

@@ -18,7 +18,7 @@ public class Agencia {
     }
 
     // constructor para la agencia guardada en la db
-    public Agencia(int id, String descripcion, String home_path, Integer dias_purga, boolean is_active) throws appException {
+    public Agencia(int id, String descripcion, String home_path, Integer dias_purga, boolean is_active) {
         this.id = id;
         this.descripcion = descripcion;
         this.home_path = home_path;
@@ -43,7 +43,7 @@ public class Agencia {
     }
 
     public String getDescription() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescription(String description) {

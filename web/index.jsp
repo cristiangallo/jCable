@@ -2,6 +2,7 @@
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
 <head>
@@ -38,7 +39,6 @@
     <div class="page-loader">
         <div class="loader">Loading...</div>
     </div>
-    <% User user = (User) session.getAttribute("user"); %>
     <jsp:include page="header.jsp" />
     <div class="main">
         <section class="module">
@@ -119,13 +119,15 @@
                             </form>
                         </div>
                         <div class="widget">
-                            <h5 class="widget-title font-alt">Blog Categories</h5>
+                            <h5 class="widget-title font-alt">Agencias de noticias</h5>
                             <ul class="icon-list">
-                                <li><a href="#">Photography - 7</a></li>
-                                <li><a href="#">Web Design - 3</a></li>
-                                <li><a href="#">Illustration - 12</a></li>
-                                <li><a href="#">Marketing - 1</a></li>
-                                <li><a href="#">Wordpress - 16</a></li>
+                                <% if (request.getAttribute("agenciasActivas")!=null){
+                                    ArrayList<Agencia> agenciasActivas = (ArrayList<Agencia>) request.getAttribute("agenciasActivas");
+                                    for (Agencia agencia : agenciasActivas) {
+                                        out.println("<li><a href='/agencias?agencia_id=" + agencia.getId() +"'> " +
+                                                agencia.getDescription() + "</a></li>");
+                                    }
+                                }%>
                             </ul>
                         </div>
                         <div class="widget">
@@ -183,23 +185,7 @@
                 </div>
             </div>
         </section>
-
         <%@include  file="footer.html" %>
-        <footer class="footer bg-dark">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p class="copyright font-alt">&copy; 2020&nbsp;<a href="https://github.com/cristiangallo/jCable.git">jCable</a>,
-                            All Rights Reserved</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="footer-social-links">
-                            <a href="#"><i class="fa fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
 </main>

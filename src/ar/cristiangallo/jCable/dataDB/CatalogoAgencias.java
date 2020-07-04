@@ -22,9 +22,11 @@ public class CatalogoAgencias {
     // hago privado el constructor para que nadie pueda instanciarlo
     private CatalogoAgencias() {}
 
-    public ArrayList<Agencia> all() throws appException {
+    public ArrayList<Agencia> all() {
         return DBAgencia.getInstancia().all();
     }
+
+    public ArrayList<Agencia> agenciasActivas() { return DBAgencia.getInstancia().agenciasActivas(); }
 
     public Agencia getAgenciaById(int agencia_id) throws appException {
         return DBAgencia.getInstancia().get(agencia_id);

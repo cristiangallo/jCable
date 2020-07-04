@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by cgallo on 02/07/20.
@@ -62,7 +63,7 @@ public class DBAgencia extends DBTable<Agencia> {
     }
 
     @Override
-    public ArrayList<Agencia> all() throws appException {
+    public ArrayList<Agencia> all() {
         ArrayList<Agencia> all = new ArrayList<Agencia>();
         Agencia agencia = null;
         PreparedStatement stmt = null;
@@ -89,6 +90,35 @@ public class DBAgencia extends DBTable<Agencia> {
             ConexionDB.getInstancia().releaseConexion();
         }
         return all;
+    }
+
+    public ArrayList<Agencia> agenciasActivas() {
+        ArrayList<Agencia> areActive = new ArrayList<Agencia>();
+        Agencia agencia = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                    "select id, descripcion, home_path, dias_purga, is_active from agencias where is_active = 1;"
+            );
+            rs = stmt.executeQuery();
+            while (rs != null && rs.next()) {
+                agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),
+                        rs.getInt("dias_purga"), rs.getBoolean("is_active"));
+                areActive.add(agencia);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.cancel();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ConexionDB.getInstancia().releaseConexion();
+        }
+        return areActive;
     }
 
     @Override

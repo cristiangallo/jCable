@@ -14,8 +14,12 @@ public class ControladorAgencias {
 
     private CatalogoAgencias catAgencias = CatalogoAgencias.getInstance();
 
-    public ArrayList<Agencia> allAgencias() throws appException {
+    public ArrayList<Agencia> allAgencias() {
         return catAgencias.all();
+    }
+
+    public ArrayList<Agencia> agenciasActivas() {
+        return catAgencias.agenciasActivas();
     }
 
     public Agencia getAgenciaById(int agencia_id) throws appException {
@@ -34,4 +38,5 @@ public class ControladorAgencias {
 
         return catAgencias.addAgencia(descripcion, home_path, dias_purga, isActive);
     }
+
 }
