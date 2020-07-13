@@ -24,7 +24,6 @@ public class DBContenido extends DBTable<Contenido> {
 
     @Override
     public Contenido get(int id) throws appException {
-        Contenido contenido;
         Agencia agencia;
         User user;
         PreparedStatement stmt = null;
