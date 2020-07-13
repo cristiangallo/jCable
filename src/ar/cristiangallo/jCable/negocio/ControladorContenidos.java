@@ -5,8 +5,8 @@ import ar.cristiangallo.jCable.dataDB.CatalogoContenido;
 /**
  * Created by cgallo on 13/07/2020.
  */
-public class ControladorContenido {
-    public ControladorContenido() {};
+public class ControladorContenidos {
+    public ControladorContenidos() {};
 
     private CatalogoContenido catContenido = CatalogoContenido.getInstance();
 
