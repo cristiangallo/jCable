@@ -95,16 +95,16 @@
                         appException errorR = (appException)request.getAttribute("errorR");
                         out.println("<div class='alert alert-danger' role='alert'>" + errorR.getMessage() + "</div>");}%>
                     <div class="form-group">
-                        <% String first_name = (String) request.getAttribute("first_name");
-                            out.println("<input class='form-control' type='text' name='first_name' placeholder='Nombre'");
-                            if (first_name!=null){out.println(" value="+first_name);}
+                        <% String nombre = (String) request.getAttribute("nombre");
+                            out.println("<input class='form-control' type='text' name='nombre' placeholder='Nombre'");
+                            if (nombre!=null){out.println(" value="+nombre);}
                             out.println(" >");
                          %>
                     </div>
                     <div class="form-group">
-                        <% String last_name = (String) request.getAttribute("last_name");
-                            out.println("<input class='form-control' type='text' name='last_name' placeholder='Apellido'");
-                            if (last_name!=null){out.println(" value="+last_name);}
+                        <% String apellido = (String) request.getAttribute("apellido");
+                            out.println("<input class='form-control' type='text' name='apellido' placeholder='Apellido'");
+                            if (apellido!=null){out.println(" value="+apellido);}
                             out.println(" >");
                          %>
                     </div>
@@ -140,7 +140,7 @@
           </div>
         </section>
         <hr class="divider-d">
-      <%@include  file="footer.html" %>
+      <%@include file="footer.html" %>
 
       </div>
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>

@@ -21,8 +21,8 @@ public class MiPerfilServet extends HttpServlet {
         if (user == null) {
             response.sendRedirect("login.jsp");
         } else {
-            request.setAttribute("first_name", user.getFirstName());
-            request.setAttribute("last_name", user.getLastName());
+            request.setAttribute("nombre", user.getNombre());
+            request.setAttribute("apellido", user.getApellido());
             request.getRequestDispatcher("mi-perfil.jsp").forward(request, response);
         }
     }
@@ -32,18 +32,18 @@ public class MiPerfilServet extends HttpServlet {
         ControladorUsers ctrlUsers = new ControladorUsers();
 
         User user = (User) request.getSession().getAttribute("user");
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
-        request.removeAttribute("first_name");
-        request.removeAttribute("last_name");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        request.removeAttribute("nombre");
+        request.removeAttribute("apellido");
 
         try {
-            System.out.println(first_name);
-            System.out.println(last_name);
-            request.setAttribute("first_name", first_name);
-            request.setAttribute("last_name", last_name);
-            user.setFirstName(first_name);
-            user.setLastName(last_name);
+            System.out.println(nombre);
+            System.out.println(apellido);
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("apellido", apellido);
+            user.setNombre(nombre);
+            user.setApellido(apellido);
             ctrlUsers.saveUser(user);
             request.setAttribute("mensaje", "Los cambios se guardaron exitosamente.");
 

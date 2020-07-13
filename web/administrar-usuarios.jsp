@@ -90,12 +90,12 @@
                                     User administrarUser = (User) request.getAttribute("administrarUser");
                                     out.println("<form class='form' name='registrarse' method='post' action=''>");
                                     out.println("<div class='form-group'>");
-                                    out.println("<input class='form-control' type='text' name='first_name' value='" +
-                                            administrarUser.getFirstName() + "' placeholder='Nombre' >");
+                                    out.println("<input class='form-control' type='text' name='nombre' value='" +
+                                            administrarUser.getNombre() + "' placeholder='Nombre' >");
                                     out.println("</div>");
                                     out.println("<div class='form-group'>");
-                                    out.println("<input class='form-control' type='text' name='last_name' " +
-                                            "value='" + administrarUser.getLastName() + "' placeholder='Apellido' >");
+                                    out.println("<input class='form-control' type='text' name='apellido' " +
+                                            "value='" + administrarUser.getApellido() + "' placeholder='Apellido' >");
                                     out.println("</div>");
                                     out.println("<div class='form-group'>");
                                     out.println("<input class='form-control' type='email' disabled name='email' " +

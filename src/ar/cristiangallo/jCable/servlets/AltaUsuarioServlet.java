@@ -26,16 +26,16 @@ public class AltaUsuarioServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
 
         try {
             request.setAttribute("emailR", email);
-            request.setAttribute("first_name", first_name);
-            request.setAttribute("last_name", last_name);
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("apellido", apellido);
             request.setAttribute("passwordR", password);
             request.setAttribute("password2", password2);
-            ctrlUsers.addUser(email, password, password2, first_name, last_name);
+            ctrlUsers.addUser(email, password, password2, nombre, apellido);
             request.setAttribute("mensajeR", "Activa tu cuenta en jCable a través del link que te enviamos por " +
                     "correo electrónico");
 

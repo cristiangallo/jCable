@@ -67,8 +67,8 @@ public class AdministrarUsuariosServlet extends HttpServlet {
             }
             ControladorUsers ctrlUsers = new ControladorUsers();
             User administrarUser = ctrlUsers.getUserById(Integer.parseInt(user_id));
-            administrarUser.setFirstName(request.getParameter("first_name"));
-            administrarUser.setLastName(request.getParameter("last_name"));
+            administrarUser.setNombre(request.getParameter("nombre"));
+            administrarUser.setApellido(request.getParameter("apellido"));
             boolean isSuperuser = request.getParameterValues("isSuperuser") != null;
             boolean isStaff = request.getParameterValues("isStaff") != null;
             boolean isActive = request.getParameterValues("isActive") != null;

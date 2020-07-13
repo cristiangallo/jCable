@@ -2,20 +2,21 @@ package ar.cristiangallo.jCable.entidades;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 public abstract class Contenido {
 
-    private int id;
-    private String titulo;
-    private String texto;
-    private Timestamp purga = null;
-    private Timestamp creado = new Timestamp(System.currentTimeMillis());
+    protected int id;
+    protected String titulo;
+    protected String texto;
+    protected Timestamp modificado = new Timestamp(System.currentTimeMillis());
+    protected Timestamp creado = new Timestamp(System.currentTimeMillis());
 
     public int getId() {
         return id;
     }
 
-    public Timestamp getModified() {
+    public final Timestamp getModified() {
         return creado;
     }
 
@@ -39,14 +40,4 @@ public abstract class Contenido {
         this.texto = texto;
     }
 
-    public Timestamp getFechaPurga() {
-        return purga;
-    }
-
-    public void setFechaPurga(Timestamp fecha_purga) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(creado);
-        cal.add(Calendar.DAY_OF_WEEK, 1);
-        this.purga = new Timestamp(cal.getTime().getTime());
-    }
 }

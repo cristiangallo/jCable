@@ -15,52 +15,52 @@ import java.sql.Timestamp;
 
 public class User {
     private int id;
-    private String first_name;
-    private String last_name;
+    private String nombre;
+    private String apellido;
     private String email;
     private String password;
     private boolean is_staff = false;
     private boolean is_active = false;
     private boolean is_superuser = false;
     private Timestamp last_login = null;
-    private Timestamp date_joined = new Timestamp(System.currentTimeMillis());
+    private Timestamp creado = new Timestamp(System.currentTimeMillis());
 
     // constructor para usuario guardado
-    public User(int id, String email, String password, String first_name, String last_name, boolean is_staff,
-                boolean is_active, boolean is_superuser, Timestamp last_login, Timestamp date_joined) {
+    public User(int id, String email, String password, String nombre, String apellido, boolean is_staff,
+                boolean is_active, boolean is_superuser, Timestamp last_login, Timestamp creado) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.is_staff = is_staff;
         this.is_active = is_active;
         this.is_superuser = is_superuser;
         this.last_login = last_login;
-        this.date_joined = date_joined;
+        this.creado = creado;
     }
 
-    public User(String email, String password, String password2, String first_name, String last_name) throws appException {
+    public User(String email, String password, String password2, String nombre, String apellido) throws appException {
         if (email == "") throw new appException("Ingresa un email.");
         User user = DBUser.getInstancia().getUser(email);
         if (user != null) throw new appException("Existe un usuario registrado con ese email, intenta recuperar la " +
                 "contraseña.");
         if (!password.equals(password2)) throw new appException("Las contraseñas no coinciden.");
         if (password == "") throw new appException("Ingresa una contraseña.");
-        if (first_name == "") throw new appException("Ingresa tu nombre.");
-        if (last_name == "") throw new appException("Ingresa tu apellido.");
+        if (nombre == "") throw new appException("Ingresa tu nombre.");
+        if (apellido == "") throw new appException("Ingresa tu apellido.");
 
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
         this.password = password;
         DBUser.getInstancia().save(this);
         /*
-        Mailer.send(email,"Activar cuenta en jCable","Hola " + first_name + ", haz <a href='http://127.0." +
+        Mailer.send(email,"Activar cuenta en jCable","Hola " + nombre + ", haz <a href='http://127.0." +
                 "0.1:8080/activar-usuario'>click aqui</a> para activar tu cuenta en jCable");
         */
 
-        SendHtmlEmail.send(email, "Activar cuenta en jCable", "<html>Hola " + first_name + " , haz " +
+        SendHtmlEmail.send(email, "Activar cuenta en jCable", "<html>Hola " + nombre + " , haz " +
                 "<a href='http://127.0.0.1:8080/activar-usuario?email=" + email + "'>click aqui</a> para activar " +
                 "tu perfil en jCable.</html>");
     }
@@ -74,26 +74,26 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return first_name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirstName(String first_name) throws appException {
-        if (first_name == "") throw new appException("El campo nombre es obligatorio.");
-        this.first_name = first_name;
+    public void setNombre(String nombre) throws appException {
+        if (nombre == "") throw new appException("El campo nombre es obligatorio.");
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return last_name;
+    public String getApellido() {
+        return apellido;
     }
 
     public String getFullName() {
-        return first_name + " " + last_name;
+        return nombre + " " + apellido;
     }
 
-    public void setLastName(String last_name) throws appException {
-        if (last_name == "") throw new appException("El campo apellido es obligatorio.");
-        this.last_name = last_name;
+    public void setApellido(String apellido) throws appException {
+        if (apellido == "") throw new appException("El campo apellido es obligatorio.");
+        this.apellido = apellido;
     }
 
     public String getEmail() {
@@ -135,7 +135,7 @@ public class User {
 
     // public void setLastLogin(java.sql.Date last_login) { this.last_login = last_login; }
 
-    public Timestamp getDateJoined() { return date_joined; }
+    public Timestamp getCreado() { return creado; }
 
     // public void setDateJoined(java.sql.Date date_joined) { this.date_joined = date_joined; }
 
@@ -154,9 +154,9 @@ public class User {
     public void olvideMiPassword() throws appException {
         setPassword(RandomString.randomAlfaString(8));
         DBUser.getInstancia().save(this);
-        // Mailer.send(email,"Nuevo password para jCable","Hola " + first_name + "!tu password provisorio es: " + password);
+        // Mailer.send(email,"Nuevo password para jCable","Hola " + nombre + "!tu password provisorio es: " + password);
 
-        SendHtmlEmail.send(email, "Nuevo password para jCable", "<html>Hola " + first_name + "!, " +
+        SendHtmlEmail.send(email, "Nuevo password para jCable", "<html>Hola " + nombre + "!, " +
                 "tu password provisorio es: "+ password + ".</html>");
 
     }

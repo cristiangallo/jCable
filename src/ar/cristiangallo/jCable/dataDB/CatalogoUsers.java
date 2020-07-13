@@ -14,9 +14,7 @@ public class CatalogoUsers {
     private static CatalogoUsers instancia;
 
     public static CatalogoUsers getInstance() {
-        if(instancia == null){
-            instancia = new CatalogoUsers();
-        }
+        if (instancia == null) { instancia = new CatalogoUsers(); }
         return instancia;
     }
 
@@ -45,8 +43,8 @@ public class CatalogoUsers {
         user.olvideMiPassword();
     }
 
-    public User addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
-        return new User(email, password, password2, first_name, last_name);
+    public User addUser(String email, String password, String password2, String nombre, String apellido) throws appException {
+        return new User(email, password, password2, nombre, apellido);
     }
 
     public User getUser(String email) {

@@ -43,8 +43,8 @@ public class ControladorUsers {
         catUsers.olvideMiPassword(email);
     }
 
-    public void addUser(String email, String password, String password2, String first_name, String last_name) throws appException {
-        catUsers.addUser(email, password, password2, first_name, last_name);
+    public void addUser(String email, String password, String password2, String nombre, String apellido) throws appException {
+        catUsers.addUser(email, password, password2, nombre, apellido);
     }
 
     public void activarUser(User user) throws appException {

@@ -5,8 +5,15 @@ import java.sql.Timestamp;
 public class Produccion extends Contenido {
     private User user;
     private boolean publicado = false;
-    private Timestamp modificado;
 
-
-
+    public Produccion(int id, String titulo, String texto, Timestamp modificado, Timestamp creado, User user,
+                      boolean publicado) {
+        this.id = id;
+        this.titulo = titulo;
+        this.texto = texto;
+        this.modificado = modificado;
+        this.creado = creado;
+        this.user = user;
+        this.publicado = publicado;
+    }
 }

@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <% if (user!=null){out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
-                        "data-toggle='dropdown'>Hola "+ user.getFirstName() + "!</a><ul class='dropdown-menu'>");
+                        "data-toggle='dropdown'>Hola "+ user.getNombre() + "!</a><ul class='dropdown-menu'>");
                     if (user.getIsSuperuser()){
                         out.println("<li><a href='/administrar-agencias'>Administrar agencias</a></li>");
                         out.println("<li><a href='/administrar-usuarios'>Administrar usuarios</a></li>");
