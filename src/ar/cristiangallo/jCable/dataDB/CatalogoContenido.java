@@ -2,6 +2,7 @@ package ar.cristiangallo.jCable.dataDB;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.entidades.Contenido;
+import java.util.ArrayList;
 
 /**
  * Created by cgallo on 13/07/2020.
@@ -23,6 +24,8 @@ public class CatalogoContenido {
         return DBContenido.getInstancia().get(contenido_id);
     }
 
-
+    public ArrayList<Contenido> all() {
+        return DBContenido.getInstancia().all();
+    }
 
 }
