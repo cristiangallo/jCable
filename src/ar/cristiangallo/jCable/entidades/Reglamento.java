@@ -15,14 +15,47 @@ public class Reglamento {
     private Integer resultados_por_pagina = 20;
     private static Reglamento instancia;
 
+    public Reglamento(Integer id, Integer dias_purga, Integer resultados_por_pagina) {
+        this.id = 1;
+        this.dias_purga = dias_purga;
+        this.resultados_por_pagina = resultados_por_pagina;
+    }
+
+    private Reglamento() {}
+
     public static Reglamento getInstance() {
         if(instancia == null){
-            instancia = new Reglamento();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                        "select id, dias_purga, resultados_por_pagina from reglamento where id = 1;"
+                );
+                rs = stmt.executeQuery();
+                if (rs != null && rs.next()) {
+                    Integer id = (Integer) rs.getObject("id");
+                    Integer dias_purga = (Integer) rs.getObject("dias_purga");
+                    Integer resultados_por_pagina = (Integer) rs.getObject("resultados_por_pagina");
+
+                    instancia = new Reglamento(id, dias_purga, resultados_por_pagina);
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.cancel();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                ConexionDB.getInstancia().releaseConexion();
+            }
         }
         return instancia;
     }
 
-    private Reglamento() {}
+
 
     private void delete() {};
 
