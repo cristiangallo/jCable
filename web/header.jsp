@@ -17,16 +17,21 @@
         </div>
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <% if (user!=null){out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
-                        "data-toggle='dropdown'>Hola "+ user.getNombre() + "!</a><ul class='dropdown-menu'>");
+                <% if (user!=null){
                     if (user.getIsSuperuser()){
+                        out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
+                        "data-toggle='dropdown'>Administrar</a><ul class='dropdown-menu'>");
                         out.println("<li><a href='/administrar-agencias'>Administrar agencias</a></li>");
                         out.println("<li><a href='/administrar-usuarios'>Administrar usuarios</a></li>");
                         out.println("<li><a href='/administrar-reglamento'>Administrar reglamento</a></li>");
                     };
+                    out.println("</ul></li>");
+                    out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
+                        "data-toggle='dropdown'>Hola "+ user.getNombre() + "!</a><ul class='dropdown-menu'>");
                     out.println("<li><a href='/mi-perfil'>Mi perfil</a></li>");
                     out.println("<li><a href='/cambiar-password'>Cambiar contraseña</a></li>");
                     out.println("<li><a href='/logout'>Cerrar sesi&oacute;n</a></li></ul></li>");
+
                 }
                 %>
             </ul>
