@@ -31,9 +31,7 @@
                     out.println("<li><a href='/mi-perfil'>Mi perfil</a></li>");
                     out.println("<li><a href='/cambiar-password'>Cambiar contraseña</a></li>");
                     out.println("<li><a href='/logout'>Cerrar sesi&oacute;n</a></li></ul></li>");
-
-                }
-                %>
+                } %>
             </ul>
         </div>
     </div>
