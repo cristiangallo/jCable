@@ -22,6 +22,7 @@
                     if (user.getIsSuperuser()){
                         out.println("<li><a href='/administrar-agencias'>Administrar agencias</a></li>");
                         out.println("<li><a href='/administrar-usuarios'>Administrar usuarios</a></li>");
+                        out.println("<li><a href='/administrar-reglamento'>Administrar reglamento</a></li>");
                     };
                     out.println("<li><a href='/mi-perfil'>Mi perfil</a></li>");
                     out.println("<li><a href='/cambiar-password'>Cambiar contraseña</a></li>");
