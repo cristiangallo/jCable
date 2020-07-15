@@ -45,71 +45,31 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8">
-                        <div class="post">
-                            <div class="post-thumbnail"><a href="#"><img src="static/images/post-1.jpg" alt="Blog-post Thumbnail"></a></div>
-                            <div class="post-header font-alt">
-                                <h2 class="post-title"><a href="#">Our trip to the Alps</a></h2>
-                                <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>| 23 November | 3 Comments | <a href="#">Photography, </a><a href="#">Web Design</a>
-                                </div>
-                            </div>
-                            <div class="post-entry">
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
-                            </div>
-                            <div class="post-more"><a class="more-link" href="#">Read more</a></div>
-                        </div>
-                        <div class="post #">
-                            <div class="post-header font-alt">
-                                <h2 class="post-title"><a href="Post with text only">Mark Stone</a></h2>
-                                <div class="post-meta">By&nbsp;<a href="#">| 23 November | 3 Comments | </a>Marketing, ,Web Design<a href="#">A</a><a href="#"> </a><a href="#">w</a><a href="#">o</a><a href="#">n</a><a href="#">d</a><a href="#">e</a><a href="#">r</a><a href="#">f</a><a href="#">u</a><a href="#">l</a><a href="#"> </a><a href="#">s</a><a href="#">e</a><a href="#">r</a><a href="#">e</a><a href="#">n</a><a href="#">i</a><a href="#">t</a><a href="#">y</a><a href="#"> </a><a href="#">h</a><a href="#">a</a><a href="#">s</a><a href="#"> </a><a href="#">t</a><a href="#">a</a><a href="#">k</a><a href="#">e</a><a href="#">n</a><a href="#"> </a><a href="#">p</a><a href="#">o</a><a href="#">s</a><a href="#">s</a><a href="#">e</a><a href="#">s</a><a href="#">s</a><a href="#">i</a><a href="#">o</a><a href="#">n</a><a href="#"> </a><a href="#">o</a><a href="#">f</a><a href="#"> </a><a href="#">m</a><a href="#">y</a><a href="#"> </a><a href="#">e</a><a href="#">n</a><a href="#">t</a><a href="#">i</a><a href="#">r</a><a href="#">e</a><a href="#"> </a><a href="#">s</a><a href="#">o</a><a href="#">u</a><a href="#">l</a><a href="#">,</a><a href="#"> </a><a href="#">l</a><a href="#">i</a><a href="#">k</a><a href="#">e</a><a href="#"> </a><a href="#">t</a><a href="#">h</a><a href="#">e</a><a href="#">s</a><a href="#">e</a><a href="#"> </a><a href="#">s</a><a href="#">w</a><a href="#">e</a><a href="#">e</a><a href="#">t</a><a href="#"> </a><a href="#">m</a><a href="#">o</a><a href="#">r</a><a href="#">n</a><a href="#">i</a><a href="#">n</a><a href="#">g</a><a href="#">s</a><a href="#"> </a><a href="#">o</a><a href="#">f</a><a href="#"> </a><a href="#">s</a><a href="#">p</a><a href="#">r</a><a href="#">i</a><a href="#">n</a><a href="#">g</a><a href="#"> </a><a href="#">w</a><a href="#">h</a><a href="#">i</a><a href="#">c</a><a href="#">h</a><a href="#"> </a><a href="#">I</a><a href="#"> </a><a href="#">e</a><a href="#">n</a><a href="#">j</a><a href="#">o</a><a href="#">y</a><a href="#"> </a><a href="#">w</a><a href="#">i</a><a href="#">t</a><a href="#">h</a><a href="#"> </a><a href="#">m</a><a href="#">y</a><a href="#"> </a><a href="#">w</a><a href="#">h</a><a href="#">o</a><a href="#">l</a><a href="#">e</a><a href="#"> </a><a href="#">h</a><a href="#">e</a><a href="#">a</a><a href="#">r</a><a href="#">t</a><a href="#">.</a><a href="#"> </a><a href="#">I</a><a href="#"> </a><a href="#">a</a><a href="#">m</a><a href="#"> </a><a href="#">a</a><a href="#">l</a><a href="#">o</a><a href="#">n</a><a href="#">e</a><a href="#">,</a><a href="#"> </a><a href="#">a</a><a href="#">n</a><a href="#">d</a><a href="#"> </a><a href="#">f</a><a href="#">e</a><a href="#">e</a><a href="#">l</a><a href="#"> </a><a href="#">t</a><a href="#">h</a><a href="#">e</a><a href="#"> </a><a href="#">c</a><a href="#">h</a><a href="#">a</a><a href="#">r</a><a href="#">m</a><a href="#"> </a><a href="#">o</a><a href="#">f</a><a href="#"> </a><a href="#">e</a><a href="#">x</a><a href="#">i</a><a href="#">s</a><a href="#">t</a><a href="#">e</a><a href="#">n</a><a href="#">c</a><a href="#">e</a><a href="#"> </a><a href="#">i</a><a href="#">n</a><a href="#"> </a><a href="#">t</a><a href="#">h</a><a href="#">i</a><a href="#">s</a><a href="#"> </a><a href="#">s</a><a href="#">p</a><a href="#">o</a><a href="#">t</a><a href="#">,</a><a href="#"> </a><a href="#">w</a><a href="#">h</a><a href="#">i</a><a href="#">c</a><a href="#">h</a><a href="#"> </a><a href="#">w</a><a href="#">a</a><a href="#">s</a><a href="#"> </a><a href="#">c</a><a href="#">r</a><a href="#">e</a><a href="#">a</a><a href="#">t</a><a href="#">e</a><a href="#">d</a><a href="#"> </a><a href="#">f</a><a href="#">o</a><a href="#">r</a><a href="#"> </a><a href="#">t</a><a href="#">h</a><a href="#">e</a><a href="#"> </a><a href="#">b</a><a href="#">l</a><a href="#">i</a><a href="#">s</a><a href="#">s</a><a href="#"> </a><a href="#">o</a><a href="#">f</a><a href="#"> </a><a href="#">s</a><a href="#">o</a><a href="#">u</a><a href="#">l</a><a href="#">s</a><a href="#"> </a><a href="#">l</a><a href="#">i</a><a href="#">k</a><a href="#">e</a><a href="#"> </a><a href="#">m</a><a href="#">i</a><a href="#">n</a><a href="#">e</a><a href="#">.</a>
-                                </div>
-                            </div>
-                            <div class="post-entry">
-                                <p></p>
-                            </div>
-                            <div class="post-more"><a class="more-link" href="Post with text only">Read more</a></div>
-                        </div>
-                        <div class="post">
-                            <div class="post-quote">
-                                <blockquote class="font-serif">
-                                    <p>" The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. "</p>
-                                    <p class="font-inc font-uppercase">- Thomas Anderson</p>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="post">
-                            <div class="post-video embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/Jkk0VHiCnKY" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-                            </div>
-                            <div class="post-header font-alt">
-                                <h2 class="post-title"><a href="#">Post with video</a></h2>
-                                <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>| 23 November | 3 Comments | <a href="#">Marketing, </a><a href="#">Web Design</a>
-                                </div>
-                            </div>
-                            <div class="post-entry">
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
-                            </div>
-                            <div class="post-more"><a class="more-link" href="#">Read more</a></div>
-                        </div>
-                        <div class="post">
-                            <div class="post-images-slider">
+                        <% if (request.getAttribute("contenidos")!=null){
+                            ArrayList<Contenido> contenidos = (ArrayList<Contenido>) request.getAttribute("contenidos");
+                            for (Contenido contenido : contenidos) {
+                                out.println("<div class='post'>");
+                                out.println("<div class='post-header font-alt'>");
+                                out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
+                                out.println("<div class='post-meta'>By&nbsp;<a href='#'>Mark Stone</a>| 23 November | 3 Comments | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                out.println("</div>");
+                                out.println("</div>");
+                                out.println("<div class='post-entry'>");
+                                out.println("<p>A wonderful serenity has taken possession of my entire soul, like " +
+                                        "these sweet mornings of spring which I enjoy with my whole heart. I am alone" +
+                                        ", and feel the charm of existence in this spot, which was created for the " +
+                                        "bliss of souls like mine.</p>");
+                                out.println("</div>");
+                                out.println("<div class='post-more'><a class='more-link' href='#'>Read more</a></div>");
+                                out.println("</div>");
+                            }
 
-                                <div class="flex-viewport" style="overflow: hidden; position: relative; height: 431.25px;"><ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(-1500px, 0px, 0px);"><li class="clone" aria-hidden="true" style="width: 750px; margin-right: 0px; float: left; display: block;"><img src="static/images/post-3.jpg" alt="Blog Slider Image" draggable="false"></li>
-                                    <li class="" data-thumb-alt="" style="width: 750px; margin-right: 0px; float: left; display: block;"><img src="static/images/post-1.jpg" alt="Blog Slider Image" draggable="false"></li>
-                                    <li data-thumb-alt="" class="flex-active-slide" style="width: 750px; margin-right: 0px; float: left; display: block;"><img src="static/images/post-3.jpg" alt="Blog Slider Image" draggable="false"></li>
-                                    <li class="clone" aria-hidden="true" style="width: 750px; margin-right: 0px; float: left; display: block;"><img src="static/images/post-1.jpg" alt="Blog Slider Image" draggable="false"></li></ul></div><ol class="flex-control-nav flex-control-paging"><li><a href="#" class="">1</a></li><li><a href="#" class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li><li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li></ul></div>
-                            <div class="post-header font-alt">
-                                <h2 class="post-title"><a href="#">Post with slideshow</a></h2>
-                                <div class="post-meta">By&nbsp;<a href="#">Mark Stone</a>| 23 November | 3 Comments | <a href="#">Marketing, </a><a href="#">Web Design</a>
-                                </div>
-                            </div>
-                            <div class="post-entry">
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
-                            </div>
-                            <div class="post-more"><a class="more-link" href="#">Read more</a></div>
-                        </div>
-                        <div class="pagination font-alt"><a href="#"><i class="fa fa-angle-left"></i></a><a class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a></div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
+                            out.println("<div class='pagination font-alt'><a href='#'><i class='fa fa-angle-left'>" +
+                                    "</i></a><a class='active' href='#'>1</a><a href='#'>2</a><a href='#'>3</a>" +
+                                    "<a href='#'>4</a><a href='#'><i class='fa fa-angle-right'></i></a></div>");
+                            out.println("</div>");
+                        } %>
+                        <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
                         <div class="widget">
                             <form role="form">
                                 <div class="search-box">
@@ -124,7 +84,7 @@
                                 out.println("<h5 class='widget-title font-alt'>Agencias de noticias</h5>");
                                 out.println("<ul class='icon-list'>");
                                 for (Agencia agencia : agenciasActivas) {
-                                    out.println("<li><a href='/agencias?agencia_id=" + agencia.getId() +"'> " +
+                                    out.println("<li><a href='/cables-agencias?agencia_id=" + agencia.getId() +"'> " +
                                             agencia.getDescription() + "</a></li>");
                                 }
                                 out.println("</ul>");
@@ -163,14 +123,6 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="widget">
-                            <h5 class="widget-title font-alt">Tag</h5>
-                            <div class="tags font-serif"><a href="#" rel="tag">Blog</a><a href="#" rel="tag">Photo</a><a href="#" rel="tag">Video</a><a href="#" rel="tag">Image</a><a href="#" rel="tag">Minimal</a><a href="#" rel="tag">Post</a><a href="#" rel="tag">Theme</a><a href="#" rel="tag">Ideas</a><a href="#" rel="tag">Tags</a><a href="#" rel="tag">Bootstrap</a><a href="#" rel="tag">Popular</a><a href="#" rel="tag">English</a>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <h5 class="widget-title font-alt">Text</h5>The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.
                         </div>
                         <div class="widget">
                             <h5 class="widget-title font-alt">Recent Comments</h5>

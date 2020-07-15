@@ -15,6 +15,7 @@ import java.io.IOException;
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // int offset = Integer.parseInt(request.getParameter("offset"));
         ControladorAgencias ctrlAgencias = new ControladorAgencias();
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
         User user = (User) request.getSession().getAttribute("user");
@@ -22,7 +23,9 @@ public class IndexServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
         request.setAttribute("agenciasActivas", ctrlAgencias.agenciasActivas());
+        request.setAttribute("contenidos", ctrlContenidos.allContenidos());
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
