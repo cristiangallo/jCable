@@ -78,8 +78,10 @@ public class DBAgencia extends DBTable<Agencia> {
         ResultSet rs = null;
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                    "select id, descripcion, home_path, dias_purga, is_active from agencias;"
+                    "select id, descripcion, home_path, dias_purga, is_active from agencias LIMIT ?, ?;"
             );
+            stmt.setInt(1, offset  );
+            stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),
