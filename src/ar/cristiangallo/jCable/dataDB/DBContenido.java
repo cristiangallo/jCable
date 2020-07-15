@@ -12,12 +12,17 @@ import java.util.ArrayList;
 
 public class DBContenido extends DBTable<Contenido> {
     private static DBContenido instancia;
+    private Reglamento reglamento;
 
     private DBContenido() {}
 
+    private DBContenido(Reglamento reglamento) {
+        this.reglamento = reglamento;
+    }
+
     public static DBContenido getInstancia() {
         if (instancia == null) {
-            instancia = new DBContenido();
+            instancia = new DBContenido(Reglamento.getInstance());
         }
         return instancia;
     }
@@ -77,7 +82,10 @@ public class DBContenido extends DBTable<Contenido> {
     }
 
     @Override
-    public ArrayList<Contenido> all() {
+    public ArrayList<Contenido> all(Integer... parametros) {
+        Integer offset = parametros.length > 0 ? parametros[0] : 0;
+        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
+
         ArrayList<Contenido> all = new ArrayList<Contenido>();
         Agencia agencia;
         User user;
@@ -93,8 +101,11 @@ public class DBContenido extends DBTable<Contenido> {
                             "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser from " +
                             "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
                             "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id, last_login, U.creado " +
-                            "as usuario_creado left join usuarios U on U.id=PR.usuario_id;"
+                            "as usuario_creado left join usuarios U on U.id=PR.usuario_id LIMIT ?, ?;"
+                    // LIMIT offset, row_count;
             );
+            stmt.setInt(1, offset  );
+            stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 Integer agencia_id = (Integer) rs.getObject("agencia_id");

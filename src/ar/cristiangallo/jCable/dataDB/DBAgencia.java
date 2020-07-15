@@ -3,6 +3,7 @@ package ar.cristiangallo.jCable.dataDB;
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.conexionDB.ConexionDB;
 import ar.cristiangallo.jCable.entidades.Agencia;
+import ar.cristiangallo.jCable.entidades.Reglamento;
 import ar.cristiangallo.jCable.entidades.User;
 
 import java.sql.PreparedStatement;
@@ -18,12 +19,17 @@ import java.util.HashMap;
 public class DBAgencia extends DBTable<Agencia> {
 
     private static DBAgencia instancia;
+    private Reglamento reglamento;
 
     private DBAgencia() {}
 
+    private DBAgencia(Reglamento reglamento) {
+        this.reglamento = reglamento;
+    }
+
     public static DBAgencia getInstancia() {
         if (instancia == null) {
-            instancia = new DBAgencia();
+            instancia = new DBAgencia(Reglamento.getInstance());
         }
         return instancia;
     }
@@ -63,7 +69,9 @@ public class DBAgencia extends DBTable<Agencia> {
     }
 
     @Override
-    public ArrayList<Agencia> all() {
+    public ArrayList<Agencia> all(Integer... parametros) {
+        Integer offset = parametros.length > 0 ? parametros[0] : 0;
+        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
         ArrayList<Agencia> all = new ArrayList<Agencia>();
         Agencia agencia = null;
         PreparedStatement stmt = null;

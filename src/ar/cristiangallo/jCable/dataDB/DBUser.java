@@ -2,6 +2,7 @@ package ar.cristiangallo.jCable.dataDB;
 
 
 import ar.cristiangallo.jCable.conexionDB.ConexionDB;
+import ar.cristiangallo.jCable.entidades.Reglamento;
 import ar.cristiangallo.jCable.entidades.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,18 +16,25 @@ import java.util.ArrayList;
 public class DBUser extends DBTable<User> {
 
     private static DBUser instancia;
+    private Reglamento reglamento;
 
     private DBUser() {}
 
+    private DBUser(Reglamento reglamento) {
+        this.reglamento = reglamento;
+    }
+
     public static DBUser getInstancia() {
         if (instancia == null) {
-            instancia = new DBUser();
+            instancia = new DBUser(Reglamento.getInstance());
         }
         return instancia;
     }
 
     @Override
-    public ArrayList<User> all() {
+    public ArrayList<User> all(Integer... parametros) {
+        Integer offset = parametros.length > 0 ? parametros[0] : 0;
+        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
         ArrayList<User> all = new ArrayList<User>();
         User user = null;
         PreparedStatement stmt = null;
@@ -34,8 +42,10 @@ public class DBUser extends DBTable<User> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "select id, email, password, nombre, apellido, is_staff, is_active, " +
-                            "is_superuser, last_login, creado from usuarios;"
+                            "is_superuser, last_login, creado from usuarios LIMIT ?, ?;"
             );
+            stmt.setInt(1, offset  );
+            stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 user = new User(rs.getInt("id"), rs.getString("email"),

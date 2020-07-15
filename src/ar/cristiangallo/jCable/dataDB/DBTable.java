@@ -10,7 +10,7 @@ public abstract class DBTable<Clase> {
 
     public abstract Clase get(int id) throws appException;
 
-    public abstract ArrayList<Clase> all() throws appException;
+    public abstract ArrayList<Clase> all(Integer... parametros) throws appException;
 
     public abstract void save(Clase instancia) throws appException;
 
