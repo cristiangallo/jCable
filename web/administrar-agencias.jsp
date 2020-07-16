@@ -81,7 +81,7 @@
                                         out.println("'icon-profile-male'");
                                     }
                                 }
-                                out.println("aria-hidden='true'></span> " + agencia.getDescription() + "</span></a>");
+                                out.println("aria-hidden='true'></span> " + agencia.getDescripcion() + "</span></a>");
                             }
                         } else if (request.getAttribute("administrarAgencia")!=null) {
                             Agencia administrarAgencia = (Agencia) request.getAttribute("administrarAgencia");
@@ -89,7 +89,7 @@
                             out.println("<div class='form-group'>");
                             out.println("<label for='descripcion'>Descripción</label>");
                             out.println("<input class='form-control' type='text' name='descripcion' value='" +
-                                    administrarAgencia.getDescription() + "' placeholder='Descripción' " +
+                                    administrarAgencia.getDescripcion() + "' placeholder='Descripción' " +
                                     "id='descripcion' >");
                             out.println("</div>");
                             out.println("<div class='form-group'>");

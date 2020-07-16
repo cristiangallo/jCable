@@ -150,7 +150,7 @@ public class DBAgencia extends DBTable<Agencia> {
                         "insert into agencias(descripcion, home_path, dias_purga, is_active) values (?,?,?,?)",
                         PreparedStatement.RETURN_GENERATED_KEYS);
             }
-            stmt.setString(1, agencia.getDescription());
+            stmt.setString(1, agencia.getDescripcion());
             stmt.setString(2, agencia.getHomePath());
             stmt.setObject(3, agencia.getDiasPurga(), java.sql.Types.INTEGER);
             stmt.setBoolean(4, agencia.getIsActive());

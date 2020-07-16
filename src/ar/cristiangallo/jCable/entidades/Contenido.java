@@ -1,6 +1,7 @@
 package ar.cristiangallo.jCable.entidades;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,6 +19,10 @@ public abstract class Contenido {
 
     public final Timestamp getModified() {
         return creado;
+    }
+
+    public String getDateTimeModificada () {
+        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(modificado);
     }
 
     public Timestamp getCreated() {

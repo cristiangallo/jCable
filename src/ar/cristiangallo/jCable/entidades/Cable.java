@@ -32,4 +32,8 @@ public class Cable extends Contenido {
         cal.add(Calendar.DAY_OF_WEEK, 1);
         this.purga = new Timestamp(cal.getTime().getTime());
     }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
 }

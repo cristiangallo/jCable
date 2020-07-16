@@ -10,9 +10,9 @@ public class Agencia {
     private Integer dias_purga = 7;
     private boolean is_active;
 
-    public Agencia(int id, String description, String home_path, boolean is_active) {
+    public Agencia(int id, String Descripcion, String home_path, boolean is_active) {
         this.id = id;
-        this.descripcion = description;
+        this.descripcion = Descripcion;
         this.home_path = home_path;
         this.is_active = is_active;
     }
@@ -42,12 +42,12 @@ public class Agencia {
         return this.id;
     }
 
-    public String getDescription() {
+    public String getDescripcion() {
         return this.descripcion;
     }
 
-    public void setDescription(String description) {
-        this.descripcion = description;
+    public void setDescripcion(String Descripcion) {
+        this.descripcion = Descripcion;
     }
 
     public String getHomePath() {
@@ -82,6 +82,5 @@ public class Agencia {
         /* ToDo revisar que no tenga cables la agencia para poder eliminarla */
         DBAgencia.getInstancia().delete(this);
     }
-
 
 }

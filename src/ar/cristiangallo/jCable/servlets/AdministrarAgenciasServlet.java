@@ -70,7 +70,7 @@ public class AdministrarAgenciasServlet extends HttpServlet {
             }
             ControladorAgencias ctrlAgencias = new ControladorAgencias();
             Agencia administrarAgencia = ctrlAgencias.getAgenciaById(Integer.parseInt(agencia_id));
-            administrarAgencia.setDescription(request.getParameter("descripcion"));
+            administrarAgencia.setDescripcion(request.getParameter("descripcion"));
             administrarAgencia.setHomePath(request.getParameter("home_path"));
             administrarAgencia.setDiasPurga(dias_purga);
             boolean isActive = request.getParameterValues("isActive") != null;

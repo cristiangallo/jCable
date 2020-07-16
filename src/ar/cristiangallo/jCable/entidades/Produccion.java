@@ -16,4 +16,8 @@ public class Produccion extends Contenido {
         this.user = user;
         this.publicado = publicado;
     }
+
+    public User getUser(){
+        return user;
+    }
 }

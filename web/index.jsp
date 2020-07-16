@@ -51,7 +51,11 @@
                                 out.println("<div class='post'>");
                                 out.println("<div class='post-header font-alt'>");
                                 out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
-                                out.println("<div class='post-meta'>By&nbsp;<a href='#'>Mark Stone</a>| 23 November | 3 Comments | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                if (contenido instanceof Produccion) {
+                                    out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" + ((Produccion) contenido).getUser().getFullName() + "</a>| " + contenido.getDateTimeModificada() + "  | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                } else {
+                                    out.println("<div class='post-meta'>Fuente&nbsp;<a href='#'>" + ((Cable) contenido).getAgencia().getDescripcion() + "</a>| " + contenido.getDateTimeModificada() +  " | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                }
                                 out.println("</div>");
                                 out.println("</div>");
                                 out.println("<div class='post-entry'>");
@@ -85,7 +89,7 @@
                                 out.println("<ul class='icon-list'>");
                                 for (Agencia agencia : agenciasActivas) {
                                     out.println("<li><a href='/cables-agencias?agencia_id=" + agencia.getId() +"'> " +
-                                            agencia.getDescription() + "</a></li>");
+                                            agencia.getDescripcion() + "</a></li>");
                                 }
                                 out.println("</ul>");
                                 out.println("</div>");
