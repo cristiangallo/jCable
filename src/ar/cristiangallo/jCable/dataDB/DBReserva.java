@@ -30,7 +30,7 @@ public class DBReserva {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sqlSelect = "select R.id, R.cable_id, R.user_id, titulo, texto, modificado, creado, urgencia, tema, purga, " +
+            String sqlSelect = "select R.id, R.cable_id, R.user_id, titulo, texto, modificado, CO.creado, urgencia, tema, purga, " +
                     "A.id as agencia_id, A.descripcion as desc_agencia, home_path, dias_purga, A.is_active as agencia_activa, " +
                     "email, nombre, apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
                     "U.creado as usuario_creado from reservas R inner join usuarios U on R.user_id=U.id " +

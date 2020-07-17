@@ -52,9 +52,16 @@
                                 out.println("<div class='post-header font-alt'>");
                                 out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
                                 if (contenido instanceof Produccion) {
-                                    out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" + ((Produccion) contenido).getUser().getFullName() + "</a>| " + contenido.getDateTimeModificada() + "  | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                    out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
+                                            ((Produccion) contenido).getUser().getFullName() + "</a>| " +
+                                            contenido.getDateTimeModificada() + "  | <a href='#'>Photography, " +
+                                            "</a><a href='#'>Web Design</a>");
                                 } else {
-                                    out.println("<div class='post-meta'>Fuente&nbsp;<a href='#'>" + ((Cable) contenido).getAgencia().getDescripcion() + "</a>| " + contenido.getDateTimeModificada() +  " | <a href='#'>Photography, </a><a href='#'>Web Design</a>");
+                                    Cable cable = ((Cable) contenido);
+                                    out.println("<div class='post-meta'>Fuente&nbsp;<a href='#'>" +
+                                            cable.getAgencia().getDescripcion() + "</a>| " +
+                                            cable.getDateTimeModificada() +  " | " + cable.getTema() + " | " +
+                                            cable.getUrgencia() + "<span><i class=\"fa fa-star star\"></i></span>");
                                 }
                                 out.println("</div>");
                                 out.println("</div>");

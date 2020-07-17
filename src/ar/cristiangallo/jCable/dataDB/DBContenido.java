@@ -109,8 +109,8 @@ public class DBContenido extends DBTable<Contenido> {
             stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
-                Integer agencia_id = (Integer) rs.getObject("agencia_id");
-                if (agencia_id != null) {
+                if (rs.getObject("agencia_id") != null) {
+                    Integer agencia_id = (Integer) rs.getObject("agencia_id");
                     agencia = new Agencia(agencia_id, rs.getString("desc_agencia"),
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
@@ -119,8 +119,8 @@ public class DBContenido extends DBTable<Contenido> {
                     System.out.println(cable.getTexto());
                     all.add(cable);
                 }
-                Integer user_id = (Integer) rs.getObject("user_id");
-                if (user_id != null) {
+                if (rs.getObject("user_id") != null) {
+                    Integer user_id = (Integer) rs.getObject("user_id");
                     user = new User(user_id, rs.getString("email"), rs.getString("password"),
                             rs.getString("nombre"), rs.getString("apellido"), rs.getBoolean("is_staff"),
                             rs.getBoolean("usuario_activo"), rs.getBoolean("is_superuser"),

@@ -42,7 +42,7 @@ public class Cable extends Contenido {
         return agencia;
     }
 
-    public void toogleReserva(User user) {
+    public boolean toogleReserva(User user) {
         boolean estaba_reservado = false;
         for (Reserva reserva : reservas) {
             if (reserva.getUser() == user) {
@@ -56,5 +56,10 @@ public class Cable extends Contenido {
             Reserva reserva = new Reserva(this, user);
             reservas.add(reserva);
         }
+        return !estaba_reservado;
     }
+
+    public String getTema() { return tema; }
+
+    public String getUrgencia() { return urgencia; }
 }
