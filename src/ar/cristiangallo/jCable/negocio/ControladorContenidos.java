@@ -1,6 +1,8 @@
 package ar.cristiangallo.jCable.negocio;
 
+import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.dataDB.CatalogoContenido;
+import ar.cristiangallo.jCable.entidades.Cable;
 import ar.cristiangallo.jCable.entidades.Contenido;
 import ar.cristiangallo.jCable.entidades.Reglamento;
 
@@ -10,13 +12,13 @@ import java.util.ArrayList;
  * Created by cgallo on 13/07/2020.
  */
 public class ControladorContenidos {
+    public Cable cable;
     public ControladorContenidos() {};
 
     private CatalogoContenido catContenido = CatalogoContenido.getInstance();
     private Reglamento reglamento = Reglamento.getInstance();
 
     public Reglamento getReglamento() {
-        System.out.println(reglamento.getId());
         return reglamento;
     }
 
@@ -26,5 +28,10 @@ public class ControladorContenidos {
 
     public ArrayList<Contenido> allContenidos() {
         return catContenido.all();
+    }
+
+    public Cable getCableById(Integer cable_id) throws appException {
+        cable = catContenido.getCableById(cable_id);
+        return cable;
     }
 }

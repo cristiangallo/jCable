@@ -18,7 +18,7 @@ public class DBUser extends DBTable<User> {
     private static DBUser instancia;
     private Reglamento reglamento;
 
-    private DBUser() {}
+    private DBUser() {};
 
     private DBUser(Reglamento reglamento) {
         this.reglamento = reglamento;

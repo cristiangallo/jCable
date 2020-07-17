@@ -1,6 +1,7 @@
 package ar.cristiangallo.jCable.dataDB;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.entidades.Cable;
 import ar.cristiangallo.jCable.entidades.Contenido;
 import java.util.ArrayList;
 
@@ -20,12 +21,11 @@ public class CatalogoContenido {
         return instancia;
     }
 
-    public Contenido getContenidoById(int contenido_id) throws appException {
-        return DBContenido.getInstancia().get(contenido_id);
+    public Cable getCableById(int cable_id) throws appException {
+        return (Cable) DBContenido.getInstancia().get(cable_id);
     }
 
     public ArrayList<Contenido> all() {
         return DBContenido.getInstancia().all();
     }
-
 }
