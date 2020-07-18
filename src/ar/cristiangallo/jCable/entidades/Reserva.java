@@ -1,6 +1,4 @@
 package ar.cristiangallo.jCable.entidades;
-
-import ar.cristiangallo.jCable.dataDB.DBAgencia;
 import ar.cristiangallo.jCable.dataDB.DBReserva;
 
 public class Reserva {
@@ -20,9 +18,7 @@ public class Reserva {
         DBReserva.getInstancia().save(this);
     }
 
-    public Reserva() {
-
-    }
+    public Reserva() {}
 
     public User getUser() {
         return user;
