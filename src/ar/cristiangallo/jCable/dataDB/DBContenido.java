@@ -31,6 +31,7 @@ public class DBContenido extends DBTable<Contenido> {
     public Contenido get(int id) throws appException {
         Agencia agencia;
         User user;
+        Reserva reserva;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -39,7 +40,7 @@ public class DBContenido extends DBTable<Contenido> {
                     "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
                     "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
                     "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
-                    "U.creado as usuario_creado, IF(R.id is not null, 1, 0) as pseudoReservado from " +
+                    "U.creado as usuario_creado,  R.id as reserva_id from " +
                     "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
                     "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
                     "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id where CO.id = ?;"
@@ -47,14 +48,25 @@ public class DBContenido extends DBTable<Contenido> {
             stmt.setInt(1, id  );
             rs = stmt.executeQuery();
             if (rs != null && rs.next()) {
+                reserva = null;
                 Integer agencia_id = (Integer) rs.getObject("agencia_id");
                 if (agencia_id > 0) {
                     agencia = new Agencia(agencia_id, rs.getString("desc_agencia"),
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     Cable cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"),
-                            rs.getBoolean("pseudoReservado"));
+                            agencia, rs.getString("urgencia"), rs.getString("tema"), new Reserva());
+                    Integer reserva_id = (Integer) rs.getObject("reserva_id");
+                    if (reserva_id!=null){
+                        user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"),
+                                rs.getString("nombre"), rs.getString("apellido"), rs.getBoolean("is_staff"),
+                                rs.getBoolean("usuario_activo"), rs.getBoolean("is_superuser"),
+                                rs.getTimestamp("last_login"), rs.getTimestamp("usuario_creado"));
+                        reserva = new Reserva(reserva_id, cable, user);
+                        cable.setReserva(reserva);
+                    }
+
+
                     return cable;
                 }
                 Integer user_id = (Integer) rs.getObject("user_id");
@@ -122,7 +134,7 @@ public class DBContenido extends DBTable<Contenido> {
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"), rs.getBoolean("pseudoReservado"));
+                            agencia, rs.getString("urgencia"), rs.getString("tema"), new Reserva());
                     System.out.println(cable.getTexto());
                     all.add(cable);
                 } else {

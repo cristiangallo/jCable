@@ -60,7 +60,7 @@
                                     Cable cable = ((Cable) contenido);
                                     out.println("<h2 class='post-title'><span><a role='button' href='#'" +
                                             "cable_id='" + cable.getId() + "'");
-                                    if (cable.getPseudoReservado()) {
+                                    if (cable.getReservado()) {
                                         out.println("class='fa fa-star star' reservado='true' title='¿Liberas este cable?'></a>");
                                     } else {
                                         out.println("class='fa fa-star star-off' reservado='false' title='¿Reservas este cable?'></a>");

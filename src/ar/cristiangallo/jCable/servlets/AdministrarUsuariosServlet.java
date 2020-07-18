@@ -16,13 +16,13 @@ import java.io.IOException;
 public class AdministrarUsuariosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
         try {
-            if (user == null) {
+            if (logued_user == null) {
                 response.sendRedirect("login.jsp");
                 return;
-            } else if (!user.getIsSuperuser()) {
+            } else if (!logued_user.getIsSuperuser()) {
                 throw new appException("No tienen acceso a la administración de perfiles.");
 
             }
@@ -50,13 +50,13 @@ public class AdministrarUsuariosServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
         try {
-            if (user == null) {
+            if (logued_user == null) {
                 response.sendRedirect("login.jsp");
                 return;
-            } else if (!user.getIsSuperuser()) {
+            } else if (!logued_user.getIsSuperuser()) {
                 throw new appException("No tienen acceso a la administración de perfiles.");
 
             }

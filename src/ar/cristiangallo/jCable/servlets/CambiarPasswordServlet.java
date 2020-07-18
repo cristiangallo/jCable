@@ -17,9 +17,9 @@ public class CambiarPasswordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
-        if (user == null) {
+        if (logued_user == null) {
             response.sendRedirect("login.jsp");
         } else {
             request.getRequestDispatcher("cambiar-password.jsp").forward(request, response);
@@ -30,7 +30,7 @@ public class CambiarPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ControladorUsers ctrlUsers = new ControladorUsers();
 
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
         String password = request.getParameter("password");
         String new_password = request.getParameter("new_password");
         String new_password2 = request.getParameter("new_password2");
@@ -39,7 +39,7 @@ public class CambiarPasswordServlet extends HttpServlet {
             request.setAttribute("password", password);
             request.setAttribute("new_password", new_password);
             request.setAttribute("new_password2", new_password2);
-            ctrlUsers.changePasswordUser(user, password, new_password, new_password2);
+            ctrlUsers.changePasswordUser(logued_user, password, new_password, new_password2);
             request.setAttribute("mensaje", "Tu contraseña se cambió exitosamente.");
 
         } catch (appException e) {

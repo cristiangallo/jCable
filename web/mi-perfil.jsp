@@ -9,7 +9,7 @@
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="ar.cristiangallo.jCable.appExceptions.appException.*" %>
-<% User user = (User) session.getAttribute("user"); %>
+<% User logued_user = (User) session.getAttribute("logued_user"); %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
 <head>
@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <%
                                     out.println("<input class='form-control' readonly type='email' name='email' " +
-                                            " value=" + user.getEmail() + " placeholder='Email'");
+                                            " value=" + logued_user.getEmail() + " placeholder='Email'");
                                 %>
                             </div>
                             <div class="form-group"><br><a href="/cambiar-password">Cambiar contraseña</a></div>

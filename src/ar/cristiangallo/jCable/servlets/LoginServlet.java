@@ -15,9 +15,9 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
-        if (user != null) {
+        if (logued_user != null) {
             response.sendRedirect("/");
             return;
         }
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         try {
             User user = ctrlUsers.getUser(email, password);
             user.login();
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("logued_user", user);
 
         } catch (appException e) {
             System.out.println(e);

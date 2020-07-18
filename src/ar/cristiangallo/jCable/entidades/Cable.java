@@ -11,11 +11,11 @@ public class Cable extends Contenido {
     private String urgencia;
     private String tema;
     private Timestamp purga = null;
-    private boolean pseudoReservado = false;
-    private ArrayList<Reserva> reservas;
+    private Reserva reserva = null;
+    // private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
     public Cable(int id, String titulo, String texto, Timestamp modificado, Timestamp creado, Timestamp purga,
-                 Agencia agencia, String urgencia, String tema, boolean pseudoReservado) {
+                 Agencia agencia, String urgencia, String tema, Reserva reserva) {
         this.id = id;
         this.titulo = titulo;
         this.texto = texto;
@@ -25,8 +25,8 @@ public class Cable extends Contenido {
         this.agencia = agencia;
         this.urgencia = urgencia;
         this.tema = tema;
-        this.pseudoReservado = pseudoReservado;
-        reservas = DBReserva.getInstancia().all(id);
+        this.reserva = reserva;
+        // reservas = DBReserva.getInstancia().all(this);
     }
 
     public Timestamp getFechaPurga() {
@@ -49,25 +49,22 @@ public class Cable extends Contenido {
     }
 
     public boolean toogleReserva(User user) {
-        boolean estaba_reservado = false;
-        for (Reserva reserva : reservas) {
-            if (reserva.getUser() == user) {
-                estaba_reservado = true;
-                reservas.remove(reserva);
-                reserva.delete();
-                break;
-            }
+        if (reserva == null) {
+            reserva = new Reserva(this, user);
+        } else {
+            reserva.delete();
+            reserva = null;
         }
-        if (!estaba_reservado) {
-            Reserva reserva = new Reserva(this, user);
-            reservas.add(reserva);
-        }
-        return !estaba_reservado;
+        return reserva == null ? false: true;
     }
 
     public String getTema() { return tema; }
 
     public String getUrgencia() { return urgencia; }
 
-    public boolean getPseudoReservado() { return pseudoReservado; }
+    public boolean getReservado() { return reserva != null ? true:false; }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
 }

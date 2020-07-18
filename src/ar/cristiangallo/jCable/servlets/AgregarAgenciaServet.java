@@ -16,12 +16,12 @@ import java.io.IOException;
 public class AgregarAgenciaServet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
         try {
-            if (user == null) {
+            if (logued_user == null) {
                 response.sendRedirect("login.jsp");
                 return;
-            } else if (!user.getIsSuperuser()) {
+            } else if (!logued_user.getIsSuperuser()) {
                 throw new appException("No tienen acceso a la administración de agencias.");
 
             }
@@ -42,7 +42,7 @@ public class AgregarAgenciaServet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer dias_purga = null;
         ControladorAgencias ctrlAgencia = new ControladorAgencias();
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
         try {
             dias_purga = Integer.parseInt(request.getParameter("dias_purga"));
         } catch(NumberFormatException ex){
@@ -52,10 +52,10 @@ public class AgregarAgenciaServet extends HttpServlet {
         boolean isActive = request.getParameterValues("isActive") != null;
 
         try {
-            if (user == null) {
+            if (logued_user == null) {
                 response.sendRedirect("login.jsp");
                 return;
-            } else if (!user.getIsSuperuser()) {
+            } else if (!logued_user.getIsSuperuser()) {
                 throw new appException("No tienen acceso a la administración de agencias.");
             }
             request.setAttribute("descripcion", descripcion);

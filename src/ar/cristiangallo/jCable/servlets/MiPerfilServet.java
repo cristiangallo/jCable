@@ -16,13 +16,13 @@ public class MiPerfilServet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
-        if (user == null) {
+        if (logued_user == null) {
             response.sendRedirect("login.jsp");
         } else {
-            request.setAttribute("nombre", user.getNombre());
-            request.setAttribute("apellido", user.getApellido());
+            request.setAttribute("nombre", logued_user.getNombre());
+            request.setAttribute("apellido", logued_user.getApellido());
             request.getRequestDispatcher("mi-perfil.jsp").forward(request, response);
         }
     }
@@ -31,7 +31,7 @@ public class MiPerfilServet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ControladorUsers ctrlUsers = new ControladorUsers();
 
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         request.removeAttribute("nombre");
@@ -42,9 +42,9 @@ public class MiPerfilServet extends HttpServlet {
             System.out.println(apellido);
             request.setAttribute("nombre", nombre);
             request.setAttribute("apellido", apellido);
-            user.setNombre(nombre);
-            user.setApellido(apellido);
-            ctrlUsers.saveUser(user);
+            logued_user.setNombre(nombre);
+            logued_user.setApellido(apellido);
+            ctrlUsers.saveUser(logued_user);
             request.setAttribute("mensaje", "Los cambios se guardaron exitosamente.");
 
         } catch (appException e) {

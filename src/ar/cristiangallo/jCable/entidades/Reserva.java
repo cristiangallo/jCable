@@ -20,6 +20,10 @@ public class Reserva {
         DBReserva.getInstancia().save(this);
     }
 
+    public Reserva() {
+
+    }
+
     public User getUser() {
         return user;
     }

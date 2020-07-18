@@ -17,15 +17,15 @@ import java.io.PrintWriter;
 public class ReservarCableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
 
-        if (user == null) { return; }
+        if (logued_user == null) { return; }
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
         Integer cable_id = Integer.parseInt(request.getParameter("cable_id"));
 
         try {
             Cable cable = ctrlContenidos.getCableById(cable_id);
-            cable.toogleReserva(user);
+            cable.toogleReserva(logued_user);
 
         } catch (appException e) {
             System.out.println(e);
@@ -35,7 +35,7 @@ public class ReservarCableServlet extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-        boolean reservado = ctrlContenidos.cable.toogleReserva(user);
+        boolean reservado = ctrlContenidos.cable.toogleReserva(logued_user);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             if (reservado) {

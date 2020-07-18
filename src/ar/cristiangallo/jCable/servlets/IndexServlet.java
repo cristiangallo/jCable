@@ -18,16 +18,13 @@ public class IndexServlet extends HttpServlet {
         // int offset = Integer.parseInt(request.getParameter("offset"));
         ControladorAgencias ctrlAgencias = new ControladorAgencias();
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+        User logued_user = (User) request.getSession().getAttribute("logued_user");
+        if (logued_user == null) {
             response.sendRedirect("login.jsp");
             return;
         }
-
-        // ToDo array de reservas por usuario para comparar
-
         request.setAttribute("agenciasActivas", ctrlAgencias.agenciasActivas());
-        request.setAttribute("contenidos", ctrlContenidos.allContenidos(user));
+        request.setAttribute("contenidos", ctrlContenidos.allContenidos(logued_user));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
