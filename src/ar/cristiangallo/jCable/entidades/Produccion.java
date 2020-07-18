@@ -17,6 +17,10 @@ public class Produccion extends Contenido {
         this.publicado = publicado;
     }
 
+    public String getAbsoluteURL () {
+        return "/producciones?produccion_id=" + id;
+    }
+
     public User getUser(){
         return user;
     }

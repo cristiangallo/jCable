@@ -11,10 +11,11 @@ public class Cable extends Contenido {
     private String urgencia;
     private String tema;
     private Timestamp purga = null;
+    private boolean pseudoReservado = false;
     private ArrayList<Reserva> reservas;
 
     public Cable(int id, String titulo, String texto, Timestamp modificado, Timestamp creado, Timestamp purga,
-                 Agencia agencia, String urgencia, String tema) {
+                 Agencia agencia, String urgencia, String tema, boolean pseudoReservado) {
         this.id = id;
         this.titulo = titulo;
         this.texto = texto;
@@ -24,11 +25,16 @@ public class Cable extends Contenido {
         this.agencia = agencia;
         this.urgencia = urgencia;
         this.tema = tema;
+        this.pseudoReservado = pseudoReservado;
         reservas = DBReserva.getInstancia().all(id);
     }
 
     public Timestamp getFechaPurga() {
         return purga;
+    }
+
+    public String getAbsoluteURL () {
+        return "/cables?cable_id=" + id;
     }
 
     public void setFechaPurga(Timestamp fecha_purga) {
@@ -62,4 +68,6 @@ public class Cable extends Contenido {
     public String getTema() { return tema; }
 
     public String getUrgencia() { return urgencia; }
+
+    public boolean getPseudoReservado() { return pseudoReservado; }
 }

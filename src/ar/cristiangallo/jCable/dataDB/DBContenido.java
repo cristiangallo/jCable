@@ -36,12 +36,13 @@ public class DBContenido extends DBTable<Contenido> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "select CO.*, CA.contenido_id as cable_id, urgencia, tema, purga, PR.contenido_id as " +
-                            "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
-                            "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
-                            "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser from " +
-                            "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on CO.id=PR.contenido_id " +
-                            "left join agencias A on A.id=CA.agencia_id, last_login, U.creado as usuario_creado left join usuarios U on U.id=PR.usuario_id " +
-                            "where CO.id = ?;"
+                    "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
+                    "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
+                    "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
+                    "U.creado as usuario_creado, IF(R.id is not null, 1, 0) as pseudoReservado from " +
+                    "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
+                    "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
+                    "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id where CO.id = ?;"
             );
             stmt.setInt(1, id  );
             rs = stmt.executeQuery();
@@ -52,7 +53,8 @@ public class DBContenido extends DBTable<Contenido> {
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     Cable cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"));
+                            agencia, rs.getString("urgencia"), rs.getString("tema"),
+                            rs.getBoolean("pseudoReservado"));
                     return cable;
                 }
                 Integer user_id = (Integer) rs.getObject("user_id");
@@ -83,6 +85,10 @@ public class DBContenido extends DBTable<Contenido> {
 
     @Override
     public ArrayList<Contenido> all(Integer... parametros) {
+        return all(null, parametros);
+    }
+
+    public ArrayList<Contenido> all(User logued_user, Integer... parametros) {
         Integer offset = parametros.length > 0 ? parametros[0] : 0;
         Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
         System.out.println(offset);
@@ -100,9 +106,10 @@ public class DBContenido extends DBTable<Contenido> {
                             "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
                             "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
                             "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
-                            "U.creado as usuario_creado from " +
+                            "U.creado as usuario_creado, IF(R.id is not null, 1, 0) as pseudoReservado from " +
                             "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
-                            "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U on U.id=PR.usuario_id LIMIT ?, ?;"
+                            "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
+                            "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id LIMIT ?, ?;"
                     // LIMIT offset, row_count;
             );
             stmt.setInt(1, offset  );
@@ -115,11 +122,10 @@ public class DBContenido extends DBTable<Contenido> {
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"));
+                            agencia, rs.getString("urgencia"), rs.getString("tema"), rs.getBoolean("pseudoReservado"));
                     System.out.println(cable.getTexto());
                     all.add(cable);
-                }
-                if (rs.getObject("user_id") != null) {
+                } else {
                     Integer user_id = (Integer) rs.getObject("user_id");
                     user = new User(user_id, rs.getString("email"), rs.getString("password"),
                             rs.getString("nombre"), rs.getString("apellido"), rs.getBoolean("is_staff"),

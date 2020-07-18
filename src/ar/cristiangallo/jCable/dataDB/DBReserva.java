@@ -49,7 +49,7 @@ public class DBReserva {
                         rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                 cable = new Cable(rs.getInt("cable_id"), rs.getString("titulo"), rs.getString("texto"),
                         rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                        agencia, rs.getString("urgencia"), rs.getString("tema"));
+                        agencia, rs.getString("urgencia"), rs.getString("tema"), false);
                 user = new User(user_id, rs.getString("email"), rs.getString("password"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getBoolean("is_staff"),
                         rs.getBoolean("usuario_activo"), rs.getBoolean("is_superuser"),
@@ -74,31 +74,19 @@ public class DBReserva {
     public void save(Reserva reserva) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Integer reserva_id = reserva.getId();
 
         try {
-            if (reserva_id != null) {
-                System.out.println("update reserva");
-                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                        "update reservas set cable_id = ?, usuario_id = ? where id = ?",
-                        PreparedStatement.RETURN_GENERATED_KEYS);
-                stmt.setInt(3, reserva_id);
-            } else {
-                System.out.println("save reserva");
-                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                        "insert into reservas (cable_id, user_id) values (?,?)",
-                        PreparedStatement.RETURN_GENERATED_KEYS);
-            }
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
+                    "insert into reservas (cable_id, user_id) values (?,?);", PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, reserva.getCable().getId());
             stmt.setInt(2, reserva.getUser().getId());
             stmt.execute();
-            if (reserva_id == null) {
-                rs = stmt.getGeneratedKeys();
-                if (rs != null && rs.next()) {
-                    reserva.setId(rs.getInt(1));
-                }
-            }
+            System.out.println("save reserva");
             rs = stmt.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                System.out.println(rs.getInt(1));
+                reserva.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

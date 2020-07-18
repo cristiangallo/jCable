@@ -24,8 +24,10 @@ public class IndexServlet extends HttpServlet {
             return;
         }
 
+        // ToDo array de reservas por usuario para comparar
+
         request.setAttribute("agenciasActivas", ctrlAgencias.agenciasActivas());
-        request.setAttribute("contenidos", ctrlContenidos.allContenidos());
+        request.setAttribute("contenidos", ctrlContenidos.allContenidos(user));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

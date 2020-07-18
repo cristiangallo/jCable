@@ -5,6 +5,7 @@ import ar.cristiangallo.jCable.dataDB.CatalogoContenido;
 import ar.cristiangallo.jCable.entidades.Cable;
 import ar.cristiangallo.jCable.entidades.Contenido;
 import ar.cristiangallo.jCable.entidades.Reglamento;
+import ar.cristiangallo.jCable.entidades.User;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class ControladorContenidos {
         reglamento.save();
     }
 
-    public ArrayList<Contenido> allContenidos() {
-        return catContenido.all();
+    public ArrayList<Contenido> allContenidos(User logued_user) {
+        return catContenido.all(logued_user);
     }
 
     public Cable getCableById(Integer cable_id) throws appException {

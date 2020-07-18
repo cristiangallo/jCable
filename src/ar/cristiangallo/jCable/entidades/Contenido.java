@@ -16,6 +16,8 @@ public abstract class Contenido {
         return id;
     }
 
+    public abstract String getAbsoluteURL ();
+
     public final Timestamp getModified() {
         return creado;
     }

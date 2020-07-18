@@ -50,18 +50,28 @@
                             for (Contenido contenido : contenidos) {
                                 out.println("<div class='post'>");
                                 out.println("<div class='post-header font-alt'>");
-                                out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
                                 if (contenido instanceof Produccion) {
+                                    out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
                                     out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
                                             ((Produccion) contenido).getUser().getFullName() + "</a>| " +
                                             contenido.getDateTimeModificada() + "  | <a href='#'>Photography, " +
                                             "</a><a href='#'>Web Design</a>");
                                 } else {
                                     Cable cable = ((Cable) contenido);
+                                    out.println("<h2 class='post-title'><span><a role='button' href='#'" +
+                                            "cable_id='" + cable.getId() + "'");
+                                    if (cable.getPseudoReservado()) {
+                                        out.println("class='fa fa-star star' reservado='true' title='¿Liberas este cable?'></a>");
+                                    } else {
+                                        out.println("class='fa fa-star star-off' reservado='false' title='¿Reservas este cable?'></a>");
+                                    }
+                                    out.println("<a href='" + cable.getAbsoluteURL() + "'>" + contenido.getTitulo() +
+                                            "</a></span></h2>");
+
                                     out.println("<div class='post-meta'>Fuente&nbsp;<a href='#'>" +
                                             cable.getAgencia().getDescripcion() + "</a>| " +
                                             cable.getDateTimeModificada() +  " | " + cable.getTema() + " | " +
-                                            cable.getUrgencia() + "<span><i class=\"fa fa-star star\"></i></span>");
+                                            cable.getUrgencia());
                                 }
                                 out.println("</div>");
                                 out.println("</div>");
@@ -148,6 +158,7 @@
                     </div>
                 </div>
             </div>
+            </div>
         </section>
         <%@include  file="footer.html" %>
     </div>
@@ -161,5 +172,27 @@ JavaScripts
 <script src="static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="static/js/plugins.js"></script>
 <script src="static/js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".fa-star").click(function(ev){
+            ev.preventDefault();
+            const cable = $(this);
+            if (confirm(cable.attr('title'))) {
+                $.ajax(
+                    {
+                        url: "/reservar-cable?cable_id=" + cable.attr("cable_id"),
+                        type: "POST",
+                        data: {},
+                        success: function (data) {
+
+                        },
+                        error: function (data) {
+                            alert("¡Ups, ocurrió un error reservando este cable!");
+                        }
+                    });
+            }
+        });
+    });
+</script>
 </body>
 </html>

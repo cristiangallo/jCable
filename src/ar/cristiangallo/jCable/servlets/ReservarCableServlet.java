@@ -21,10 +21,11 @@ public class ReservarCableServlet extends HttpServlet {
 
         if (user == null) { return; }
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
-        Integer contenido_id = Integer.parseInt(request.getParameter("contenido_id"));
+        Integer cable_id = Integer.parseInt(request.getParameter("cable_id"));
 
         try {
-            Cable cable = ctrlContenidos.getCableById(contenido_id);
+            Cable cable = ctrlContenidos.getCableById(cable_id);
+            cable.toogleReserva(user);
 
         } catch (appException e) {
             System.out.println(e);

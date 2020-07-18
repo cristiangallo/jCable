@@ -3,6 +3,8 @@ package ar.cristiangallo.jCable.dataDB;
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.entidades.Cable;
 import ar.cristiangallo.jCable.entidades.Contenido;
+import ar.cristiangallo.jCable.entidades.User;
+
 import java.util.ArrayList;
 
 /**
@@ -25,7 +27,7 @@ public class CatalogoContenido {
         return (Cable) DBContenido.getInstancia().get(cable_id);
     }
 
-    public ArrayList<Contenido> all() {
-        return DBContenido.getInstancia().all();
+    public ArrayList<Contenido> all(User logued_user) {
+        return DBContenido.getInstancia().all(logued_user);
     }
 }

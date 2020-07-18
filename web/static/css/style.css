@@ -2604,13 +2604,12 @@ Google map
   color: #111;
 }
 
-.star,
-.star-off {
+.star, .star-off, .star-off:hover {
   margin-bottom: 5px;
   color: #f1c40f;
 }
 
-.star-off {
+.star-off, .star:hover {
   color: #e5e5e5;
 }
 
