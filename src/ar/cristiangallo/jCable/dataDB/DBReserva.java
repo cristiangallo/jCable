@@ -68,10 +68,14 @@ public class DBReserva extends DBTable<Reserva> {
         return reserva;
     }
 
+    @Override
     public ArrayList<Reserva> all(Integer... parametros) {
+        return all(null, parametros);
+    }
+
+    public ArrayList<Reserva> all(User logued_user, Integer... parametros) {
         Integer offset = parametros.length > 0 ? parametros[0] : 0;
         Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
-
         ArrayList<Reserva> all = new ArrayList<Reserva>();
         Reserva reserva = null;
         Cable cable;
@@ -86,7 +90,15 @@ public class DBReserva extends DBTable<Reserva> {
                     "U.creado as usuario_creado from reservas R inner join usuarios U on R.user_id=U.id " +
                     "inner join contenidos CO on CO.id=R.cable_id inner join cables CA on CO.id=CA.contenido_id " +
                     "inner join agencias A on A.id=CA.agencia_id";
-            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sqlSelect);
+
+            if (logued_user != null){
+                sqlSelect = sqlSelect + " where R.user_id = ? ";
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sqlSelect);
+                stmt.setInt(1, logued_user.getId());
+            } else {
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sqlSelect);
+            }
+
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 agencia = new Agencia(rs.getInt("agencia_id"), rs.getString("desc_agencia"),
@@ -122,8 +134,8 @@ public class DBReserva extends DBTable<Reserva> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "insert into reservas (cable_id, user_id) values (?,?);", PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, reserva.getCable().getId(), java.sql.Types.INTEGER);
-            stmt.setObject(2, reserva.getUser().getId(), java.sql.Types.INTEGER);
+            stmt.setInt(1, reserva.getCable().getId());
+            stmt.setInt(2, reserva.getUser().getId());
             stmt.execute();
             System.out.println("save reserva");
             rs = stmt.getGeneratedKeys();
@@ -150,6 +162,7 @@ public class DBReserva extends DBTable<Reserva> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "delete from reservas where id = ?;");
+
             stmt.setInt(1, reserva.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

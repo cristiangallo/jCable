@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 public class ReservarCableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean reservado = false;
         User logued_user = (User) request.getSession().getAttribute("logued_user");
 
         if (logued_user == null) { return; }
@@ -25,7 +26,7 @@ public class ReservarCableServlet extends HttpServlet {
 
         try {
             Cable cable = ctrlContenidos.getCableById(cable_id);
-            cable.toogleReserva(logued_user);
+            reservado = logued_user.toogleReserva(cable);
 
         } catch (appException e) {
             System.out.println(e);
@@ -35,7 +36,7 @@ public class ReservarCableServlet extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-        boolean reservado = ctrlContenidos.cable.toogleReserva(logued_user);
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             if (reservado) {

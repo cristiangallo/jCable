@@ -1,6 +1,7 @@
 package ar.cristiangallo.jCable.entidades;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.dataDB.CatalogoContenido;
 import ar.cristiangallo.jCable.dataDB.DBUser;
 // import org.apache.commons.mail.EmailException;
 // import utiles.Mailer;
@@ -8,6 +9,7 @@ import utiles.RandomString;
 import utiles.SendHtmlEmail;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Created by cgallo on 05/06/20.
@@ -24,6 +26,7 @@ public class User {
     private boolean is_superuser = false;
     private Timestamp last_login = null;
     private Timestamp creado = new Timestamp(System.currentTimeMillis());
+    private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
     // constructor para usuario guardado
     public User(int id, String email, String password, String nombre, String apellido, boolean is_staff,
@@ -183,5 +186,32 @@ public class User {
 
     public void save() {
         DBUser.getInstancia().save(this);
+    }
+
+    public void setReservas(ArrayList<Reserva> allReservas) {
+        reservas = allReservas;
+    }
+
+    public Reserva getCableReservado(Cable cable) {
+        for (Reserva reserva:reservas ) {
+            System.out.println(reserva.getId());
+            if (reserva.getCable().getId() == cable.getId()) {
+                return reserva;
+            }
+        }
+        return null;
+    }
+
+    public boolean toogleReserva(Cable cable) {
+        Reserva reserva = getCableReservado(cable);
+        if (reserva==null) {
+            reserva = new Reserva(cable, this);
+            reservas.add(reserva);
+        } else {
+            reservas.remove(reserva);
+            reserva.delete();
+            reserva = null;
+        }
+        return reserva == null ? false: true;
     }
 }

@@ -1,6 +1,7 @@
 package ar.cristiangallo.jCable.negocio;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.dataDB.CatalogoContenido;
 import ar.cristiangallo.jCable.dataDB.CatalogoUsers;
 import ar.cristiangallo.jCable.entidades.User;
 
@@ -14,9 +15,11 @@ import java.util.*;
 public class ControladorUsers {
     public ControladorUsers(){};
     private CatalogoUsers catUsers = CatalogoUsers.getInstance();
+    private CatalogoContenido catContenidos = CatalogoContenido.getInstance();
 
     public User getUser(String email, String password) throws appException {
         User user = catUsers.getUser(email, password);
+        user.setReservas(catContenidos.allReservas(user));
         return user;
     }
 

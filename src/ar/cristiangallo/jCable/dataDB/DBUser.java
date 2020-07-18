@@ -34,7 +34,7 @@ public class DBUser extends DBTable<User> {
     @Override
     public ArrayList<User> all(Integer... parametros) {
         Integer offset = parametros.length > 0 ? parametros[0] : 0;
-        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
+        Integer resultados_por_pagina = reglamento.getResultadoPorPagina();
         ArrayList<User> all = new ArrayList<User>();
         User user = null;
         PreparedStatement stmt = null;

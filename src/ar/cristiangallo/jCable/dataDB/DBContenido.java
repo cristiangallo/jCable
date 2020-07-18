@@ -103,8 +103,6 @@ public class DBContenido extends DBTable<Contenido> {
     public ArrayList<Contenido> all(User logued_user, Integer... parametros) {
         Integer offset = parametros.length > 0 ? parametros[0] : 0;
         Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
-        System.out.println(offset);
-        System.out.println(resultados_por_pagina);
         ArrayList<Contenido> all = new ArrayList<Contenido>();
         Agencia agencia;
         User user;
@@ -118,7 +116,7 @@ public class DBContenido extends DBTable<Contenido> {
                             "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
                             "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
                             "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
-                            "U.creado as usuario_creado, IF(R.id is not null, 1, 0) as pseudoReservado from " +
+                            "U.creado as usuario_creado, R.id as reserva_id from " +
                             "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
                             "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
                             "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id LIMIT ?, ?;"
@@ -134,7 +132,7 @@ public class DBContenido extends DBTable<Contenido> {
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"), new Reserva());
+                            agencia, rs.getString("urgencia"), rs.getString("tema"), null);
                     System.out.println(cable.getTexto());
                     all.add(cable);
                 } else {

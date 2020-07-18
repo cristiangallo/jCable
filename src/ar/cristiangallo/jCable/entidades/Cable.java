@@ -48,8 +48,10 @@ public class Cable extends Contenido {
         return agencia;
     }
 
+
+    /*
     public boolean toogleReserva(User user) {
-        if (reserva == null) {
+        if (!getReservado()) {
             reserva = new Reserva(this, user);
         } else {
             reserva.delete();
@@ -58,11 +60,11 @@ public class Cable extends Contenido {
         return reserva == null ? false: true;
     }
 
+    public boolean getReservado() { return reserva != null ? true:false; }
+     */
     public String getTema() { return tema; }
 
     public String getUrgencia() { return urgencia; }
-
-    public boolean getReservado() { return reserva != null ? true:false; }
 
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
