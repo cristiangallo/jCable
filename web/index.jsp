@@ -49,7 +49,7 @@
                         <% if (request.getAttribute("contenidos")!=null){
                             ArrayList<Contenido> contenidos = (ArrayList<Contenido>) request.getAttribute("contenidos");
                             for (Contenido contenido : contenidos) {
-                                out.println("<div class='post'>");
+                                out.println("<div class='post' id=\"" + contenido.getId() + "\">");
                                 out.println("<div class='post-header font-alt'>");
                                 if (contenido instanceof Produccion) {
                                     out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
