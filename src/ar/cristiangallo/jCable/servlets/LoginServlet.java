@@ -26,16 +26,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ControladorUsers ctrlUsers = new ControladorUsers();
-
         String email = request.getParameter("emailL");
         String password = request.getParameter("passwordL");
-        request.setAttribute("emailL", email);
-        request.setAttribute("passwordL", password);
+        ControladorUsers ctrlUsers = new ControladorUsers(email, password);
+
         try {
-            User user = ctrlUsers.getUser(email, password);
-            user.login();
-            request.getSession().setAttribute("logued_user", user);
+            ctrlUsers.getUser().login();
+            request.getSession().setAttribute("logued_user", ctrlUsers.getUser());
 
         } catch (appException e) {
             System.out.println(e);
@@ -46,7 +43,8 @@ public class LoginServlet extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-
+        request.setAttribute("emailL", email);
+        request.setAttribute("passwordL", password);
         // request.getRequestDispatcher("index.jsp").forward(request, response);
         response.sendRedirect("/");
     }
