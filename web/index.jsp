@@ -178,14 +178,17 @@ JavaScripts
         $(".fa-star").click(function(ev){
             ev.preventDefault();
             const cable = $(this);
-            if (confirm(cable.attr('title'))) {
+            const title = cable.attr('title');
+            const cable_id = cable.attr("cable_id");
+            // cable.toggleClass("star star-off");
+            if (confirm(title)) {
                 $.ajax(
                     {
-                        url: "/reservar-cable?cable_id=" + cable.attr("cable_id"),
+                        url: "/reservar-cable?cable_id=" + cable_id,
                         type: "POST",
                         data: {},
                         success: function (data) {
-
+                            cable.toggleClass("star star-off");
                         },
                         error: function (data) {
                             alert("¡Ups, ocurrió un error reservando este cable!");
