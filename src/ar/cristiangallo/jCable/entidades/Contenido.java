@@ -46,4 +46,7 @@ public abstract class Contenido {
         this.texto = texto;
     }
 
+    public final String getBajada() {
+        return texto.split("\n")[0];
+    }
 }

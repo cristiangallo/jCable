@@ -18,7 +18,7 @@ public class Produccion extends Contenido {
     }
 
     public String getAbsoluteURL () {
-        return "/producciones?produccion_id=" + id;
+        return "/contenidos?produccion_id=" + id;
     }
 
     public User getUser(){

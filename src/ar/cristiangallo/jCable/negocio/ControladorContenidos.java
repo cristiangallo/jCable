@@ -36,4 +36,8 @@ public class ControladorContenidos {
         cable = catContenido.getCableById(cable_id);
         return cable;
     }
+
+    public boolean toogleReserva() {
+        return user.toogleReserva(cable);
+    }
 }

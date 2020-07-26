@@ -33,9 +33,7 @@ public class Cable extends Contenido {
         return purga;
     }
 
-    public String getAbsoluteURL () {
-        return "/cables?cable_id=" + id;
-    }
+    public String getAbsoluteURL () { return "/contenidos?cable_id=" + id; }
 
     public void setFechaPurga(Timestamp fecha_purga) {
         Calendar cal = Calendar.getInstance();
