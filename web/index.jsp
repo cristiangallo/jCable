@@ -77,12 +77,9 @@
                                 out.println("</div>");
                                 out.println("</div>");
                                 out.println("<div class='post-entry'>");
-                                out.println("<p>A wonderful serenity has taken possession of my entire soul, like " +
-                                        "these sweet mornings of spring which I enjoy with my whole heart. I am alone" +
-                                        ", and feel the charm of existence in this spot, which was created for the " +
-                                        "bliss of souls like mine.</p>");
+                                out.println("<p>" + contenido.getTexto().split("\n")[0] + "</p>");
                                 out.println("</div>");
-                                out.println("<div class='post-more'><a class='more-link' href='#'>Read more</a></div>");
+                                out.println("<div class='post-more'><a class='more-link' href='#'>Leer más</a></div>");
                                 out.println("</div>");
                             }
 
@@ -111,8 +108,8 @@
                                 }
                                 out.println("</ul>");
                                 out.println("</div>");
-                            }
-                        %>
+                            } %>
+
                         <div class="widget">
                             <h5 class="widget-title font-alt">Popular Posts</h5>
                             <ul class="widget-posts">
@@ -177,18 +174,16 @@ JavaScripts
     $(document).ready(function(){
         $(".fa-star").click(function(ev){
             ev.preventDefault();
-            const cable = $(this);
-            const title = cable.attr('title');
-            const cable_id = cable.attr("cable_id");
-            // cable.toggleClass("star star-off");
-            if (confirm(title)) {
+            let cable = $(this);
+            if (confirm(cable.attr('title'))) {
+                $.ajaxSetup({ cache: false });
                 $.ajax(
                     {
-                        url: "/reservar-cable?cable_id=" + cable_id,
+                        url: "/reservar-cable?cable_id=" + cable.attr("cable_id"),
                         type: "POST",
                         data: {},
                         success: function (data) {
-                            cable.toggleClass("star star-off");
+                            $("#"+cable.attr("cable_id")).html(data);
                         },
                         error: function (data) {
                             alert("¡Ups, ocurrió un error reservando este cable!");

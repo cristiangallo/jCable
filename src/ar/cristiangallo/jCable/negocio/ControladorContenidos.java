@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class ControladorContenidos {
     public Cable cable;
+    public User user;
     public ControladorContenidos() {};
 
     private CatalogoContenido catContenido = CatalogoContenido.getInstance();

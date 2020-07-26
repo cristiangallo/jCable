@@ -17,16 +17,17 @@ import java.io.PrintWriter;
 public class ReservarCableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean reservado = false;
         User logued_user = (User) request.getSession().getAttribute("logued_user");
 
         if (logued_user == null) { return; }
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
+        ctrlContenidos.user = logued_user;
         Integer cable_id = Integer.parseInt(request.getParameter("cable_id"));
 
         try {
             Cable cable = ctrlContenidos.getCableById(cable_id);
-            reservado = logued_user.toogleReserva(cable);
+            request.setAttribute("contenido", cable);
+            logued_user.toogleReserva(cable);
 
         } catch (appException e) {
             System.out.println(e);
@@ -37,13 +38,7 @@ public class ReservarCableServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            if (reservado) {
-                out.println("<span><i class=\"fa fa-star star\"></i></span>");
-            } else {
-                out.println("<span><i class=\"fa fa-star\"></i></span>");
-            }
-        }
+        request.getRequestDispatcher("estampilla.jsp").forward(request, response);
+
     }
 }
