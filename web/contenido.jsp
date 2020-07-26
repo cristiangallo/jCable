@@ -86,8 +86,6 @@
                             out.println("<p>" + contenido.getTextoHTML() + "</p>");
                             out.println("</div>");
                             out.println("</div>");
-
-
                             out.println("</div>");
                          %>
                         <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
