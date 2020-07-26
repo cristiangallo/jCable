@@ -42,11 +42,19 @@ public abstract class Contenido {
         return texto;
     }
 
+    public String getTextoHTML() {
+        String texto_html = "";
+        for (String parrafo : this.texto.split("\n")) {
+            texto_html += "<p>" + parrafo + "</p>";
+        }
+        return texto_html;
+    }
+
     public void setTexto(String texto) {
         this.texto = texto;
     }
 
     public final String getBajada() {
-        return texto.split("\n")[0];
+        return "<p>" + texto.split("\n")[0] + "</p>";
     }
 }

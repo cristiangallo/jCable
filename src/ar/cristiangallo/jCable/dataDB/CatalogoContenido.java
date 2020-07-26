@@ -24,8 +24,8 @@ public class CatalogoContenido {
         return instancia;
     }
 
-    public Cable getCableById(int cable_id) throws appException {
-        return (Cable) DBContenido.getInstancia().get(cable_id);
+    public Contenido getContenido(int id) throws appException {
+        return DBContenido.getInstancia().get(id);
     }
 
     public ArrayList<Contenido> all(User logued_user) {

@@ -50,7 +50,7 @@ public class DBContenido extends DBTable<Contenido> {
             if (rs != null && rs.next()) {
                 reserva = null;
                 Integer agencia_id = (Integer) rs.getObject("agencia_id");
-                if (agencia_id > 0) {
+                if (agencia_id != null) {
                     agencia = new Agencia(agencia_id, rs.getString("desc_agencia"),
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     Cable cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),

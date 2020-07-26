@@ -38,7 +38,7 @@
     out.println("</div>");
     out.println("</div>");
     out.println("<div class='post-entry'>");
-    out.println("<p>" + contenido.getBajada() + "</p>");
+    out.println(contenido.getBajada());
     out.println("</div>");
     out.println("<div class='post-more'><a class='more-link' href='" + contenido.getAbsoluteURL() + "'>Leer más</a></div>");
 %>

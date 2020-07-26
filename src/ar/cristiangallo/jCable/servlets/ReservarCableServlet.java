@@ -23,7 +23,7 @@ public class ReservarCableServlet extends HttpServlet {
         if (logued_user == null) { return; }
         ctrlContenidos.user = logued_user;
         try {
-            Cable cable = ctrlContenidos.getCableById(Integer.parseInt(request.getParameter("cable_id")));
+            Cable cable = (Cable) ctrlContenidos.getContenido(Integer.parseInt(request.getParameter("cable_id")));
             ctrlContenidos.toogleReserva();
             request.setAttribute("contenido", cable);
             // logued_user.toogleReserva(cable);

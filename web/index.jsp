@@ -1,7 +1,5 @@
-
 <%@page import="ar.cristiangallo.jCable.entidades.*" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
@@ -77,7 +75,7 @@
                                 out.println("</div>");
                                 out.println("</div>");
                                 out.println("<div class='post-entry'>");
-                                out.println("<p>" + contenido.getBajada() + "</p>");
+                                out.println(contenido.getBajada());
                                 out.println("</div>");
                                 out.println("<div class='post-more'><a class='more-link' href='" + contenido.getAbsoluteURL() + "'>Leer más</a></div>");
                                 out.println("</div>");
