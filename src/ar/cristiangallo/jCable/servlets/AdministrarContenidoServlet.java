@@ -44,6 +44,10 @@ public class AdministrarContenidoServlet extends HttpServlet {
             }
             ControladorContenidos ctrlContenidos = new ControladorContenidos();
             Contenido contenido = ctrlContenidos.getContenido(contenido_id);
+            if (contenido==null) {
+                response.sendRedirect("404.jsp");
+                return;
+            }
             request.setAttribute("contenido", contenido);
 
         } catch (appException e) {
