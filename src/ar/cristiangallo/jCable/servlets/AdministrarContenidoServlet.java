@@ -34,7 +34,6 @@ public class AdministrarContenidoServlet extends HttpServlet {
             }
             ControladorContenidos ctrlContenidos = new ControladorContenidos();
             Contenido contenido = ctrlContenidos.getContenido(contenido_id);
-
             request.setAttribute("contenido", contenido);
 
         } catch (appException e) {
