@@ -20,11 +20,21 @@ public class AdministrarContenidoServlet extends HttpServlet {
         Integer contenido_id;
         User logued_user = (User) request.getSession().getAttribute("logued_user");
         if (request.getParameter("cable_id")!=null) {
-            contenido_id = Integer.parseInt(request.getParameter("cable_id"));
+            try {
+                contenido_id = Integer.parseInt(request.getParameter("cable_id"));
+            } catch (NumberFormatException e) {
+                response.sendRedirect("404.jsp");
+                return;
+            }
         } else if (request.getParameter("produccion_id")!=null) {
-            contenido_id = Integer.parseInt(request.getParameter("produccion_id"));
+            try {
+                contenido_id = Integer.parseInt(request.getParameter("produccion_id"));
+            } catch (NumberFormatException e) {
+                response.sendRedirect("404.jsp");
+                return;
+            }
         } else {
-            // raise 404
+            response.sendRedirect("404.jsp");
             return;
         }
         try {
