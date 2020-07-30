@@ -54,8 +54,7 @@
                                     out.println("<h2 class='post-title'><a href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
                                     out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
                                             ((Produccion) contenido).getUser().getFullName() + "</a>| " +
-                                            contenido.getDateTimeModificada() + "  | <a href='#'>Photography, " +
-                                            "</a><a href='#'>Web Design</a>");
+                                            contenido.getDateTimeModificada());
                                     out.println("</div>");
                                     out.println("</div>");
                                     out.println("<div class='post-entry'>");
