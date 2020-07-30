@@ -24,4 +24,7 @@ public class Produccion extends Contenido {
     public User getUser(){
         return user;
     }
+    public boolean getPublicado(){
+        return publicado;
+    }
 }

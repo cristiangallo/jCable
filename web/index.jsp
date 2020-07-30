@@ -47,16 +47,25 @@
                         <% if (request.getAttribute("contenidos")!=null){
                             ArrayList<Contenido> contenidos = (ArrayList<Contenido>) request.getAttribute("contenidos");
                             for (Contenido contenido : contenidos) {
-                                out.println("<div class='post' id=\"" + contenido.getId() + "\">");
-                                out.println("<div class='post-header font-alt'>");
-                                if (contenido instanceof Produccion) {
-                                    out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
+                                if (contenido instanceof Produccion && ((Produccion) contenido).getPublicado()) {
+                                    out.println("<div class='post' id=\"" + contenido.getId() + "\">");
+                                    out.println("<div class='post-header font-alt'>");
+                                    out.println("<h2 class='post-title'><a href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
                                     out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
                                             ((Produccion) contenido).getUser().getFullName() + "</a>| " +
                                             contenido.getDateTimeModificada() + "  | <a href='#'>Photography, " +
                                             "</a><a href='#'>Web Design</a>");
-                                } else {
+                                    out.println("</div>");
+                                    out.println("</div>");
+                                    out.println("<div class='post-entry'>");
+                                    out.println(contenido.getBajada());
+                                    out.println("</div>");
+                                    out.println("<div class='post-more'><a class='more-link' href='" + contenido.getAbsoluteURL() + "'>Leer más</a></div>");
+                                    out.println("</div>");
+                                } else if (contenido instanceof Cable) {
                                     Cable cable = ((Cable) contenido);
+                                    out.println("<div class='post' id=\"" + contenido.getId() + "\">");
+                                    out.println("<div class='post-header font-alt'>");
                                     out.println("<h2 class='post-title'><span><a role='button' href='#'" +
                                             "cable_id='" + cable.getId() + "'");
                                     if (logued_user.getCableReservado(cable) != null) {
@@ -71,15 +80,14 @@
                                             cable.getAgencia().getDescripcion() + "</a>| " +
                                             cable.getDateTimeModificada() +  " | " + cable.getTema() + " | " +
                                             cable.getUrgencia());
+                                    out.println("</div>");
+                                    out.println("</div>");
+                                    out.println("<div class='post-entry'>");
+                                    out.println(contenido.getBajada());
+                                    out.println("</div>");
+                                    out.println("<div class='post-more'><a class='more-link' href='" + contenido.getAbsoluteURL() + "'>Leer más</a></div>");
+                                    out.println("</div>");
                                 }
-                                out.println("</div>");
-                                out.println("</div>");
-                                out.println("<div class='post-entry'>");
-                                out.println(contenido.getBajada());
-                                out.println("</div>");
-                                out.println("<div class='post-more'><a class='more-link' href='" + contenido.getAbsoluteURL() + "'>Leer más</a></div>");
-                                out.println("</div>");
-
                             }
 
                             out.println("<div class='pagination font-alt'><a href='#'><i class='fa fa-angle-left'>" +
