@@ -74,7 +74,7 @@
                                         "onclick=\"return confirm('are you sure?');\" href='/eliminar-contenido?" +
                                         "contenido_id=" + produccion.getId() + "'>Eliminar</a>");
                                 out.println("<a class='btn btn-round btn-b'  role='button' href='/editar-contenido?" +
-                                        "contenido_id=" + produccion.getId() + "type='submit'>Editar contenido</a>");
+                                        "contenido_id=" + produccion.getId() + "' type='submit'>Editar contenido</a>");
                                 out.println("</div>");
                                 out.println("</div>");
                             } else if (contenido instanceof Cable) {
