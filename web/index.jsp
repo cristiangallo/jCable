@@ -47,7 +47,8 @@
                         <% if (request.getAttribute("contenidos")!=null){
                             ArrayList<Contenido> contenidos = (ArrayList<Contenido>) request.getAttribute("contenidos");
                             for (Contenido contenido : contenidos) {
-                                if (contenido instanceof Produccion && ((Produccion) contenido).getPublicado()) {
+                                if (contenido instanceof Produccion && (((Produccion) contenido).getPublicado()) || (contenido instanceof Produccion &&
+                                        !((Produccion) contenido).getPublicado()) && ((Produccion) contenido).getUser().getId()==logued_user.getId()) {
                                     out.println("<div class='post' id=\"" + contenido.getId() + "\">");
                                     out.println("<div class='post-header font-alt'>");
                                     out.println("<h2 class='post-title'><a href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
