@@ -214,4 +214,9 @@ public class User {
         }
         return reserva == null ? false: true;
     }
+
+    public String getAbsoluteURL() {
+        return "/productores?productor_id=" + id;
+    }
+
 }

@@ -51,20 +51,35 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8">
-                        <%
-
-                            Contenido contenido = (Contenido) request.getAttribute("contenido");
-
-                            out.println("<div class='post' id=\"" + contenido.getId() + "\">");
-                            out.println("<div class='post-header font-alt'>");
+                        <% Contenido contenido = (Contenido) request.getAttribute("contenido");
                             if (contenido instanceof Produccion) {
-                                out.println("<h2 class='post-title'><a href='#'>" + contenido.getTitulo() + "</a></h2>");
+                                Produccion produccion = (Produccion) contenido;
+                                out.println("<div class='post' id=\"" + produccion.getId() + "\">");
+                                out.println("<div class='post-header font-alt'>");
+                                out.println("<h2 class='post-title'><a href='" + produccion.getUser().getAbsoluteURL() + "'>" + produccion.getTitulo() + "</a></h2>");
                                 out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
-                                        ((Produccion) contenido).getUser().getFullName() + "</a>| " +
-                                        contenido.getDateTimeModificada() + "  | <a href='#'>Photography, " +
-                                        "</a><a href='#'>Web Design</a>");
-                            } else {
+                                        produccion.getUser().getFullName() + "</a>| " +
+                                        produccion.getDateTimeModificada());
+                                out.println("</div>");
+                                out.println("</div>");
+                                out.println("<div class='post-entry'>");
+                                out.println("<p>" + produccion.getTextoHTML() + "</p>");
+                                out.println("</div>");
+                                out.println("</div>");
+
+                                out.println("<div class='form-group'>");
+                                out.println("<button class='btn btn-border-d btn-round' type='button' " +
+                                        "onclick=\"document.location.href = '/administrar-agencias';\">volver</button>");
+                                out.println("<a class='btn btn-border-d btn-round' role='button' " +
+                                        "onclick=\"return confirm('are you sure?');\" href='/eliminar-contenido?" +
+                                        "contenido_id=" + produccion.getId() + "'>Eliminar</a>");
+                                out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
+                                out.println("</div>");
+                                out.println("</div>");
+                            } else if (contenido instanceof Cable) {
                                 Cable cable = ((Cable) contenido);
+                                out.println("<div class='post' id=\"" + contenido.getId() + "\">");
+                                out.println("<div class='post-header font-alt'>");
                                 out.println("<h2 class='post-title'><span><a role='button' href='#'" +
                                         "cable_id='" + cable.getId() + "'");
                                 if (logued_user.getCableReservado(cable) != null) {
@@ -79,14 +94,18 @@
                                         cable.getAgencia().getDescripcion() + "</a>| " +
                                         cable.getDateTimeModificada() +  " | " + cable.getTema() + " | " +
                                         cable.getUrgencia());
+                                out.println("</div>");
+                                out.println("</div>");
+                                out.println("<div class='post-entry'>");
+                                out.println("<p>" + contenido.getTextoHTML() + "</p>");
+                                out.println("</div>");
+                                out.println("<div class='form-group'>");
+                                out.println("<button class='btn btn-border-d btn-round' type='button' " +
+                                        "onclick=\"window.history.go(-1); return false;\">volver</button>");
+                                out.println("</div>");
+                                out.println("</div>");
+                                out.println("</div>");
                             }
-                            out.println("</div>");
-                            out.println("</div>");
-                            out.println("<div class='post-entry'>");
-                            out.println("<p>" + contenido.getTextoHTML() + "</p>");
-                            out.println("</div>");
-                            out.println("</div>");
-                            out.println("</div>");
                          %>
                         <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
                             <div class="widget">

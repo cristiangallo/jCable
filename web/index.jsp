@@ -52,7 +52,7 @@
                                     out.println("<div class='post' id=\"" + contenido.getId() + "\">");
                                     out.println("<div class='post-header font-alt'>");
                                     out.println("<h2 class='post-title'><a href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
-                                    out.println("<div class='post-meta'>Por&nbsp;<a href='#'>" +
+                                    out.println("<div class='post-meta'>Por&nbsp;<a href='" + ((Produccion) contenido).getUser().getAbsoluteURL() + "'>" +
                                             ((Produccion) contenido).getUser().getFullName() + "</a>| " +
                                             contenido.getDateTimeModificada());
                                     out.println("</div>");
