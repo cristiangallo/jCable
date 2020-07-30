@@ -43,4 +43,12 @@ public class ControladorContenidos {
     public boolean toogleReserva() {
         return user.toogleReserva(cable);
     }
+
+    public void deleteContenido() throws appException {
+        if (produccion!=null) {
+            produccion.delete();
+        } else {
+            throw new appException("Este contenido no puede ser eliminado.");
+        }
+    }
 }

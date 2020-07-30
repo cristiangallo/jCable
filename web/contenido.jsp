@@ -69,11 +69,12 @@
 
                                 out.println("<div class='form-group'>");
                                 out.println("<button class='btn btn-border-d btn-round' type='button' " +
-                                        "onclick=\"document.location.href = '/administrar-agencias';\">volver</button>");
+                                        "onclick=\"window.history.go(-1); return false;\">volver</button>");
                                 out.println("<a class='btn btn-border-d btn-round' role='button' " +
                                         "onclick=\"return confirm('are you sure?');\" href='/eliminar-contenido?" +
                                         "contenido_id=" + produccion.getId() + "'>Eliminar</a>");
-                                out.println("<button class='btn btn-round btn-b' type='submit'>Guardar cambios</button>");
+                                out.println("<a class='btn btn-round btn-b'  role='button' href='/editar-contenido?" +
+                                        "contenido_id=" + produccion.getId() + "type='submit'>Editar contenido</a>");
                                 out.println("</div>");
                                 out.println("</div>");
                             } else if (contenido instanceof Cable) {

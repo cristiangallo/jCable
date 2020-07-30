@@ -35,6 +35,11 @@ public class Cable extends Contenido {
 
     public String getAbsoluteURL () { return "/contenidos?cable_id=" + id; }
 
+    @Override
+    public void delete() {
+
+    }
+
     public void setFechaPurga(Timestamp fecha_purga) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(creado);

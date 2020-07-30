@@ -1,5 +1,7 @@
 package ar.cristiangallo.jCable.entidades;
 
+import ar.cristiangallo.jCable.appExceptions.appException;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -57,4 +59,6 @@ public abstract class Contenido {
     public final String getBajada() {
         return "<p>" + texto.split("\n")[0] + "</p>";
     }
+
+    public abstract void delete() throws appException;
 }

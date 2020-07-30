@@ -170,7 +170,32 @@ public class DBContenido extends DBTable<Contenido> {
     }
 
     @Override
-    public void delete(Contenido instancia) throws appException {
-
+    public void delete(Contenido contenido) throws appException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String db_table;
+        try {
+            if (contenido instanceof Produccion) {
+                db_table = "producciones";
+            } else {
+                db_table = "cables";
+            }
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement("delete from " + db_table + " where contenido_id = ?;");
+            stmt.setInt(1, contenido.getId());
+            stmt.executeUpdate();
+            stmt = ConexionDB.getInstancia().getConexion().prepareStatement("delete from contenidos where id = ?;");
+            stmt.setInt(1, contenido.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.cancel();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ConexionDB.getInstancia().releaseConexion();
+        }
     }
 }

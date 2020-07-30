@@ -1,5 +1,8 @@
 package ar.cristiangallo.jCable.entidades;
 
+import ar.cristiangallo.jCable.appExceptions.appException;
+import ar.cristiangallo.jCable.dataDB.DBContenido;
+
 import java.sql.Timestamp;
 
 public class Produccion extends Contenido {
@@ -19,6 +22,11 @@ public class Produccion extends Contenido {
 
     public String getAbsoluteURL () {
         return "/contenidos?produccion_id=" + id;
+    }
+
+    @Override
+    public void delete() throws appException {
+        DBContenido.getInstancia().delete(this);
     }
 
     public User getUser(){
