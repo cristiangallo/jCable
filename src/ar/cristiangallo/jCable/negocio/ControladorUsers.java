@@ -13,20 +13,13 @@ import java.util.*;
  */
 
 public class ControladorUsers {
-    private String email;
-    private String password;
-    private User user;
+    public User user;
 
     public ControladorUsers(){};
     private CatalogoUsers catUsers = CatalogoUsers.getInstance();
     private CatalogoContenido catContenidos = CatalogoContenido.getInstance();
 
-    public ControladorUsers(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public User getUser() throws appException {
+    public User getUser(String email, String password) throws appException {
         user = catUsers.getUser(email, password);
         user.setReservas(catContenidos.allReservas(user));
         return user;

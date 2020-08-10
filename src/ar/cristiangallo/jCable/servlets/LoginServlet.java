@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("emailL");
         String password = request.getParameter("passwordL");
-        ControladorUsers ctrlUsers = new ControladorUsers(email, password);
-
+        ControladorUsers ctrlUsers = new ControladorUsers();
         try {
-            ctrlUsers.getUser().login();
-            request.getSession().setAttribute("logued_user", ctrlUsers.getUser());
+            User user = ctrlUsers.getUser(email, password);
+            ctrlUsers.user.login();
+            request.getSession().setAttribute("logued_user", user);
 
         } catch (appException e) {
             System.out.println(e);
