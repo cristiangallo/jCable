@@ -18,6 +18,13 @@
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <% if (logued_user!=null){
+                    if (logued_user.getIsProductor()){
+                        out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
+                                "data-toggle='dropdown'>Producciones</a><ul class='dropdown-menu'>");
+                        out.println("<li><a href='/nueva-produccion'>Nueva producción</a></li>");
+                        out.println("<li><a id='mis-producciones' href='/listar-producciones'>Mis producciones</a></li>");
+                    };
+                    out.println("</ul></li>");
                     if (logued_user.getIsSuperuser()){
                         out.println("<li class='dropdown'><a class='dropdown-toggle' href='#' " +
                         "data-toggle='dropdown'>Administrar</a><ul class='dropdown-menu'>");
