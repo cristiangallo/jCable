@@ -1,7 +1,7 @@
 package ar.cristiangallo.jCable.servlets;
 
+import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.entidades.User;
-import ar.cristiangallo.jCable.negocio.ControladorAgencias;
 import ar.cristiangallo.jCable.negocio.ControladorContenidos;
 
 import javax.servlet.ServletException;
@@ -11,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Home", urlPatterns = {"/index", ""})
-public class IndexServlet extends HttpServlet {
+@WebServlet(name="Listar-producciones", urlPatterns = {"/listar-producciones"})
+public class ListarProduccionesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ControladorAgencias ctrlAgencias = new ControladorAgencias();
-        ControladorContenidos ctrlContenidos = new ControladorContenidos();
         User logued_user = (User) request.getSession().getAttribute("logued_user");
         if (logued_user == null) {
             response.sendRedirect("login.jsp");
             return;
         }
-        request.setAttribute("agenciasActivas", ctrlAgencias.agenciasActivas());
-        request.setAttribute("contenidos", ctrlContenidos.allContenidos(logued_user));
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        ControladorContenidos ctrlContenidos = new ControladorContenidos();
+        ctrlContenidos.user = logued_user;
+        request.setAttribute("contenidos", ctrlContenidos.allProducciones());
+
+        request.getRequestDispatcher("listar-contenidos.jsp").forward(request, response);
     }
+
 }
