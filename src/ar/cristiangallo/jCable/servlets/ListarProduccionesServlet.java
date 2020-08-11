@@ -23,7 +23,6 @@ public class ListarProduccionesServlet extends HttpServlet {
         ControladorContenidos ctrlContenidos = new ControladorContenidos();
         ctrlContenidos.user = logued_user;
         request.setAttribute("contenidos", ctrlContenidos.allProducciones());
-
         request.getRequestDispatcher("listar-contenidos.jsp").forward(request, response);
     }
 
