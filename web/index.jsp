@@ -43,7 +43,7 @@
         <section class="module">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-8" id="contenidos">
                         <% if (request.getAttribute("contenidos")!=null){
                             ArrayList<Contenido> contenidos = (ArrayList<Contenido>) request.getAttribute("contenidos");
                             for (Contenido contenido : contenidos) {
@@ -104,9 +104,9 @@
                             out.println("<div class='pagination font-alt'><a href='#'><i class='fa fa-angle-left'>" +
                                     "</i></a><a class='active' href='#'>1</a><a href='#'>2</a><a href='#'>3</a>" +
                                     "<a href='#'>4</a><a href='#'><i class='fa fa-angle-right'></i></a></div>");
-                            out.println("</div>");
                         } %>
-                        <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
                         <div class="widget">
                             <form role="form">
                                 <div class="search-box">
@@ -194,9 +194,9 @@ JavaScripts
             ev.preventDefault();
             let cable = $(this);
             if (confirm(cable.attr('title'))) {
-                $.ajaxSetup({ cache: false });
-                $.ajax(
-                    {
+                $.ajaxSetup({  });
+                $.ajax({
+                        cache: false,
                         url: "/reservar-cable?cable_id=" + cable.attr("cable_id"),
                         type: "POST",
                         data: {},
@@ -209,6 +209,21 @@ JavaScripts
                     });
             }
         });
+        $("#mis-producciones").click(function(evento){
+            evento.preventDefault();
+                $.ajax({
+                    cache: false,
+                    url: "/listar-producciones",
+                    type: "GET",
+                    data: {},
+                    success: function (data) {
+                        $("#contenidos").html(data);
+                    },
+                    error: function (data) {
+                        alert("¡Ups, ocurrió un error buscando tus producciones!");
+                    }
+                });
+            });
     });
 </script>
 </body>
