@@ -13,6 +13,8 @@ public class ControladorContenidos {
     public Cable cable;
     public Produccion produccion;
     public User user;
+    public Agencia agencia;
+
     public ControladorContenidos() {};
 
     private CatalogoContenido catContenido = CatalogoContenido.getInstance();
@@ -45,6 +47,11 @@ public class ControladorContenidos {
         return contenido;
     }
 
+    public Agencia getAgencia(Integer id) throws appException {
+        agencia = catContenido.getAgencia(id);
+        return agencia;
+    }
+
     public boolean toogleReserva() {
         return user.toogleReserva(cable);
     }
@@ -55,5 +62,9 @@ public class ControladorContenidos {
         } else {
             throw new appException("Este contenido no puede ser eliminado.");
         }
+    }
+
+    public ArrayList<Contenido> allCables(Agencia agencia) {
+        return catContenido.allCables(agencia);
     }
 }

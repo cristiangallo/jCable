@@ -36,4 +36,13 @@ public class CatalogoContenido {
     public ArrayList<Contenido> allProducciones(User logued_user) {
         return DBContenido.getInstancia().allProducciones(logued_user);
     }
+
+    public ArrayList<Contenido> allCables(Agencia agencia) {
+        return DBContenido.getInstancia().allCables(agencia);
+    }
+
+
+    public Agencia getAgencia(Integer id) throws appException {
+        return DBAgencia.getInstancia().get(id);
+    }
 }

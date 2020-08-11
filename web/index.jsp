@@ -121,7 +121,7 @@
                                 out.println("<h5 class='widget-title font-alt'>Agencias de noticias</h5>");
                                 out.println("<ul class='icon-list'>");
                                 for (Agencia agencia : agenciasActivas) {
-                                    out.println("<li><a href='/cables-agencias?agencia_id=" + agencia.getId() +"'> " +
+                                    out.println("<li><a class='agencia' href='/cables-agencias?agencia_id=" + agencia.getId() +"'> " +
                                             agencia.getDescripcion() + "</a></li>");
                                 }
                                 out.println("</ul>");
@@ -211,19 +211,35 @@ JavaScripts
         });
         $("#mis-producciones").click(function(evento){
             evento.preventDefault();
-                $.ajax({
-                    cache: false,
-                    url: "/listar-producciones",
-                    type: "GET",
-                    data: {},
-                    success: function (data) {
-                        $("#contenidos").html(data);
-                    },
-                    error: function (data) {
-                        alert("¡Ups, ocurrió un error buscando tus producciones!");
-                    }
-                });
+            $.ajax({
+                cache: false,
+                url: "/listar-producciones",
+                type: "GET",
+                data: {},
+                success: function (data) {
+                    $("#contenidos").html(data);
+                },
+                error: function (data) {
+                    alert("¡Ups, ocurrió un error buscando tus producciones!");
+                }
             });
+        });
+        $(".agencia").click(function(evento){
+            evento.preventDefault();
+            let agencia = $(this);
+            $.ajax({
+                cache: false,
+                url: agencia.attr("href"),
+                type: "GET",
+                data: {},
+                success: function (data) {
+                    $("#contenidos").html(data);
+                },
+                error: function (data) {
+                    alert("¡Ups, ocurrió un error buscando los cables!");
+                }
+            });
+        });
     });
 </script>
 </body>

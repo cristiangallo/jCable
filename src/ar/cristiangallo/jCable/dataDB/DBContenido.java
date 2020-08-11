@@ -97,20 +97,24 @@ public class DBContenido extends DBTable<Contenido> {
 
     @Override
     public ArrayList<Contenido> all() {
-        return all(null, false);
+        return all(null, null, false);
     }
 
     public ArrayList<Contenido> allProducciones(User logued_user) {
-        return all(logued_user, true);
+        return all(logued_user, null, true);
+    }
+
+    public ArrayList<Contenido> allCables(Agencia agencia) {
+        return all(null, agencia, false);
     }
 
     public ArrayList<Contenido> all(User logued_user) {
-        return all(logued_user, false);
+        return all(logued_user, null, false);
     }
 
-    public ArrayList<Contenido> all(User logued_user, boolean solo_producciones) {
+    public ArrayList<Contenido> all(User logued_user, Agencia agencia, boolean solo_producciones) {
         ArrayList<Contenido> all = new ArrayList<Contenido>();
-        Agencia agencia;
+        Agencia agencia_tmp;
         User user;
         Produccion produccion;
         Cable cable;
@@ -127,9 +131,12 @@ public class DBContenido extends DBTable<Contenido> {
                     "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id";
             if (solo_producciones) {
                 sql_query += " where U.id = ?;";
-                System.out.println(sql_query);
                 stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sql_query);
                 stmt.setInt(1, logued_user.getId());
+            } else if (agencia!=null) {
+                sql_query += " where A.id = ?;";
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sql_query);
+                stmt.setInt(1, agencia.getId());
             } else {
                 stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sql_query);
             }
@@ -138,11 +145,11 @@ public class DBContenido extends DBTable<Contenido> {
             while (rs != null && rs.next()) {
                 if (rs.getObject("agencia_id") != null) {
                     Integer agencia_id = (Integer) rs.getObject("agencia_id");
-                    agencia = new Agencia(agencia_id, rs.getString("desc_agencia"),
+                    agencia_tmp = new Agencia(agencia_id, rs.getString("desc_agencia"),
                             rs.getString("home_path"), rs.getInt("dias_purga"), rs.getBoolean("agencia_activa"));
                     cable = new Cable(rs.getInt("id"), rs.getString("titulo"), rs.getString("texto"),
                             rs.getTimestamp("modificado"), rs.getTimestamp("creado"), rs.getTimestamp("purga"),
-                            agencia, rs.getString("urgencia"), rs.getString("tema"), null);
+                            agencia_tmp, rs.getString("urgencia"), rs.getString("tema"), null);
                     System.out.println(cable.getTexto());
                     all.add(cable);
                 } else {
