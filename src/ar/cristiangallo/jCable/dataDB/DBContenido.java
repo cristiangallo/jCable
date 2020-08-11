@@ -96,13 +96,19 @@ public class DBContenido extends DBTable<Contenido> {
     }
 
     @Override
-    public ArrayList<Contenido> all(Integer... parametros) {
-        return all(null, parametros);
+    public ArrayList<Contenido> all() {
+        return all(null, false);
     }
 
-    public ArrayList<Contenido> all(User logued_user, Integer... parametros) {
-        Integer offset = parametros.length > 0 ? parametros[0] : 0;
-        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
+    public ArrayList<Contenido> allProducciones(User logued_user) {
+        return all(logued_user, true);
+    }
+
+    public ArrayList<Contenido> all(User logued_user) {
+        return all(logued_user, false);
+    }
+
+    public ArrayList<Contenido> all(User logued_user, boolean solo_producciones) {
         ArrayList<Contenido> all = new ArrayList<Contenido>();
         Agencia agencia;
         User user;
@@ -111,19 +117,23 @@ public class DBContenido extends DBTable<Contenido> {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                    "select CO.*, CA.contenido_id as cable_id, urgencia, tema, purga, PR.contenido_id as " +
-                            "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
-                            "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
-                            "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
-                            "U.creado as usuario_creado, R.id as reserva_id from " +
-                            "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
-                            "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
-                            "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id LIMIT ?, ?;"
-                    // LIMIT offset, row_count;
-            );
-            stmt.setInt(1, offset  );
-            stmt.setInt(2, resultados_por_pagina  );
+            String sql_query = "select CO.*, CA.contenido_id as cable_id, urgencia, tema, purga, PR.contenido_id as " +
+                    "produccion_id, publicado, A.id as agencia_id, A.descripcion as desc_agencia, " +
+                    "home_path, dias_purga, A.is_active as agencia_activa, U.id as user_id, email, nombre, " +
+                    "apellido, password, is_staff, U.is_active as usuario_activo, is_superuser, last_login, " +
+                    "U.creado as usuario_creado, R.id as reserva_id from " +
+                    "contenidos CO left join cables CA on CO.id=CA.contenido_id left join producciones PR on " +
+                    "CO.id=PR.contenido_id left join agencias A on A.id=CA.agencia_id left join usuarios U " +
+                    "on U.id=PR.usuario_id left join reservas R on CA.contenido_id=R.cable_id";
+            if (solo_producciones) {
+                sql_query += " where U.id = ?;";
+                System.out.println(sql_query);
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sql_query);
+                stmt.setInt(1, logued_user.getId());
+            } else {
+                stmt = ConexionDB.getInstancia().getConexion().prepareStatement(sql_query);
+            }
+
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 if (rs.getObject("agencia_id") != null) {
@@ -198,4 +208,6 @@ public class DBContenido extends DBTable<Contenido> {
             ConexionDB.getInstancia().releaseConexion();
         }
     }
+
+
 }

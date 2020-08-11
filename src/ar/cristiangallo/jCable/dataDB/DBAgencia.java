@@ -69,19 +69,15 @@ public class DBAgencia extends DBTable<Agencia> {
     }
 
     @Override
-    public ArrayList<Agencia> all(Integer... parametros) {
-        Integer offset = parametros.length > 0 ? parametros[0] : 0;
-        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
+    public ArrayList<Agencia> all() {
         ArrayList<Agencia> all = new ArrayList<Agencia>();
         Agencia agencia = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
-                    "select id, descripcion, home_path, dias_purga, is_active from agencias LIMIT ?, ?;"
+                    "select id, descripcion, home_path, dias_purga, is_active from agencias;"
             );
-            stmt.setInt(1, offset  );
-            stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 agencia = new Agencia(rs.getInt("id"), rs.getString("descripcion"), rs.getString("home_path"),

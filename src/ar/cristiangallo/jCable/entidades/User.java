@@ -219,4 +219,7 @@ public class User {
         return "/productores?productor_id=" + id;
     }
 
+    public boolean getIsProductor() {
+        return is_staff;
+    }
 }

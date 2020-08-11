@@ -32,9 +32,7 @@ public class DBUser extends DBTable<User> {
     }
 
     @Override
-    public ArrayList<User> all(Integer... parametros) {
-        Integer offset = parametros.length > 0 ? parametros[0] : 0;
-        Integer resultados_por_pagina = reglamento.getResultadoPorPagina();
+    public ArrayList<User> all() {
         ArrayList<User> all = new ArrayList<User>();
         User user = null;
         PreparedStatement stmt = null;
@@ -42,10 +40,8 @@ public class DBUser extends DBTable<User> {
         try {
             stmt = ConexionDB.getInstancia().getConexion().prepareStatement(
                     "select id, email, password, nombre, apellido, is_staff, is_active, " +
-                            "is_superuser, last_login, creado from usuarios LIMIT ?, ?;"
+                            "is_superuser, last_login, creado from usuarios;"
             );
-            stmt.setInt(1, offset  );
-            stmt.setInt(2, resultados_por_pagina  );
             rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
                 user = new User(rs.getInt("id"), rs.getString("email"),

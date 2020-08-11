@@ -16,6 +16,7 @@ public class ControladorContenidos {
     public ControladorContenidos() {};
 
     private CatalogoContenido catContenido = CatalogoContenido.getInstance();
+
     private Reglamento reglamento = Reglamento.getInstance();
 
     public Reglamento getReglamento() {
@@ -28,6 +29,10 @@ public class ControladorContenidos {
 
     public ArrayList<Contenido> allContenidos(User logued_user) {
         return catContenido.all(logued_user);
+    }
+
+    public ArrayList<Contenido> allProducciones() {
+        return catContenido.allProducciones(user);
     }
 
     public Contenido getContenido(Integer id) throws appException {

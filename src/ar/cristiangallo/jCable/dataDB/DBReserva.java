@@ -69,13 +69,11 @@ public class DBReserva extends DBTable<Reserva> {
     }
 
     @Override
-    public ArrayList<Reserva> all(Integer... parametros) {
-        return all(null, parametros);
+    public ArrayList<Reserva> all() {
+        return all(null);
     }
 
-    public ArrayList<Reserva> all(User logued_user, Integer... parametros) {
-        Integer offset = parametros.length > 0 ? parametros[0] : 0;
-        Integer resultados_por_pagina = parametros.length > 1 ? parametros[1] : reglamento.getResultadoPorPagina();
+    public ArrayList<Reserva> all(User logued_user) {
         ArrayList<Reserva> all = new ArrayList<Reserva>();
         Reserva reserva = null;
         Cable cable;
