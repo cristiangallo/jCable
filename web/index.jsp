@@ -49,17 +49,13 @@
                             for (Contenido contenido : contenidos) {
                                 if (contenido instanceof Produccion && (((Produccion) contenido).getPublicado()) || (contenido instanceof Produccion &&
                                         !((Produccion) contenido).getPublicado()) && ((Produccion) contenido).getUser().getId()==logued_user.getId()) {
+                                    Produccion produccion = (Produccion) contenido;
                                     out.println("<div class='post' id=\"" + contenido.getId() + "\">");
                                     out.println("<div class='post-header font-alt'>");
                                     out.println("<h2 class='post-title'>");
-                                    if (((Produccion) contenido).getPublicado()) {
-                                        out.print("<a href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
-                                    } else {
-                                        out.print("<a href='/editar-contenido?contenido_id=" + contenido.getId() + "'>" + contenido.getTitulo() + "</a></h2>");
-                                    }
-
-                                    out.println("<div class='post-meta'>Por&nbsp;<a href='" + ((Produccion) contenido).getUser().getAbsoluteURL() + "'>" +
-                                            ((Produccion) contenido).getUser().getFullName() + "</a>| " +
+                                    out.print("<a class='produccion' href='" + contenido.getAbsoluteURL() + "'>" + contenido.getTitulo() + "</a></h2>");
+                                    out.println("<div class='post-meta'>Por&nbsp;<a href='" + produccion.getUser().getAbsoluteURL() + "'>" +
+                                            produccion.getUser().getFullName() + "</a>| " +
                                             contenido.getDateTimeModificada());
                                     out.println("</div>");
                                     out.println("</div>");
@@ -67,10 +63,11 @@
                                     out.println(contenido.getBajada());
                                     out.println("</div>");
                                     out.println("<div class='post-more'>");
-                                    if (((Produccion) contenido).getPublicado()) {
-                                        out.print("<a class='more-link' href='"+ contenido.getAbsoluteURL() + "'>Leer más</a></div>");
+                                    out.print("<a class='produccion more-link' href='"+ contenido.getAbsoluteURL() + "'>");
+                                    if (produccion.getPublicado() && produccion.getUser().getId()!=logued_user.getId()) {
+                                        out.println("Leer más</a></div>");
                                     } else {
-                                        out.print("<a class='more-link' href='/editar-contenido?contenido_id=" + contenido.getId() + "'>Continuar edición</a></div>");
+                                        out.println("Modificar</a></div>");
                                     }
                                     out.println("</div>");
                                 } else if (contenido instanceof Cable) {
@@ -208,6 +205,22 @@ JavaScripts
                         }
                     });
             }
+        });
+        $(".produccion").click(function(evento){
+            evento.preventDefault();
+            let produccion = $(this);
+            $.ajax({
+                cache: false,
+                url: produccion.attr("href"),
+                type: "GET",
+                data: {},
+                success: function (data) {
+                    $("#contenidos").html(data);
+                },
+                error: function (data) {
+                    alert("¡Ups, ocurrió un error buscando tus producciones!");
+                }
+            });
         });
         $("#mis-producciones").click(function(evento){
             evento.preventDefault();

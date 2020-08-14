@@ -2,6 +2,7 @@ package ar.cristiangallo.jCable.servlets;
 
 import ar.cristiangallo.jCable.appExceptions.appException;
 import ar.cristiangallo.jCable.entidades.Contenido;
+import ar.cristiangallo.jCable.entidades.Produccion;
 import ar.cristiangallo.jCable.entidades.User;
 import ar.cristiangallo.jCable.negocio.ControladorContenidos;
 
@@ -18,7 +19,12 @@ public class AdministrarContenidoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer contenido_id;
+        Contenido contenido = null;
         User logued_user = (User) request.getSession().getAttribute("logued_user");
+        if (logued_user == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
         if (request.getParameter("cable_id")!=null) {
             try {
                 contenido_id = Integer.parseInt(request.getParameter("cable_id"));
@@ -38,12 +44,8 @@ public class AdministrarContenidoServlet extends HttpServlet {
             return;
         }
         try {
-            if (logued_user == null) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
             ControladorContenidos ctrlContenidos = new ControladorContenidos();
-            Contenido contenido = ctrlContenidos.getContenido(contenido_id);
+            contenido = ctrlContenidos.getContenido(contenido_id);
             if (contenido==null) {
                 response.sendRedirect("404.jsp");
                 return;
@@ -58,7 +60,10 @@ public class AdministrarContenidoServlet extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        request.getRequestDispatcher("contenido.jsp").forward(request, response);
+        if (contenido instanceof Produccion && ((Produccion) contenido).getUser().getId()==logued_user.getId()) {
+            request.getRequestDispatcher("editar-contenido.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("contenido.jsp").forward(request, response);
+        }
     }
 }
